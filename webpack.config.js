@@ -7,6 +7,7 @@ let configs = {
   entry: {
     vender: ['webpack/hot/dev-server', 'webpack-hot-middleware/client'], // 额外插件打包成vender
     index: './components/index.js',
+    resetPasswd: './components/resetPasswd.js',
   },
   output: {
     path: path.join(ROOT_PATH, 'dist'),
