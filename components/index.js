@@ -13,21 +13,21 @@ import { Router, Route} from 'react-router';
 //   }
 // }
 
-var Index = React.createClass({
-  render(){
-    return (
-      <div>
-      <h1>Hello</h1>
-      <Head name="React">
-        React
-      </Head>
+// var Index = React.createClass({
+//   render(){
+//     return (
+//       <div>
+//       <Head name="React">
+//         React
+//       </Head>
+//       </div>
+//     );
+//   }
+// })
 
-      </div>
-    );
-  }
-})
+var style={
 
-
+}
 ReactDOM.render(
   <Index />,
   document.getElementById('react-root')
