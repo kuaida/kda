@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>React</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/index.css' />
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="http://cdn.bootcss.com/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
+  <!-- Optional theme -->
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script type="text/javascript">
+    var socket = io();
+  </script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-4 col-xs-4 col-sm-4" id="read">
+                <p>0</p>
+                浏览量
+              </div>
+              <div class="col-md-4 col-xs-4 col-sm-4" id="time">
+                <p>10:10</p>
+                创建时间
+              </div>
+              <div class="col-md-4 col-xs-4 col-sm-4" id="time">
+                <p>10:10</p>
+                剩余时间
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-9 col-xs-12 col-sm-12" id="money">
+                <img src="/index/1.jpg" alt=""> 标题：
+                <span class="tit">那么问题来了</span>
+                <span class="tub">
+                    <i class="fa fa-money " aria-hidden="true">&nbsp;<span>20</span></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="req">
+          那么问题来了hahahahahahhhahahaah
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-4 col-xs-4 col-sm-4" id="read">
+                <p>0</p>
+                浏览量
+              </div>
+              <div class="col-md-4 col-xs-4 col-sm-4" id="time">
+                <p>10:10</p>
+                创建时间
+              </div>
+              <div class="col-md-4 col-xs-4 col-sm-4" id="time">
+                <p>10:10</p>
+                剩余时间
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-9 col-xs-12 col-sm-12" id="money">
+                <img src="/index/1.jpg" alt=""> 标题：
+                <span class="tit">那么问题来了</span>
+                <span class="tub">
+                    <i class="fa fa-money " aria-hidden="true">&nbsp;<span>20</span></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="req">
+          那么问题来了hahahahahahhhahahaah那么问题来了hahahahahahhhahahaah那么问题来了hahahahahahhhahahaah那么问题来了hahahahahahhhahahaah那么问题来了hahahahahahhhahahaah
+        </div>
+
+      </div>
+      <div class="col-md-3">
+
+        <div class="l-t">
+          <div class="l-xs">
+            <i class="fa fa-free-code-camp" aria-hidden="true"></i> 新手任务
+          </div>
+          <ul class="l-dg">
+            <li><i class="fa fa-empire" aria-hidden="true"></i><a href="#">关注 3 个以上标签</a></li>
+            <li><i class="fa fa-empire" aria-hidden="true"></i><a href="#">关注 3 个以上用户</a></li>
+            <li><i class="fa fa-empire" aria-hidden="true"></i><a href="#">提出你的第一个问题</a></li>
+            <li><i class="fa fa-empire" aria-hidden="true"></i>回答一个你擅长的问题</li>
+            <li><i class="fa fa-empire" aria-hidden="true"></i>对内容进行投票</li>
+            <li><i class="fa fa-empire" aria-hidden="true"></i><a href="#">阅读声望与权限的规范</a></li>
+            <li><i class="fa fa-empire" aria-hidden="true"></i><a href="#">完善个人资料</a></li>
+          </ul>
+        </div>
+        <div class="l-w">
+          <p>手机应用APP</p>
+          <a class="tw" href="#">点击下载</a>
+        </div>
+        <div class="l-x">
+          <div class="row">
+            <div class="col-sm-6"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i><a href="#">我的草稿</a></div>
+            <div class="col-sm-6"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i><a href="#">我的笔记</a></div>
+            <div class="col-sm-6"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i><a href="#">我的收藏</a></div>
+            <div class="col-sm-6"><i class="fa fa-eye fa-lg" aria-hidden="true"></i><a href="#">我关注的</a></div>
+            <div class="col-sm-6"><i class="fa fa-globe fa-lg" aria-hidden="true"></i><a href="#">受邀回答</a></div>
+            <div class="col-sm-6"><i class="fa fa-heartbeat fa-lg" aria-hidden="true"></i><a href="#">邀请朋友</a></div>
+          </div>
+        </div>
+        <div class="l-l">
+          <h4>排行帮
+              <span class="span">
+                <a href="#">今天</a>&nbsp;·
+                <a href="#">本周</a>&nbsp;·
+                <a href="#">更多</a>
+              </span>
+            </h4>
+          <ol>
+            <li>
+              <!-- 头像图片 -->
+              <img src="/index/1.jpg" alt="">
+              <!-- <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> -->
+              <a href="#">HopEvan</a>
+              <span>+46</span>
+            </li>
+            <li>
+              <!-- 头像图片 -->
+              <img src="/index/1.jpg" alt="">
+              <!-- <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> -->
+              <a href="#">HopEvan</a>
+              <span>+46</span>
+            </li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="container" id="react-root"></div>
+  <script type="text/javascript" src="/js/index.js"></script>
+</body>
+
+</html>
