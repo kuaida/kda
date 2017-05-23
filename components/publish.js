@@ -6,7 +6,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { deepPurple900, deepPurple300, yellowA700, grey500, green800, redA700 } from 'material-ui/styles/colors';
+import { deepPurple900, deepPurple300, yellowA700, grey500, green800, redA700, deepPurple800 } from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -35,13 +35,13 @@ const styles = {
     backgroundColor:grey500,
     padding:"10px",
     paddingBottom:"4px",
-    borderRadius:"6px"
+    borderRadius:"2px"
   },
   payToggle:{
-    backgroundColor:yellowA700,
+    backgroundColor:deepPurple800,
     padding:"10px",
     paddingBottom:"4px",
-    borderRadius:"6px"
+    borderRadius:"2px"
   },
   sliderTime:{
     cursor:"pointer",
@@ -124,7 +124,7 @@ class Publish extends Component {
               setTimeout(()=>{
                 window.location.assign('/');
               },2000);
-              
+
             }else{
               this.setState(Object.assign({},this.state,{state:4}));
             }
