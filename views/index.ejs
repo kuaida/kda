@@ -1,27 +1,202 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>React</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://cdn.bootcss.com/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
 
-    <script type="text/javascript">
+<head>
+  <title>React</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/index.css' />
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="http://cdn.bootcss.com/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script type="text/javascript">
     var socket = io();
-    </script>
-    <style media="screen">
-    body{
-      padding-top: 0px;
-    }
-    </style>
-  </head>
-  <body>
-    <% include head %>
-    <div id="react-root"></div>
+  </script>
+  </style>
+</head>
+
+<body>
+  <% include head %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="row" id="title">
+                <div class="col-md-12 col-xs-12 col-sm-12" id="money">
+                  <div class="row">
+                    <div class="col-md-1 col-xs-1 col-sm-1" id="tit">
+                      标题
+                    </div>
+                    <div class="col-md-10 col-xs-6 col-sm-6" id="ans">
+                      <span>那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了</span>
+                      <a href="#">php</a>
+                    </div>
+                    <div class="col-md-1 col-xs-1 col-sm-1">
+                      <span class="tub">
+                        <i class="fa fa-money" aria-hidden="true">&nbsp;<span>20</span></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="row" id="xian">
+                <div class="col-md-3 col-xs-3 col-sm-3" id="img">
+                  <img src="/images/head.jpg" alt="">
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3" id="read">
+                  <p>0</p>
+                  浏览量
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
+                  <p>10:10</p>
+                  创建时间
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
+                  <p>10:10</p>
+                  剩余时间
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="row" id="title">
+                <div class="col-md-12 col-xs-12 col-sm-12" id="money">
+                  <div class="row">
+                    <div class="col-md-1 col-xs-1 col-sm-1" id="tit">
+                      标题
+                    </div>
+                    <div class="col-md-10 col-xs-6 col-sm-6" id="ans">
+                      <span>那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了</span>
+                      <a href="#">php</a>
+                    </div>
+                    <div class="col-md-1 col-xs-1 col-sm-1">
+                      <span class="tub">
+                        <i class="fa fa-money" aria-hidden="true">&nbsp;<span>20</span></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="row" id="xian">
+                <div class="col-md-3 col-xs-3 col-sm-3" id="img">
+                  <img src="/images/head.jpg" alt="">
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3" id="read">
+                  <p>0</p>
+                  浏览量
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
+                  <p>10:10</p>
+                  创建时间
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
+                  <p>10:10</p>
+                  剩余时间
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+
+
+        <div class="col-md-3">
+
+          <div class="l-t">
+            <div class="l-xs">
+              <i class="fa fa-money " aria-hidden="true"></i>赏金榜
+            </div>
+            <ol>
+              <li>
+                <!-- 头像图片 -->
+                <img src="/images/head.jpg" alt="">
+                <a href="#">HopEvan</a>
+                <span>+46</span>
+              </li>
+              <li>
+                <!-- 头像图片 -->
+                <img src="/images/head.jpg" alt="">
+                <a href="#">HopEvan</a>
+                <span>+46</span>
+              </li>
+            </ol>
+          </div>
+
+
+          <div class="l-t">
+            <div class="l-xs">
+              <i class="fa fa-free-code-camp" aria-hidden="true"></i>达人榜
+            </div>
+            <ol>
+              <li>
+                <!-- 头像图片 -->
+                <img src="/images/head.jpg" alt="">
+                <a href="#">HopEvan</a>
+                <span>+46</span>
+              </li>
+              <li>
+                <!-- 头像图片 -->
+                <img src="/images/head.jpg" alt="">
+                <a href="#">HopEvan</a>
+                <span>+46</span>
+              </li>
+            </ol>
+          </div>
+          <div class="l-l">
+            <h4>达人榜
+              <span class="span">
+                <a href="#">今天</a>&nbsp;·
+                <a href="#">本周</a>&nbsp;·
+                <a href="#">更多</a>
+              </span>
+            </h4>
+            <ol>
+              <li>
+                <!-- 头像图片 -->
+                <img src="/images/head.jpg" alt="">
+                <a href="#">HopEvan</a>
+                <span>+46</span>
+              </li>
+              <li>
+                <!-- 头像图片 -->
+                <img src="/images/head.jpg" alt="">
+                <a href="#">HopEvan</a>
+                <span>+46</span>
+              </li>
+            </ol>
+          </div>
+          <div class="l-w">
+            <p>手机应用APP</p>
+            <a class="tw" href="#">点击下载</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
     <% include foot %>
-    <script type="text/javascript" src="/js/vender.js"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
-  </body>
+      <div class="container" id="react-root"></div>
+      <script type="text/javascript" src="/js/index.js"></script>
+</body>
+
 </html>

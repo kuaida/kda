@@ -1,0 +1,233 @@
+/*颜色　#673ab7  */
+
+
+/*left*/
+
+.row .col-md-3 {
+  height: 100%;
+}
+
+#xian {
+  /*height: 60px;*/
+  border-bottom: 1px solid #673ab7;
+}
+
+#title {
+  margin-top: 10px;
+}
+
+.row .col-md-9 .row .col-md-1 {
+  width: 7%;
+  height: 60px;
+  border: 2px solid white;
+}
+
+#read p {
+  margin-bottom: 0;
+  text-align: center;
+  margin-top: 4px;
+}
+
+#read {
+  font-size: 12px;
+  padding: 5px;
+  text-align: center;
+}
+
+#time p {
+  margin-bottom: 0;
+  text-align: center;
+  margin-top: 4px;
+}
+
+#time {
+  font-size: 12px;
+  padding: 3px;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.row .col-md-9 .row .col-md-9 {
+  height: 60px;
+}
+
+#money {
+  font-size: 20px;
+  padding: 18px 0;
+}
+
+#money {
+  padding: 0;
+}
+
+#img img {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 50%;
+  margin-top: 0px;
+}
+
+#money #tit {
+  padding: 0 10px;
+  color: #673ab7;
+  font-weight: 900;
+}
+
+#money .tub i {
+  color: #FFD700;
+}
+
+#money a {
+  color: #673ab7;
+  font-size: 12px;
+}
+
+#ans {
+  font-size: 14px;
+  height: 100%;
+}
+
+#req {
+  border-bottom: 1px solid #673ab7;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+
+/*right*/
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.l-t {
+  width: 100%;
+  height: 298px;
+  border: 1px solid #673ab7;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.l-t ol {
+  margin-top: 6px;
+}
+
+.l-xs {
+  height: 42px;
+  background: #673ab7;
+  padding: 10px 15px;
+  color: white;
+  font-weight: 900;
+}
+
+li {
+  margin-bottom: 10px;
+  font-weight: 900;
+}
+
+li a {
+  color: #673ab7;
+  font-weight: 900;
+}
+
+li a:hover {
+  color: purple;
+  font-weight: 900;
+}
+
+.l-w {
+  height: 120px;
+  padding: 15px;
+  background: #fcf8e3;
+  border: 1px solid #faebcc;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.l-w .tw {
+  display: block;
+  height: 35px;
+  color: #fff;
+  background-color: #673ab7;
+  border-color: #008151;
+  border-radius: 4px;
+  text-align: center;
+  padding: 6px 6px;
+}
+
+.l-w-f {
+  margin-top: 20px;
+}
+
+.l-w-f a {
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.l-x {
+  margin: 0px 15px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.col-sm-6 {
+  padding: 6px 0;
+}
+
+.l-x .col-sm-6 i {
+  padding-right: 6px;
+  color: #673ab7;
+}
+
+.l-x a {
+  color: black;
+  font-weight: 900;
+}
+
+.l-x a:hover {
+  color: #673ab7;
+}
+
+.l-l {
+  height: 255px;
+}
+
+.span {
+  float: right;
+}
+
+.span a {
+  font-size: 13px;
+  color: #673ab7;
+}
+
+.span a:hover {
+  font-size: 13px;
+  color: purple;
+}
+
+ol {
+  margin-left: 30px;
+  padding-left: 0px;
+}
+
+ol li img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+ol li a {
+  margin-left: 10px;
+}
+
+ol li span {
+  margin-right: 20px;
+  float: right;
+}
