@@ -6,12 +6,13 @@ var ROOT_PATH = path.resolve(__dirname);
 let configs = {
   entry: {
     vender: ['webpack/hot/dev-server', 'webpack-hot-middleware/client'], // 额外插件打包成vender
+    publish: './components/publish.js',
     index: './components/index.js',
     filephoto: './components/userinfo/filephoto.js',
     btHeadPortrait: './components/userinfo/btHeadPortrait.js',
   },
   output: {
-    path: path.join(ROOT_PATH, 'dist'),
+    path: path.join(ROOT_PATH, 'public'),
     publicPath: '/', // output.path的相对路径
     filename: 'js/[name].js' // 根据原始名动态命名
   },
