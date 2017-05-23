@@ -7,4 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/userinfo',function(req,res,next){
+  res.render('userinfo.ejs')
+})
 module.exports = router;
