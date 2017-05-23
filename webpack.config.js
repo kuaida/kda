@@ -10,6 +10,7 @@ let configs = {
     index: './components/index.js',
     filephoto: './components/userinfo/filephoto.js',
     btHeadPortrait: './components/userinfo/btHeadPortrait.js',
+    resetPasswd: './components/resetPasswd.js',
   },
   output: {
     path: path.join(ROOT_PATH, 'public'),

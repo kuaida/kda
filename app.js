@@ -16,6 +16,7 @@ const salt = 10;
 var index = require('./routes/index');
 var users = require('./routes/users');
 var publish = require('./routes/publish');
+var resetPasswd = require('./routes/resetPasswd');
 
 var app = express();
 app.use(session({
@@ -53,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/publish', publish);
+app.use('/resetPasswd',resetPasswd)
 app.get('/login', function(req, res, next){
   // bcrypt.hash(req.body.pass, salt, function(err, hash){
   //   console.log(hash);
