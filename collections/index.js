@@ -23,7 +23,9 @@ let userSchema  = Schema({
   myQuestions:	[],
   myAnswers:	[],
   alipayAccount:	String,
-  balance:	Number
+  balance:	Number,
+  headPortrait:String,
+  backgroundImage:String
 });
 
 let questionSchema = Schema({
