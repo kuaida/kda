@@ -8,5 +8,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/userinfo',function(req,res,next){
   res.render('userinfo',{user:'ren'})
+  res.render('index',{user:''});
+});
+
+router.get('/userinfo',function(req,res,next){
+  res.render('userinfo.ejs')
 })
 module.exports = router;
