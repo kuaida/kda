@@ -11,6 +11,7 @@ let configs = {
     filephoto: './components/userinfo/filephoto.js',
     btHeadPortrait: './components/userinfo/btHeadPortrait.js',
     resetPasswd: './components/resetPasswd.js',
+    question: './components/question/question.js',
   },
   output: {
     path: path.join(ROOT_PATH, 'public'),
