@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Document</title>
+  <style media="screen">
+    .ma{
+      display: none;
+      color: red;
+    }
+    span{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <br>
+  <div class="container">
+    <h1>正在注册</h1>
+    <br>
+  <form method="post" action="/login/reg">
+      <label for="exampleInputEmail1">注册用户名</label>
+      <!-- 通过判断用户名是否存在 -->
+      <% if(cunzai !== 'no' ){ %>
+        <span>用户名已存在</span>
+      <% } %>
+      <input type="email" name='account' class="form-control" placeholder="Email">
+      <br>
+      <label for="exampleInputPassword1">注册密码</label>&nbsp;&nbsp;<span class="ma">密码不能少于8位</span>
+      <input type="password" name='password' class="form-control password" placeholder="Password">
+      <br>
+    <button type="submit" class="btn btn-default submit">注册</button>
+  </form>
+</div>
+  <script type="text/javascript">
+    var passwordLength = 0;
+    $('.password').focus(function(){
+      $('.submit').attr('disabled',false);
+      $('.ma').css('display','none');
+    });
+
+    $('.password').blur(function(){
+      passwordLength = $(this).val().length;
+      if(passwordLength < 8){
+        $('.submit').attr('disabled',true);
+        console.log(123);
+        $('.ma').css('display','inline')
+      }
+    });
+  </script>
+</body>
+</html>
