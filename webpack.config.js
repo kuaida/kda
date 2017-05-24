@@ -1,4 +1,4 @@
-var path = require('path');
+
 var webpack = require('webpack');
 
 var ROOT_PATH = path.resolve(__dirname);
@@ -10,7 +10,8 @@ let configs = {
     index: './components/index.js',
     filephoto: './components/userinfo/filephoto.js',
     uploadphoto: './components/userinfo/uploadphoto.js',
-    btHeadPortrait: './components/userinfo/btHeadPortrait.js',
+    resetPasswd: './components/resetPasswd.js',
+    question: './components/question/question.js',
     center: './components/userinfo/center.js',
   },
   output: {

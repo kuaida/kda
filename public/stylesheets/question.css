@@ -1,0 +1,24 @@
+.question-main {
+  width: 80%;
+  margin: auto;
+}
+
+.question-title {
+  padding-left: 100px;
+  padding-right: 200px;
+}
+
+.question-img {
+  display: inline-block;
+  float: left;
+}
+
+.question-answer {
+  width: 1000px;
+  height: 300px;
+
+}
+
+.question-btn {
+  float: right;
+}
