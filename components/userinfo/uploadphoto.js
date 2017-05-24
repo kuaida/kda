@@ -24,6 +24,18 @@ const styles = {
   },
 };
 
+
+const CardExampleWithAvatar = () => (
+  <Card>
+    <CardMedia
+      overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+    >
+      <img src="" style={{width:'100%',height:240}} />
+    </CardMedia>
+    <CardTitle title="Card title" subtitle="Card subtitle" />
+  </Card>
+);
+
 const RaisedButtonExampleComplex = () => (
     <RaisedButton
     label="编辑封面图片"
@@ -35,9 +47,22 @@ const RaisedButtonExampleComplex = () => (
     </RaisedButton>
 );
 
+class Counter extends React.Component{
+  render(){
+    return(
+      <div>
+        <CardExampleWithAvatar />
+        <RaisedButtonExampleComplex />
+      </div>
+    )
+  }
+}
+// Counter.propTypes = {initialCount:React.PropTypes.number};
+// Counter.defaultProps = {initialCount:0};
+
 ReactDOM.render(
   <MuiThemeProvider>
-    <RaisedButtonExampleComplex />
+    <Counter/>
   </MuiThemeProvider>,
-  document.getElementById('filephoto')
+  document.getElementById('uploadphoto')
 );
