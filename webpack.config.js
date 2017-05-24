@@ -13,6 +13,7 @@ let configs = {
     btHeadPortrait: './components/userinfo/btHeadPortrait.js',
     resetPasswd: './components/resetPasswd.js',
     question: './components/question/question.js',
+    center: './components/userinfo/center.js',
   },
   output: {
     path: path.join(ROOT_PATH, 'public'),
