@@ -7,6 +7,44 @@
   height: 100%;
 }
 
+#head {
+  margin-top: 40px;
+}
+
+#change {
+  background: #673ab7;
+  color: white;
+  padding: 20px;
+  margin: 2px;
+}
+
+#chang {
+  color: #FFD700;
+  font-size: 16px;
+  font-weight: 900;
+  margin-right: 20px;
+}
+
+#change a {
+  color: white;
+  font-weight: 900;
+  margin: 0 4px;
+}
+
+#change a:hover {
+  color: white;
+  font-weight: 900;
+}
+
+#change a:focus {
+  color: #00B7FF;
+  font-weight: 900;
+}
+
+#left {
+  padding: 0 20px;
+}
+
 #xian {
   /*height: 60px;*/
   border-bottom: 1px solid #673ab7;
@@ -19,7 +57,7 @@
 .row .col-md-9 .row .col-md-1 {
   width: 7%;
   height: 60px;
-  border: 2px solid white;
+  /*margin-top: 10px;*/
 }
 
 #read p {
@@ -110,7 +148,7 @@ a {
   height: 298px;
   border: 1px solid #673ab7;
   border-radius: 4px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .l-t ol {
@@ -145,7 +183,7 @@ li a:hover {
   padding: 15px;
   background: #fcf8e3;
   border: 1px solid #faebcc;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   border-radius: 4px;
 }
 
@@ -172,7 +210,7 @@ li a:hover {
 .l-x {
   margin: 0px 15px;
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .col-sm-6 {
