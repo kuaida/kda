@@ -9,7 +9,9 @@ let configs = {
     publish: './components/publish.js',
     index: './components/index.js',
     filephoto: './components/userinfo/filephoto.js',
+    uploadphoto: './components/userinfo/uploadphoto.js',
     btHeadPortrait: './components/userinfo/btHeadPortrait.js',
+    center: './components/userinfo/center.js',
   },
   output: {
     path: path.join(ROOT_PATH, 'public'),
