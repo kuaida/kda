@@ -1,5 +1,5 @@
 .question-main {
-  width: 80%;
+  /*width: 80%;*/
   margin: auto;
 }
 
@@ -21,4 +21,9 @@
 
 .question-btn {
   float: right;
+}
+
+.container .question-main .jumbotron {
+  border-radius: 0;
+  padding-top: 0;
 }
