@@ -64,25 +64,24 @@ class HorizontalTransition extends React.Component {
     switch (stepIndex) {
       case 0:
         return (
-          <p>
-          邮箱输入框
-          </p>
+          <div>
+            <p>我们将向您的邮箱发送验证码</p>
+            <TextField style={{marginTop: 0}} floatingLabelText="输入您的账户邮箱" />
+          </div>
         );
       case 1:
         return (
           <div>
-            <TextField style={{marginTop: 0}} floatingLabelText="Ad group name" />
-            <p>
-              验证码
-            </p>
-            <p>Something something whatever cool</p>
+          <p>发送成功，请查收</p>
+            <TextField style={{marginTop: 0}} floatingLabelText="输入验证码" />
           </div>
         );
       case 2:
         return (
-          <p>
-            更改密码
-          </p>
+          <div>
+            <TextField style={{marginTop: 0}} floatingLabelText="输入新密码" />
+            <TextField style={{marginTop: 0,float:'right'}} floatingLabelText="确认新密码" />
+          </div>
         );
       default:
         return 'You\'re a long way from home sonny jim!';
@@ -116,13 +115,13 @@ class HorizontalTransition extends React.Component {
         <div>{this.getStepContent(stepIndex)}</div>
         <div style={{marginTop: 24, marginBottom: 12}}>
           <FlatButton
-            label="Back"
+            label="返回上一步"
             disabled={stepIndex === 0}
             onTouchTap={this.handlePrev.bind(this)}
             style={{marginRight: 12}}
           />
           <RaisedButton
-            label={stepIndex === 2 ? 'Finish' : 'Next'}
+            label={stepIndex === 2 ? '完成' : '确认'}
             primary={true}
             onTouchTap={this.handleNext.bind(this)}
           />
@@ -144,7 +143,7 @@ class HorizontalTransition extends React.Component {
             <StepLabel>输入验证码</StepLabel>
           </Step>
           <Step>
-            <StepLabel>重新设置密码</StepLabel>
+            <StepLabel>设置新密码</StepLabel>
           </Step>
         </Stepper>
         <ExpandTransition loading={loading} open={true}>
