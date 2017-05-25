@@ -11,6 +11,7 @@ db.once('open', function(){
 })
 
 let Schema = mongoose.Schema;
+let ObjectId = Schema.Types.ObjectId;
 
 let userSchema = Schema({
   account:String,
@@ -19,9 +20,9 @@ let userSchema = Schema({
   gender:Boolean,
   age:Number,
   birthday:String,
-  myCollections:[{type:'Object',ref:'question'}],
-  myQuestions:[{type:'Object',ref:'question'}],
-  myAnswers:[{type:'Object',ref:'question'}],
+  myCollections:[{type:'ObjectId',ref:'question'}],
+  myQuestions:[{type:'ObjectId',ref:'question'}],
+  myAnswers:[{type:'ObjectId',ref:'question'}],
   alipayAccount:String,
   balance:Number,
   headPortrait:String,
@@ -32,8 +33,8 @@ let questionSchema = Schema({
   title:String,
   type:[],
   content:String,
-  author:{type:'Object',ref:'user'},
-  answerList:[{type:'Object',ref:'question'}],
+  author:{type:'ObjectId',ref:'user'},
+  answerList:[{type:'ObjectId',ref:'question'}],
   charge:Boolean,
   validTime:Number,
   money:Number,
@@ -42,7 +43,7 @@ let questionSchema = Schema({
 });
 
 let answerSchema = Schema({
-  question:Object{type:'Object',ref:'question'},
+  question:Object{type:'ObjectId',ref:'question'},
   Content:String,
   answerTime:String,
   author:Object,
@@ -52,7 +53,7 @@ let answerSchema = Schema({
 
 let typeSchema = Schema({
   type:	String,
-  questionIdList:[{type:'Object',ref:'question'}]
+  questionIdList:[{type:'ObjectId',ref:'question'}]
 });
 
 let billSchema = Schema({
