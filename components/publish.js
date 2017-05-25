@@ -14,6 +14,7 @@ import Toggle from 'material-ui/Toggle';
 import Slider from 'material-ui/Slider';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
+const QueryString = require('querystring');
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -43,7 +44,7 @@ const styles = {
     paddingBottom:"4px",
     borderRadius:"2px"
   },
-  sliderTime:{
+  slider:{
     cursor:"pointer",
     marginTop:"10px",
     marginBottom:"15px",
@@ -77,7 +78,7 @@ class Publish extends Component {
     this.state = {
       title: '',
       type: [],
-      typeItems:['html5','css3','javascript','jQuery','Node.js'],
+      typeItems:[],
       editorHtml: '',
       pay: false,
       time: 1,
@@ -86,7 +87,7 @@ class Publish extends Component {
     }
   }
   componentWillMount(){
-    fetch('/getAllTypes')
+    fetch('/publish/getAllTypes')
     .then((response)=>{
       return response.json();
     })
@@ -100,16 +101,16 @@ class Publish extends Component {
   typeItems(values){
     return this.state.typeItems.map((item)=>
       <MenuItem
-        key={item}
+        key={item._id}
         insetChildren={true}
-        checked={values && values.indexOf(item) > -1}
-        value={item}
-        primaryText={item}
+        checked={values && values.indexOf(item.type) > -1}
+        value={item.type}
+        primaryText={item.type}
       />
     );
   }
   postQuestion(data){
-    fetch('/postQuestion',{
+    fetch('/publish/postQuestion',{
       method:"POST",
       headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -118,16 +119,19 @@ class Publish extends Component {
       body:data
     })
     .then((response)=>{
-            if(response.ok){
-              this.setState(Object.assign({},this.state,{state:3}));
-
-              setTimeout(()=>{
-                window.location.assign('/');
-              },2000);
-
-            }else{
-              this.setState(Object.assign({},this.state,{state:4}));
-            }
+      return response.json();
+    })
+    .then((json)=>{
+      if(json.state==200){
+        this.setState(Object.assign({},this.state,{state:3}));
+        setTimeout(()=>{
+          window.location.assign('/');
+        },2000);
+      }else if(json.state==400){
+        this.setState(Object.assign({},this.state,{state:4}));
+      }else if(json.state==300){
+          window.location.assign('/login');
+      }
     })
     .catch((err)=>{
       console.log(err);
@@ -159,7 +163,7 @@ class Publish extends Component {
     if(this.state.state==1){
       if(this.state.title&&this.state.type.length&&this.state.editorHtml){
           this.setState(Object.assign({},this.state,{state:2}));
-          let data = JSON.stringify(Object.assign({},this.state,{typeItems:null}));
+          let data = QueryString.stringify(Object.assign({},this.state,{typeItems:null}));
           this.postQuestion(data);
       }
     }
@@ -222,25 +226,31 @@ class Publish extends Component {
                 onToggle={( e, isChecked )=>{this.changePay(isChecked)}}
               />
             </Col>
-            <Col lg={12} md={12} sm={12} xs={12} style={styles.colBottom,{display:this.state.pay?"block":"none"}}>
-              <h4>悬赏在 <b　style={{color:deepPurple900}}>{this.state.time}</b> 小时后失效</h4>
-              <Slider
-                value={this.state.time}
-                min={1}
-                max={24}
-                step={1}
-                sliderStyle={styles.sliderTime}
-                onChange={ ( e, time ) => { this.changeTime(time) } }
-                />
-                <h4>悬赏金 <b style={{color:yellowA700}}>{this.state.count}</b> 快币</h4>
-                <Slider
-                  value={this.state.count}
-                  min={1}
-                  max={500}
-                  step={1}
-                  sliderStyle={styles.sliderCount}
-                  onChange={ ( e, count ) => { this.changeCount(count) } }
-                  />
+            <Col lg={12} style={styles.colBottom,{display:this.state.pay?"block":"none"}}>
+              <Row>
+               <Col lg={6} md={6} sm={6} xs={12}>
+                  <h4>悬赏在 <b　style={{color:deepPurple900}}>{this.state.time}</b> 小时后失效</h4>
+                  <Slider
+                    value={this.state.time}
+                    min={1}
+                    max={24}
+                    step={1}
+                    sliderStyle={styles.slider}
+                    onChange={ ( e, time ) => { this.changeTime(time) } }
+                    />
+                </Col>
+                <Col lg={6} md={6} sm={6} xs={12}>
+                    <h4>悬赏金 <b style={{color:yellowA700}}>{this.state.count}</b> 快币</h4>
+                    <Slider
+                      value={this.state.count}
+                      min={1}
+                      max={500}
+                      step={1}
+                      sliderStyle={styles.slider}
+                      onChange={ ( e, count ) => { this.changeCount(count) } }
+                      />
+                </Col>
+              </Row>
             </Col>
             <Col lg={12}>
               <RaisedButton
