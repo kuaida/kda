@@ -43,10 +43,10 @@ let questionSchema = Schema({
 });
 
 let answerSchema = Schema({
-  question:Object{type:'ObjectId',ref:'question'},
+  question:{type:'ObjectId',ref:'question'},
   Content:String,
   answerTime:String,
-  author:Object,
+  author:{type:'ObjectId',ref:'user'},
   adopt:Boolean,
   likers:[]
 });
