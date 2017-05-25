@@ -48,6 +48,7 @@
             </div>
           </div>
 
+      <% ques.forEach(function(quest){ %>
           <div class="row" id="left">
             <div class="col-md-12 col-xs-12 col-sm-12">
               <div class="row" id="title">
@@ -57,12 +58,12 @@
                       标题
                     </div>
                     <div class="col-md-10 col-xs-6 col-sm-6" id="ans">
-                      <span>那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了</span>
+                    <span><%= quest.content %></span>
                       <a href="#">php</a>
                     </div>
                     <div class="col-md-1 col-xs-1 col-sm-1">
                       <span class="tub">
-                        <i class="fa fa-money" aria-hidden="true">&nbsp;<span>20</span></i>
+                        <i class="fa fa-money" aria-hidden="true">&nbsp;<span><%= quest.money %></span></i>
                       </span>
                     </div>
                   </div>
@@ -89,57 +90,9 @@
                 </div>
               </div>
             </div>
-
-
-
           </div>
+      <% }) %>
 
-
-          <div class="row" id="left">
-            <div class="col-md-12 col-xs-12 col-sm-12">
-              <div class="row" id="title">
-                <div class="col-md-12 col-xs-12 col-sm-12" id="money">
-                  <div class="row">
-                    <div class="col-md-1 col-xs-1 col-sm-1" id="tit">
-                      标题
-                    </div>
-                    <div class="col-md-10 col-xs-6 col-sm-6" id="ans">
-                      <span>那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了那么问题来了</span>
-                      <a href="#">php</a>
-                    </div>
-                    <div class="col-md-1 col-xs-1 col-sm-1">
-                      <span class="tub">
-                        <i class="fa fa-money" aria-hidden="true">&nbsp;<span>20</span></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-12 col-xs-12 col-sm-12">
-              <div class="row" id="xian">
-                <div class="col-md-3 col-xs-3 col-sm-3" id="img">
-                  <img src="/images/head.jpg" alt="">
-                </div>
-                <div class="col-md-3 col-xs-3 col-sm-3" id="read">
-                  <p>0</p>
-                  浏览量
-                </div>
-                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
-                  <p>10:10</p>
-                  创建时间
-                </div>
-                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
-                  <p>10:10</p>
-                  剩余时间
-                </div>
-              </div>
-            </div>
-
-
-
-          </div>
         </div>
 
 
@@ -219,7 +172,6 @@
       </div>
     </div>
     </div>
-    <a href="/resetPasswd">忘记密码</a>
     <% include foot %>
       <div class="container" id="react-root"></div>
       <script type="text/javascript" src="/js/index.js"></script>
