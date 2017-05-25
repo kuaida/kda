@@ -11,27 +11,30 @@ db.once('open', function(){
 })
 
 let Schema = mongoose.Schema;
+let ObjectId = Schema.Types.ObjectId;
 
-let userSchema  = Schema({
+let userSchema = Schema({
   account:String,
   nickName:String,
-  password:	String,
-  gender:	Boolean,
-  age:	Number,
-  birthday:	String,
-  myCollections:	[],
-  myQuestions:	[],
-  myAnswers:	[],
-  alipayAccount:	String,
-  balance:	Number
+  password:String,
+  gender:Boolean,
+  age:Number,
+  birthday:String,
+  myCollections:[{type:'ObjectId',ref:'question'}],
+  myQuestions:[{type:'ObjectId',ref:'question'}],
+  myAnswers:[{type:'ObjectId',ref:'question'}],
+  alipayAccount:String,
+  balance:Number,
+  headPortrait:String,
+  backgroundImage:String
 });
 
 let questionSchema = Schema({
   title:String,
   type:[],
   content:String,
-  author:Object,
-  answerList:[],
+  author:{type:'ObjectId',ref:'user'},
+  answerList:[{type:'ObjectId',ref:'question'}],
   charge:Boolean,
   validTime:Number,
   money:Number,
@@ -40,17 +43,17 @@ let questionSchema = Schema({
 });
 
 let answerSchema = Schema({
-  question:Object,
+  question:{type:'ObjectId',ref:'question'},
   Content:String,
   answerTime:String,
-  author:Object,
+  author:{type:'ObjectId',ref:'user'},
   adopt:Boolean,
-  likeNum:Number
+  likers:[]
 });
 
 let typeSchema = Schema({
-  	type:	String,
-    questionIdList:	[]
+  type:	String,
+  questionIdList:[{type:'ObjectId',ref:'question'}]
 });
 
 let billSchema = Schema({

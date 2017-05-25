@@ -8,8 +8,9 @@ let configs = {
     vender: ['webpack/hot/dev-server', 'webpack-hot-middleware/client'], // 额外插件打包成vender
     publish: './components/publish.js',
     index: './components/index.js',
-    filephoto: './components/userinfo/filephoto.js',
-    btHeadPortrait: './components/userinfo/btHeadPortrait.js',
+    userinfo: './components/userinfo/index.js',
+    resetPasswd: './components/resetPasswd.js',
+    question: './components/question/question.js',
   },
   output: {
     path: path.join(ROOT_PATH, 'public'),
