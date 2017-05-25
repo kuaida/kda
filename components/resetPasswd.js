@@ -15,7 +15,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import ExpandTransition from 'material-ui/internal/ExpandTransition';
 import TextField from 'material-ui/TextField';
-
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: deepPurple900,
@@ -30,6 +29,8 @@ class HorizontalTransition extends React.Component {
        loading: false,
        finished: false,
        stepIndex: 0,
+       dis:0,
+       numberList:0,
      }
  }
 
@@ -40,13 +41,40 @@ class HorizontalTransition extends React.Component {
   };
 
   handleNext() {
-    const {stepIndex} = this.state;
+    const {stepIndex,numberList} = this.state;
     if (!this.state.loading) {
-      this.dummyAsync(() => this.setState({
-        loading: false,
-        stepIndex: this.state.stepIndex + 1,
-        finished: this.state.stepIndex >= 2,
-      }));
+      if($('#email').val()){
+        $.ajax({
+          type:'POST',
+          url:'/resetPasswd/val',
+          dataType:'json',
+          data:{email:$('#email').val()},
+          success:function(result){
+            if(result){
+              this.dummyAsync(() => this.setState({
+                loading: false,
+                stepIndex: this.state.stepIndex + 1,
+                finished: this.state.stepIndex >= 2,
+                numberList:result,
+              }));
+            }else{
+              $('.email_p_err').css('display','block');
+              $('.email_p_pu').css('display','none');
+            }
+          }.bind(this)
+        })
+      }
+
+      if($('#val').val() == this.state.numberList){
+        this.dummyAsync(() => this.setState({
+          loading: false,
+          stepIndex: this.state.stepIndex + 1,
+          finished: this.state.stepIndex >= 2,
+        }));
+      }else{
+          $('.val_p_err').css('display','block');
+          $('.val_p_pu').css('display','none');
+      }
     }
   };
 
@@ -65,22 +93,24 @@ class HorizontalTransition extends React.Component {
       case 0:
         return (
           <div>
-            <p>我们将向您的邮箱发送验证码</p>
-            <TextField style={{marginTop: 0}} floatingLabelText="输入您的账户邮箱" />
+            <p className='email_p_pu'>我们将向您的邮箱发送验证码</p>
+            <p className='email_p_err'>注册邮箱不存在</p>
+            <TextField id='email' style={{marginTop: 0}} floatingLabelText="输入您的账户邮箱" />
           </div>
         );
       case 1:
         return (
           <div>
-          <p>发送成功，请查收</p>
-            <TextField style={{marginTop: 0}} floatingLabelText="输入验证码" />
+          <p className='val_p_pu'>发送成功，请查收</p>
+          <p className='val_p_err'>验证失败</p>
+          <TextField style={{marginTop: 0}} id='val' floatingLabelText="输入验证码" />
           </div>
         );
       case 2:
         return (
           <div>
-            <TextField style={{marginTop: 0}} floatingLabelText="输入新密码" />
-            <TextField style={{marginTop: 0,float:'right'}} floatingLabelText="确认新密码" />
+            <TextField style={{marginTop: 0}} id='newPasswd' floatingLabelText="输入新密码" />
+            <TextField style={{marginTop: 0,float:'right'}} id='newPasswd' floatingLabelText="确认新密码" />
           </div>
         );
       default:
