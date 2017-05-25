@@ -7,7 +7,6 @@ var bcrypt = require('bcrypt');
 
 router.get('/', function(req, res, next) {
   dbmodel.question.find({}, function(err, data) {
-    console.log("++++" + data + "******");
     res.render('index', {
       user: 'ren',
       ques: data
@@ -20,17 +19,5 @@ router.get('/userinfo', function(req, res, next) {
     user: 'ren'
   })
 })
-
-
-
-// router.get('/', function(req, res, next) {
-//   dbmodel.question.find().sort({
-//     time: -1
-//   }).exec(function(err, data) {
-//     res.render('index', {
-//       ques: data
-//     });
-//   })
-// })
 
 module.exports = router;
