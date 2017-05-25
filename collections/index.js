@@ -12,18 +12,18 @@ db.once('open', function(){
 
 let Schema = mongoose.Schema;
 
-let userSchema  = Schema({
+let userSchema = Schema({
   account:String,
   nickName:String,
-  password:	String,
-  gender:	Boolean,
-  age:	Number,
-  birthday:	String,
-  myCollections:	[],
-  myQuestions:	[],
-  myAnswers:	[],
-  alipayAccount:	String,
-  balance:	Number,
+  password:String,
+  gender:Boolean,
+  age:Number,
+  birthday:String,
+  myCollections:[{type:'Object',ref:'question'}],
+  myQuestions:[{type:'Object',ref:'question'}],
+  myAnswers:[{type:'Object',ref:'question'}],
+  alipayAccount:String,
+  balance:Number,
   headPortrait:String,
   backgroundImage:String
 });
@@ -32,8 +32,8 @@ let questionSchema = Schema({
   title:String,
   type:[],
   content:String,
-  author:Object,
-  answerList:[],
+  author:{type:'Object',ref:'user'},
+  answerList:[{type:'Object',ref:'question'}],
   charge:Boolean,
   validTime:Number,
   money:Number,
@@ -42,17 +42,17 @@ let questionSchema = Schema({
 });
 
 let answerSchema = Schema({
-  question:Object,
+  question:Object{type:'Object',ref:'question'},
   Content:String,
   answerTime:String,
   author:Object,
   adopt:Boolean,
-  likeNum:Number
+  likers:[]
 });
 
 let typeSchema = Schema({
-  	type:	String,
-    questionIdList:	[]
+  type:	String,
+  questionIdList:[{type:'Object',ref:'question'}]
 });
 
 let billSchema = Schema({
