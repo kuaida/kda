@@ -2,8 +2,7 @@
 <html>
 
 <head>
-  <title>i快答</title>
-  <link rel="shortcut icon" href="/favicon.ico">
+  <title>React</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/index.css' />
   <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -21,36 +20,36 @@
 
 <body>
   <% include head %>
-    <a href="/resetPasswd"></a>
+
     <div class="container">
       <div class="row" id="head">
-        <div class="col-md-9">
-          <div class="row" id="change" id="left">
+        <div class="col-md-9" id="left">
+          <div class="row" id="change">
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12" id="change-s">
                     <span id="chang">是否悬赏:</span>
-                    <a href="#">全部</a>
+                    <span class="active"><a href="#">全部</a></span>
                     <span><a href="#">悬赏</a></span>
                     <span><a href="#">非悬赏</a></span>
 
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" id="change-s">
                     <span id="chang">问题状态:</span>
-                    <a href="#">全部</a>
+                    <span class="active"><a href="#">全部</a></span>
                     <span><a href="#">提问中</a></span>
                     <span><a href="#">已解决</a></span>
 
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" id="change-s">
                     <span id="chang">问题种类:</span>
-                    <span><a href="#">全部</a></span>
+                    <span class="active"><a href="#">全部</a></span>
                     <span><a href="#">php</a></span>
                 </div>
             </div>
           </div>
 
       <% ques.forEach(function(quest){ %>
-          <div class="row" id="left">
+          <div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12">
               <div class="row" id="title">
                 <div class="col-md-12 col-xs-12 col-sm-12" id="money">
@@ -59,8 +58,8 @@
                       标题
                     </div>
                     <div class="col-md-10 col-xs-6 col-sm-6" id="ans">
-                    <span><%= quest.content %></span>
-                      <a href="#">php</a>
+                    <span><a href="#"><%= quest.title %></a></span>
+                      <i><a href="#">php</a></i>
                     </div>
                     <div class="col-md-1 col-xs-1 col-sm-1">
                       <span class="tub">
@@ -168,6 +167,13 @@
     <% include foot %>
       <div class="container" id="react-root"></div>
       <script type="text/javascript" src="/js/index.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $("#change-s span").click(function(){
+            $(this).addClass("active").siblings().removeClass("active")
+          })
+        })
+      </script>
 </body>
 
 </html>
