@@ -3,61 +3,63 @@
 
 /*left*/
 
-.row .col-md-3 {
-  height: 100%;
-}
-
 #head {
   margin-top: 15px;
 }
 
 #change {
-  background: #673ab7;
+  border: 1px solid #673ab7;
   color: white;
-  padding: 20px;
-  margin: 2px;
+  padding: 20px 0px;
+}
+
+.col-md-12 {
+  margin: 4px 0;
 }
 
 #chang {
-  color: #FFD700;
+  color: #000;
   font-size: 16px;
   font-weight: 900;
-  margin-right: 20px;
+  margin-right: 10px;
+  margin: 4px;
+}
+
+#change-s {
+  padding: 0px 30px;
 }
 
 #change a {
-  color: white;
+  text-decoration: none;
+  display: inline-block;
+  color: #673ab7;
+  padding: 2px 6px;
   font-weight: 900;
   margin: 0 4px;
 }
 
 #change a:hover {
-  color: white;
+  color: #fff;
+  background: #673ab7;
   font-weight: 900;
 }
 
-#change a:focus {
-  color: #00B7FF;
+#change .active a {
+  color: #fff;
+  background: #673ab7;
   font-weight: 900;
 }
 
 #left {
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 #xian {
-  /*height: 60px;*/
   border-bottom: 1px solid #673ab7;
 }
 
 #title {
   margin-top: 10px;
-}
-
-.row .col-md-9 .row .col-md-1 {
-  width: 7%;
-  height: 60px;
-  /*margin-top: 10px;*/
 }
 
 #read p {
@@ -85,10 +87,6 @@
   text-align: center;
 }
 
-.row .col-md-9 .row .col-md-9 {
-  height: 60px;
-}
-
 #money {
   font-size: 20px;
   padding: 18px 0;
@@ -108,8 +106,9 @@
 
 #money #tit {
   padding: 0 10px;
-  color: #673ab7;
+  color: #000;
   font-weight: 900;
+  padding-left: 20px;
 }
 
 #money .tub i {
@@ -121,15 +120,21 @@
   font-size: 12px;
 }
 
-#ans {
+#ans a {
   font-size: 14px;
   height: 100%;
 }
 
-#req {
-  border-bottom: 1px solid #673ab7;
-  padding-bottom: 20px;
-  margin-bottom: 10px;
+#ans span>a {
+  color: #999;
+  font-size: 16px;
+}
+
+#ans i>a {
+  color: #fff;
+  background: #673ab7;
+  font-size: 12px;
+  padding: 2px 4px;
 }
 
 
@@ -145,9 +150,8 @@ a {
 
 .l-t {
   width: 100%;
-  height: 298px;
+  height: 100%;
   border: 1px solid #673ab7;
-  border-radius: 4px;
   margin-bottom: 30px;
 }
 
@@ -163,17 +167,17 @@ a {
   font-weight: 900;
 }
 
-li {
+ol li {
   margin-bottom: 10px;
   font-weight: 900;
 }
 
-li a {
+ol li a {
   color: #673ab7;
   font-weight: 900;
 }
 
-li a:hover {
+ol li a:hover {
   color: purple;
   font-weight: 900;
 }
@@ -184,7 +188,6 @@ li a:hover {
   background: #fcf8e3;
   border: 1px solid #faebcc;
   margin-bottom: 30px;
-  border-radius: 4px;
 }
 
 .l-w .tw {
@@ -193,46 +196,12 @@ li a:hover {
   color: #fff;
   background-color: #673ab7;
   border-color: #008151;
-  border-radius: 4px;
   text-align: center;
   padding: 6px 6px;
 }
 
-.l-w-f {
-  margin-top: 20px;
-}
-
-.l-w-f a {
-  padding-left: 10px;
-  font-size: 12px;
-}
-
-.l-x {
-  margin: 0px 15px;
-  margin-top: 0px;
-  margin-bottom: 30px;
-}
-
-.col-sm-6 {
-  padding: 6px 0;
-}
-
-.l-x .col-sm-6 i {
-  padding-right: 6px;
-  color: #673ab7;
-}
-
-.l-x a {
-  color: black;
-  font-weight: 900;
-}
-
-.l-x a:hover {
-  color: #673ab7;
-}
-
 .l-l {
-  height: 255px;
+  height: 100%;
 }
 
 .span {
