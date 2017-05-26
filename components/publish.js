@@ -192,7 +192,7 @@ class Publish extends Component {
     return (
       <Grid>
           <Row>
-            <Col lg={12} style={styles.colBottom}>
+            <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2} style={styles.colBottom}>
               <TextField
                 hintText="来个标题"
                 fullWidth={true}
@@ -201,7 +201,7 @@ class Publish extends Component {
                 onChange={ ( e, title )=>{ this.changeTitle( title ) } }
               />
             </Col>
-            <Col lg={12} style={styles.colBottom}>
+            <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2} style={styles.colBottom}>
                 <SelectField
                 multiple={true}
                 hintText="问题类别(1~3个)"
@@ -212,13 +212,13 @@ class Publish extends Component {
                   {this.typeItems(this.state.type)}
                 </SelectField>
             </Col>
-            <Col lg={12} style={styles.colBottom}>
+            <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2} style={styles.colBottom}>
               <ReactQuill theme="snow"
                           onChange={(html) => { this.changeQuill(html) }}
                           placeholder={this.props.placeholder}
               />
             </Col>
-            <Col lg={3} md={4} sm={6} xs={12} style={styles.colBottom}>
+            <Col lg={3} lgOffset={2} md={4} mdOffset={2} sm={6} smOffset={2} xs={12} style={styles.colBottom}>
               <Toggle
                 label={this.state.pay?"悬赏":"不悬赏"}
                 labelStyle={this.state.pay?{color:"#fff"}:{}}
@@ -226,7 +226,7 @@ class Publish extends Component {
                 onToggle={( e, isChecked )=>{this.changePay(isChecked)}}
               />
             </Col>
-            <Col lg={12} style={styles.colBottom,{display:this.state.pay?"block":"none"}}>
+            <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2} style={styles.colBottom,{display:this.state.pay?"block":"none"}}>
               <Row>
                <Col lg={6} md={6} sm={6} xs={12}>
                   <h4>悬赏在 <b　style={{color:deepPurple900}}>{this.state.time}</b> 小时后失效</h4>
@@ -252,7 +252,7 @@ class Publish extends Component {
                 </Col>
               </Row>
             </Col>
-            <Col lg={12}>
+            <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2}>
               <RaisedButton
                   disabled={this.state.state==1?false:true}　
                   label="提交"
