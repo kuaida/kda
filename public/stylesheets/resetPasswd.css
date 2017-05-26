@@ -3,7 +3,6 @@
   margin-bottom: 400px;
 }
 
-.email_p_err,.val_p_err{
+.color_red{
   color: red;
-  display: none;
 }
