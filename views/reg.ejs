@@ -16,26 +16,53 @@
     span{
       color: red;
     }
+
+    h {
+      display: inline-block;
+      margin: auto;
+    }
+
+    input {
+      text-align: center;
+    }
+
+    .reg {
+      margin:auto;
+      padding-top: 20px;
+      height: 350px;
+      width: 500px;
+      box-shadow: 0 0 10px black;
+    }
+
   </style>
 </head>
 <body>
+    <% include head %>
   <br>
-  <div class="container">
-    <h1>正在注册</h1>
-    <br>
-  <form method="post" action="/login/reg">
-      <label for="exampleInputEmail1">注册用户名</label>
-      <!-- 通过判断用户名是否存在 -->
-      <% if(cunzai !== 'no' ){ %>
-        <span>用户名已存在</span>
-      <% } %>
-      <input type="email" name='account' class="form-control" placeholder="Email">
-      <br>
-      <label for="exampleInputPassword1">注册密码</label>&nbsp;&nbsp;<span class="ma">密码不能少于8位</span>
-      <input type="password" name='password' class="form-control password" placeholder="Password">
-      <br>
-    <button type="submit" class="btn btn-default submit">注册</button>
-  </form>
+  <div class="reg">
+
+    <div class="container" style="height:300px;width:350px;margin-top:30px;text-align:center">
+        <h1>正在注册</h1>
+        <br>
+      <form method="post" action="/reg">
+        <div class="form-group" style="height:300px;width:350px;margin: auto;">
+
+          <label for="exampleInputEmail1" >注册用户名</label>
+          <!-- 通过判断用户名是否存在 -->
+          <% if(cunzai !== 'no' ){ %>
+            <span>用户名已存在</span>
+          <% } %>
+          <input type="email" name='account' class="form-control" placeholder="Email">
+          <br>
+          <label for="exampleInputPassword1">注册密码</label>&nbsp;&nbsp;<span class="ma">密码不能少于8位</span>
+          <input type="password" name='password' class="form-control password" placeholder="Password">
+          <br>
+          <a type="submit" href='/login' class="btn btn-default" style="float:right;margin-top:5px;background: #0D47A1;color:white;">登录</a>
+        <button type="submit" class="btn btn-default submit" style="float:right;margin-top:5px;background: #0D47A1;color:white;">注册</button>
+        <a href="#" style="float:left;margin-top:7px;">忘记密码</a>
+        </div>
+      </form>
+    </div>
 </div>
   <script type="text/javascript">
     var passwordLength = 0;
@@ -53,5 +80,6 @@
       }
     });
   </script>
+  <% include foot %>
 </body>
 </html>
