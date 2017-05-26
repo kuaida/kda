@@ -14,10 +14,13 @@ router.get('/', function(req, res, next) {
   })
 })
 
+
 router.get('/userinfo', function(req, res, next) {
   res.render('userinfo', {
     user: 'ren'
   })
 })
+
+
 
 module.exports = router;
