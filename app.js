@@ -12,12 +12,14 @@ var WebpackDevMiddleware = require('webpack-dev-middleware');
 var config = require('./webpack.config.js');
 var compiler = webpack(config);
 const salt = 10;
+var db = require('./collections');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var publish = require('./routes/publish');
 var resetPasswd = require('./routes/resetPasswd');
 var question = require('./routes/question');
+var login = require('./routes/login');
 
 var app = express();
 app.use(session({
@@ -57,13 +59,8 @@ app.use('/users', users);
 app.use('/publish', publish);
 app.use('/resetPasswd',resetPasswd);
 app.use('/question',question);
-app.get('/login', function(req, res, next){
-  // bcrypt.hash(req.body.pass, salt, function(err, hash){
-  //   console.log(hash);
-  // });
-  req.session.user = 'Welcome to REMN login page.';
-  res.send(req.session.user);
-})
+app.use('/login',login);
+
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
