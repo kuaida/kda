@@ -161,7 +161,7 @@ class Publish extends Component {
   }
   buttonClick(){
     if(this.state.state==1){
-      if(this.state.title&&this.state.type.length&&this.state.editorHtml){
+      if(this.state.title&&this.state.type.length){
           this.setState(Object.assign({},this.state,{state:2}));
           let data = QueryString.stringify(Object.assign({},this.state,{typeItems:null}));
           this.postQuestion(data);

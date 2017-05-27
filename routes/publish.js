@@ -9,9 +9,25 @@ const types = {
   last:Math.floor(Number(moment('2015-05-25').format('x'))/1000),
   limit:600
 };
+const redis = require('../redis');
 
+const initTypes = ['HTML5','CSS3','Node.js','Express','React','Javascript','jQuery','React Native','MongoDB','MySQL','Python','PHP','UI框架','JS框架'];
 router.get('/', function(req, res, next) {
-  res.render('publish',{user:''});
+  res.render('publish',{user:req.session.user});
+});
+/*
+* 初始化标签
+*/
+dbs.type.find({},(err,res)=>{
+  if(!res.length){
+    initTypes.forEach((tag)=>{
+      let newTag = new dbs.type({
+        type:tag,
+        questionIdList:[]
+      });
+      newTag.save(()=>{});
+    });
+  }
 });
 
 router.get('/getAllTypes',function(req,res,next){
@@ -68,7 +84,7 @@ router.post('/postQuestion',function(req,res,next){
           console.log(err);
           res.json({state:400});
         }else{
-          dbs.type.update({'type':{$in:ques.type}},{$push:{'questionIdList':ques._id}},{multi:true},(err)=>{
+          dbs.type.update({'type':{$in:ques.type}},{$addToSet:{'questionIdList':ques._id}},{multi:true},(err)=>{
             if(err){
               console.log(err);
             }else{
