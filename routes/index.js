@@ -13,7 +13,17 @@ router.get('/', function(req, res, next) {
       user: 'ren',
       ques: data
     });
-  })
+  });
+
+  dbmodel.user.find({}, function(err, data) {
+    console.log(data + "ddddddddd");
+    res.render('index', {
+      user: 'ren',
+      users: data
+    });
+  });
+
+
 })
 
 router.get('/userinfo', function(req, res, next) {
