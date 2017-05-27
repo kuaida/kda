@@ -51,13 +51,14 @@ class HorizontalTransition extends React.Component {
         if (!isok) {
           $('.email_p_pu').html('邮箱格式不正确').addClass('color_red');
         }else{
+          $('.email_p_pu').html('正在发送邮件，请稍等').addClass('color_green');
           $.ajax({
             type:'POST',
             url:'/resetPasswd/val',
             dataType:'json',
             data:{email:$('#email').val()},
             success:function(result){
-              if(result){
+              if(result.status == 1){
                 this.dummyAsync(() => this.setState({
                   loading: false,
                   stepIndex: this.state.stepIndex + 1,
@@ -65,6 +66,8 @@ class HorizontalTransition extends React.Component {
                   numberList:result.numberList,
                   userName:result.userName,
                 }));
+              }else if(result.status == 2){
+                $('.email_p_pu').html('网络不佳，发送失败').addClass('color_yellow');
               }else{
                 $('.email_p_pu').html('邮箱不存在,请先去注册').addClass('color_red');
               }

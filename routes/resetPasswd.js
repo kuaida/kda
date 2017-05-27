@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 var db = require('../collections')
+var bcrypt = require('bcrypt');
+var salt = 10;
 var numberList;
 
 router.get('/', function(req, res, next) {
@@ -27,30 +29,31 @@ router.post('/val', function(req, res, next) {
         var mailOptions = {
           from: 'ikuaida@sina.com',
           to: req.body.email,
-          subject: '爱快打',
+          subject: '快答邮箱验证',
           html:`修改密码验证<h2>验证码:</h2>`+numberList
         };
         transporter.sendMail(mailOptions, function(error, info) {
           if (error) {
             console.log(error);
-            res.json(false)
+            res.json({status:2})
           } else {
-            res.json({numberList:numberList,userName:req.body.email})
+            res.json({status:1,numberList:numberList,userName:req.body.email})
           }
         });
 
       }else{
-        res.json(false)
+        res.json({status:0})
       }
     })
-
   }
 })
 router.post('/mod', function(req, res, next) {
-  db.user.update({account:req.body.account},{$set:{password:req.body.password}},function(err,data){
-    if(!err){
-      res.json(true)
-    }
+  bcrypt.hash(req.body.password, salt,function(err,hash){
+    db.user.update({account:req.body.account},{$set:{password:hash}},function(err,data){
+      if(!err){
+        res.json(true)
+      }
+    })
   })
 });
 

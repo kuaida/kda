@@ -9,7 +9,7 @@
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <title>Document</title>
   <style media="screen">
-    .ma{
+    .ma,.ma1{
       display: none;
       color: red;
     }
@@ -29,7 +29,7 @@
     .reg {
       margin:auto;
       padding-top: 20px;
-      height: 350px;
+      height: 100%;
       width: 500px;
       box-shadow: 0 0 10px black;
     }
@@ -41,7 +41,7 @@
   <br>
   <div class="reg">
 
-    <div class="container" style="height:300px;width:350px;margin-top:30px;text-align:center">
+    <div class="container" style="height:100%;width:350px;margin-top:30px;text-align:center">
         <h1>正在注册</h1>
         <br>
       <form method="post" action="/reg">
@@ -49,17 +49,20 @@
 
           <label for="exampleInputEmail1" >注册用户名</label>
           <!-- 通过判断用户名是否存在 -->
-          <% if(cunzai !== 'no' ){ %>
+          <% if(islive){ %>
             <span>用户名已存在</span>
           <% } %>
           <input type="email" name='account' class="form-control" placeholder="Email">
           <br>
           <label for="exampleInputPassword1">注册密码</label>&nbsp;&nbsp;<span class="ma">密码不能少于8位</span>
-          <input type="password" name='password' class="form-control password" placeholder="Password">
+          <input type="password" name='password' id='exampleInputPassword1' class="form-control password" placeholder="Password">
+          <br>
+          <br>
+          <label for="exampleInputPassword2">确认密码</label>&nbsp;&nbsp;<span class="ma1">两次密码不一致</span>
+          <input type="password" id='exampleInputPassword2' class="form-control password1" placeholder="Password">
           <br>
           <a type="submit" href='/login' class="btn btn-default" style="float:right;margin-top:5px;background: #0D47A1;color:white;">登录</a>
         <button type="submit" class="btn btn-default submit" style="float:right;margin-top:5px;background: #0D47A1;color:white;">注册</button>
-        <a href="/resetPasswd" style="float:left;margin-top:7px;">忘记密码</a>
         </div>
       </form>
     </div>
@@ -75,10 +78,21 @@
       passwordLength = $(this).val().length;
       if(passwordLength < 8){
         $('.submit').attr('disabled',true);
-        console.log(123);
         $('.ma').css('display','inline')
       }
     });
+
+    $('.password1').focus(function(){
+      $('.submit').attr('disabled',false);
+      $('.ma1').css('display','none');
+    });
+
+    $('.submit').click(function(){
+      if($('.password').val() !== $('.password1').val()){
+          $(this).attr('disabled',true)
+          $('.ma1').css('display','inline')
+      }
+    })
   </script>
   <% include foot %>
 </body>

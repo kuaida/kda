@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/login',function(req,res,next){
-  res.render('login',{user:'no',password:'no'});
+  res.render('login',{user:req.session.nickName,sucess:true});
 })
 
 router.post('/login',function(req,res,next){
@@ -35,44 +35,47 @@ router.post('/login',function(req,res,next){
     if(data){
       bcrypt.compare(req.body.password,data.password,function(err,hash){
         if(hash){
-          var addr = req.body.account;
-          res.cookie('addr',addr,{maxAge:1000*60*60*24*30,httpOnly:true});
-          req.session.user = data.nickName;
+          req.session.nickName = data.nickName;
           req.session.userid = data._id;
           req.session.account = data.account;
           res.redirect('/');
         }else{
-          res.render('login',{user:'no',password:'yes'})
+          res.render('login',{user:req.session.nickName,sucess:false})
         }
       })
     }else{
-      res.render('login',{user:'yes',password:'no'})
+      res.render('login',{user:req.session.nickName,sucess:false})
     }
   })
 })
 
 router.get('/reg',function(req,res,next){
-  res.render('reg',{user:null,cunzai: 'no'});
+  res.render('reg',{user:req.session.nickName,islive:false});
 })
 
 router.post('/reg',function(req,res,next){
   db.user.findOne({account:req.body.account},function(err,data){
     if(data){
-      res.render('reg',{user:'no',cunzai: 'yes'})
+      res.render('reg',{user:req.session.nickName,islive: true})
     }else{
+      bcrypt.hash(req.body.password, salt,function(err,hash){
       var user = new db.user({
         account:req.body.account,
-        password:req.body.password
+        password:hash
       });
-
-      bcrypt.hash(req.body.password, salt,function(err,hash){
-        user.password = hash;
         user.save(function(err,data){
-          res.render('login',{user:'no',password:'no'})
+          res.redirect('/login')
         })
       })
     }
   })
+})
+
+router.get('/logout', function(req, res, next) {
+  req.session.user = data.nickName;
+  req.session.userid = data._id;
+  req.session.account = data.account;
+  res.redirect('/login');
 })
 
 module.exports = router;
