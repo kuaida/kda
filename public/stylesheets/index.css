@@ -111,8 +111,15 @@
   padding-left: 20px;
 }
 
+#money .tub {
+  padding-right: 100px;
+}
+
 #money .tub i {
-  color: #FFD700;
+  border: 1px solid #FF6F00;
+  color: #FF6F00;
+  padding: 0px 2px;
+  font-size: 12px;
 }
 
 #money a {
