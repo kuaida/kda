@@ -114,10 +114,10 @@ router.post('/reg', function(req, res, next) {
 })
 
 router.get('/logout', function(req, res, next) {
-  req.session.nickName = null;
-  req.session.userid = null;
-  req.session.account = null;
+  req.session.user = data.nickName;
+  req.session.userid = data._id;
+  req.session.account = data.account;
   res.redirect('/login');
 })
 
-module.exports = router;
+module.exports = router
