@@ -17,7 +17,7 @@ let userSchema = Schema({
   account:{type:'String',requried:true},
   nickName:{type:'String',default:'user'},
   password:{type:'String',required:true},
-  gender:{type:'Boolean',default:true}, //true 代表男性
+  gender:{type:'Boolean',default:true}, 
   age:{type:'Number',default:0},
   birthday:{type:'String',default:'1990-01-01'},
   myCollections:[{type:'ObjectId',ref:'question'}],
@@ -37,8 +37,8 @@ let questionSchema = Schema({
   author:{type:'ObjectId',ref:'user'},
   answerList:[{type:'ObjectId',ref:'question'}],
   charge:{type:'Boolean',default:false},
-  validTime:{type:'Number',default:4},
-  money:{type:'Number',default:10},
+  validTime:{type:'Number',default:0},
+  money:{type:'Number',default:0},
   createTime:{type:'String',default:''},
   pageviews:{type:'Number',default:0}
 });
