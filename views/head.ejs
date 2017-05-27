@@ -62,6 +62,7 @@
                           <li><a href="/logout" style="font-size:16px;font-weight:bold;color:black">退出登录</a></li>
                       </ul>
                   </li>
+                  <li class="active"><a href="#" style='color:yellow;'><span class="glyphicon glyphicon-yen" aria-hidden="true"></span><%= balance %></a></li>
                   <% }else{ %>
                     <li><a type="button" href='/login' style='padding:5px;font-size:16px;background-color:#7E57C2;margin-top:8px;color:#eee' class="btn">登录</a></li>
                     <li>&nbsp;&nbsp;</li>
@@ -75,8 +76,6 @@
        $(function(){
          $("[data-toggle='collapse']").click(function(event){
            var id = $(this).data("target");
-          //  $(id).toggleClass("in");
-           //event.stopPropagation();
            $(id).toggle(200);
          });
 
