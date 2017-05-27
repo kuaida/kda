@@ -4,51 +4,62 @@ var dbmodel = require('../collections');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
-  res.render('question',{'user':''});
+  dbmodel.question.findOne({_id: '5928e40767cfd96c99735fd1'},function(err,data) {
+    console.log(data.pageviews);
+    dbmodel.question.update({_id: '5928e40767cfd96c99735fd1'},{$set:{'pageviews': data.pageviews + 1}},function() {})
+  })
+  res.render('question',{'user':'', 'title': '测试问题标题'});
 });
 
-router.post('/comment',function(data) {
-  console.log(data.body.user);
-  console.log(data.body.data);
-  console.log(data.body.time);
-  
-  // let nowtime = new Date().valueOf();
-  // let date3 = nowtime - data.body.time;
-  //
-  //
-  // var days=Math.floor(date3 / (24 * 3600 * 1000))
-  //
-  // var leave1=date3 % (24 * 3600 * 1000)
-  // var hours=Math.floor(leave1 / (3600 * 1000))
-  //
-  // var leave2=leave1 % (3600 * 1000)
-  // var minutes=Math.floor(leave2 / (60 * 1000))
-  //
-  // var leave3=leave2 % (60 * 1000)
-  // var seconds=Math.round(leave3 / 1000)
-  //
-  // var disAndTimeText;
-  //
-  // if(days>0) {
-  //     var myText = '600m  '+days+'天前'
-  //
-  // }
-  //
-  // if(days==0&&hours>0) {
-  //     var myText = '600m  '+hours+'小时前'
-  //
-  // }
-  //
-  // if(days==0&&hours==0&&minutes>0) {
-  //     var myText = '600m  '+minutes+'分钟前'
-  //
-  // }
-  //
-  // if(days==0&&hours==0&&minutes==0&&seconds>0) {
-  //     var myText = '600m  刚刚'
-  //
-  // }
+router.post('/comment',function(req, res, next) {;
+  let quest = new dbmodel.answer(req.body);
+  quest.save(function(err) {
+    if (err) {
+      console.log(err);
+    }
+  })
+  dbmodel.question.findOne({_id: req.body.question}, function(err,data) {
+    var title = data._id;
+    dbmodel.user.findOne({_id: req.body.author}, function(err,data1) {
+      dbmodel.user.update({_id: req.body.author},{$push:{'myAnswers': title}},function() {})
+    })
+  })
+});
+
+router.post('/collection',function(req, res, next) {
+  dbmodel.user.where('myCollections').in([req.body.questionid]).exec(function(err, data1) {
+    if(data1.length) {
+      dbmodel.question.findOne({_id: req.body.questionid}, function(err,data) {
+        var id = data._id
+        dbmodel.user.update({_id: req.body.userid},{$pop:{'myCollections': id}},function() {})
+      })
+    } else {
+      dbmodel.question.findOne({_id: req.body.questionid}, function(err,data) {
+        var id = data._id
+        dbmodel.user.update({_id: req.body.userid},{$push:{'myCollections': id}},function() {})
+      })
+    }
+  })
+});
+
+
+
+
+router.post('/like',function(req, res, next) {
+  dbmodel.answer.findOne({question: req.body.questionid}, function(err,data) {
+    dbmodel.answer.where('likers').in([req.body.userid]).exec(function(err,data1){
+      if(data1.length) {
+        dbmodel.answer.update({question: req.body.questionid}, {$pop: {'likers': req.body.userid}}, function() {})
+      } else {
+        dbmodel.answer.update({question: req.body.questionid}, {$push: {'likers': req.body.userid}}, function() {})
+      }
+    })
+  })
+});
+
+router.post('/adopt', function(req, res, next) {
+  console.log(req.body);
+  dbmodel.answer.update({question: req.body.questionid}, {$set: {'adopt': req.body.state}}, function() {})
 })
 
 module.exports = router;
