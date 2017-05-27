@@ -13,6 +13,14 @@
     .navbar .nav>li>a:focus,.navbar .nav>li>a:hover{
       background-color: #673AB7;
     }
+    #he{
+      display: block;
+      width: 58px;
+      height: 20px;
+      position: absolute;
+      top: 10px;
+      left: -45px;
+    }
     </style>
 </head>
 
@@ -42,7 +50,7 @@
                   <% if(user){ %>
                     <li class="dropdown">
                       <ul class="nav navbar-nav">
-                          <li class="active"><a href="/userinfo" style='font-size:20px;font-weight:bold;color:#eee;'>欢迎</a></li>
+                          <li class="active" style="position:relative"><span id="he" style='font-size:20px;font-weight:bold;color:#eee;'>欢迎</span></li>
                       </ul>
                     </li>
                   <li class="dropdown">
@@ -60,8 +68,9 @@
                       <ul class="dropdown-menu">
                           <li><a href="#" style="font-size:16px;font-weight:bold;color:black">系统消息</a></li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的回答</a></li>
-                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的提问</a></li>
+                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的消息</a></li>
+                          <!-- <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的回答</a></li>
+                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的提问</a></li> -->
                       </ul>
                   </li>
                   <% }else{ %>
