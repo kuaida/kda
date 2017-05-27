@@ -57,27 +57,15 @@
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;font-weight:bold;color:#eee"><%= user %> <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                          <li><a href="/userinfo" style="font-size:16px;font-weight:bold;color:black">我的主页</a></li>
-                          <li><a href="/publish" style="font-size:16px;font-weight:bold;color:black">我要提问</a></li>
-                          <li><a href="/question" style="font-size:16px;font-weight:bold;color:black">我要回答</a></li>
+                          <li><a href="/userinfo" style="font-size:16px;font-weight:bold;color:black">个人设置</a></li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">退出登录</a></li>
-                      </ul>
-                  </li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;font-weight:bold;color:#eee">消息 <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">系统消息</a></li>
-                          <li role="separator" class="divider"></li>
-                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的消息</a></li>
-                          <!-- <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的回答</a></li>
-                          <li><a href="#" style="font-size:16px;font-weight:bold;color:black">我的提问</a></li> -->
+                          <li><a href="/logout" style="font-size:16px;font-weight:bold;color:black">退出登录</a></li>
                       </ul>
                   </li>
                   <% }else{ %>
-                    <li><a type="button" href='/login' style='padding:5px;font-size:20px;font-weight:bold;background-color:#7E57C2;margin-top:8px;color:#eee' class="btn">登录</a></li>
+                    <li><a type="button" href='/login' style='padding:5px;font-size:16px;background-color:#7E57C2;margin-top:8px;color:#eee' class="btn">登录</a></li>
                     <li>&nbsp;&nbsp;</li>
-                    <li><a type="button" href='/reg' style='padding:5px;font-size:20px;font-weight:bold;background-color:#7E57C2;margin-top:8px;color:#eee' class="btn">注册</a></li>
+                    <li><a type="button" href='/reg' style='padding:5px;font-size:16px;background-color:#7E57C2;margin-top:8px;color:#eee' class="btn">注册</a></li>
                   <% } %>
                 </ul>
             </div>
