@@ -211,18 +211,8 @@ ol li a:hover {
   height: 100%;
 }
 
-.span {
-  float: right;
-}
-
-.span a {
-  font-size: 13px;
-  color: #673ab7;
-}
-
-.span a:hover {
-  font-size: 13px;
-  color: purple;
+.l-l ol {
+  margin-bottom: 25px;
 }
 
 ol {

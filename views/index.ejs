@@ -62,7 +62,7 @@
                       标题
                     </div>
                     <div class="col-md-7 col-xs-7 col-sm-7" id="ans">
-                      <span><a href="#"><%= quest.title %></a></span>
+                      <span><a href=/question/<%= quest._id %>><%= quest.title %></a></span>
                       <i><a href="#"><%= quest.type %></a></i>
                     </div>
                     <div class="col-md-3 col-xs-3 col-sm-3">
@@ -78,7 +78,9 @@
             <div class="col-md-12 col-xs-12 col-sm-12">
               <div class="row" id="xian">
                 <div class="col-md-3 col-xs-3 col-sm-3" id="img">
-                  <img src="<%= data2.headPortrait %>" alt="">
+                  <a href="/userinfo/<%= data2._id %>">
+                    <img src="<%= data2.headPortrait %>" alt="">
+                  </a>
                 </div>
                 <div class="col-md-3 col-xs-3 col-sm-3" id="read">
                   <p><%= quest.pageviews %></p>
@@ -106,7 +108,7 @@
             <ol>
               <% data2.forEach(function(ranko){ %>
                 <li>
-                  <a href="#"><%= ranko.title %></a>
+                  <a href=/question/<%= ranko._id %>><%= ranko.title %></a>
                   <span><%= ranko.money %></span>
                 </li>
                 <% }) %>
@@ -120,24 +122,18 @@
                 <% data3.forEach(function(user){ %>
                   <li>
                     <img src="<% user.headPortrait %>" alt="">
-                    <a href="#"><%= user.nickName %></a>
+                    <a href=/userinfo/<%= data2._id %>><%= user.nickName %></a>
                     <span><%= user.totalReward %></span>
                   </li>
                 <% }) %>
                 </ol>
               </div>
               <div class="l-l">
-                <h4>热搜榜
-                  <span class="span">
-                    <a href="#">今天</a>&nbsp;·
-                    <a href="#">本周</a>&nbsp;·
-                    <a href="#">更多</a>
-                  </span>
-                </h4>
+                <h4>热搜榜</h4>
                 <ol>
                   <% data4.forEach(function(ranks){ %>
                     <li>
-                      <a href="#"><%= ranks.title %></a>
+                      <a href=/question/<%= ranks._id %>><%= ranks.title %></a>
                       <span><%= ranks.pageviews %></span>
                     </li>
                     <% }) %>
