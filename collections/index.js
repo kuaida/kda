@@ -161,6 +161,7 @@ let billSchema = Schema({
   consumptionRecord: [],
   rechargeRecord: []
 })
+
 module.exports.user = mongoose.model('user', userSchema);
 module.exports.question = mongoose.model('question',questionSchema);
 module.exports.answer = mongoose.model('answer',answerSchema);
