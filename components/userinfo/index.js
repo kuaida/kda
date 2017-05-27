@@ -7,10 +7,28 @@ import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import {green100, green500, green700} from 'material-ui/styles/colors';
+import { deepPurple900, deepPurple300, yellowA700, grey500, green800, redA700, deepPurple800 } from 'material-ui/styles/colors';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
+import Paper from 'material-ui/Paper';
+import Dialog from 'material-ui/Dialog';
+import DatePicker from 'material-ui/DatePicker';
+
+import Divider from 'material-ui/Divider';
+import TextField from 'material-ui/TextField';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
+
+
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: deepPurple900,
+  }
+});
+
+
+
 const styles = {
   button: {
     margin: 12,
@@ -18,39 +36,62 @@ const styles = {
     top:50,
     left:'82%',
   },
-  exampleImageInput: {
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0,
+    exampleImageInput: {
+      cursor: 'pointer',
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      right: 0,
+      left: 0,
+      width: '100%',
+      opacity: 0,
+    },
+    headline: {
+      fontSize: 24,
+      paddingTop: 16,
+      paddingBottom:16,
+      marginBottom: 12,
+      fontWeight: 400,
+      borderBottomWrdth:0.5,
+      borderBottomColor:'#999',
+      borderBottomStyle:'solid',
+    },
+    tabs:{
+      width:'100%',
+    },
+    card:{
+      position:'relative'
+    },
+    info:{
+      width:"50%",
+      paddingLeft:220,
+    },
+    rbutton:{
+      margin: 12,
+    },
+    rb:{
+      position:'absolute',
+      top:"85%",
+      left:"85%",
+    },
+    hh3:{
+      paddingLeft:"80%"
+    },
+    st:{
+    paddingTop:15,
+    boxSizing:"border-box"
   },
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
+  hr:{
+    margin:0
   },
-  tabs:{
-    width:'100%'
+  a:{
+    color:'#333'
   },
-  card:{
-    position:'relative'
-  },
-  info:{
-    width:"50%",
-    paddingLeft:220,
-  },
-  rbutton:{
-    margin: 12,
-  },
-  rb:{
-    position:'absolute',
-    top:"85%",
-    left:"85%"
+  paper:{
+    height: "100%",
+    width: "100%",
+    textAlign: 'left',
+    display: 'inline-block',
   }
 };
 
@@ -79,7 +120,7 @@ const Rstyles = {
 
 const RaisedButtonExampleSimple = () => (
   <div style={styles.rb}>
-    <RaisedButton label="编辑个人资料" secondary={true} style={styles.rbutton} />
+    <RaisedButton label="编辑个人资料" secondary={true} style={styles.rbutton} buttonStyle={{backgroundColor:'gray'}}/>
   </div>
 );
 
@@ -120,7 +161,7 @@ const CardExampleWithAvatar = () => (
    <CardText expandable={true} style={styles.info}>
     我的资料
    </CardText>
-   <RaisedButtonExampleSimple />
+   <DialogExampleDialogDatePicker/>
   </Card>
 );
 
@@ -135,21 +176,95 @@ const RaisedButtonExampleComplex = () => (
     </RaisedButton>
 );
 
+
 class TabsExampleControlled extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       value: 'a',
+      data:[],
     };
   }
 
   handleChange(value){
-    this.setState({
-      value: value,
-    });
+    this.setState(Object.assign({},this.state,{value: value}));
   };
 
+
+  componentWillMount(){
+    fetch('/userinfo/userdata',{
+      method:"POST",
+      headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+      },
+      credentials: 'include',
+    })
+    .then((response)=>{
+      return response.json();
+    })
+    .then((json)=>{
+        this.setState({data:json});
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+  }
+
+data(value){
+    if (value=='a') {
+      let a = []
+      this.state.data.map(function(data){
+        a.push(data.myQuestions)
+      })
+      return (
+        a.map(function(a){
+          return(
+            <div style={styles.st}>
+              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>问题的题目</a></h4>
+              <p style={styles.hh3}><i>2017-01-01 00:00:00</i><span style={{paddingLeft:10}}>1人回答</span></p>
+              <hr style={styles.hr}/>
+            </div>
+          )
+        })
+      )
+    }
+    if (value=='b') {
+      let a = []
+      this.state.data.map(function(data){
+        a.push(data.myAnswers)
+      })
+      return (
+        a.map(function(a){
+          return(
+            <div style={styles.st}>
+              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>回答的题目</a></h4>
+              <p style={styles.hh3}><i>2017-01-01 00:00:00</i><span style={{paddingLeft:10}}>1人回答</span></p>
+              <hr style={styles.hr}/>
+            </div>
+          )
+        })
+      )
+    }
+
+    if (value=='c') {
+      let a = []
+      this.state.data.map(function(data){
+        a.push(data.myCollections)
+      })
+      return (
+        a.map(function(a){
+          return(
+            <div style={styles.st}>
+              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>回答的题目</a></h4>
+              <p style={styles.hh3}><i>2017-01-01 00:00:00</i><span style={{paddingLeft:10}}>1人回答</span></p>
+              <hr style={styles.hr}/>
+            </div>
+          )
+        })
+      )
+    }
+}
   render() {
     return (
       <Tabs
@@ -157,48 +272,78 @@ class TabsExampleControlled extends React.Component {
         onChange={this.handleChange.bind(this)}
         style={styles.tabs}
       >
-        <Tab label="动态" value="a">
-          <div>
-            <h2 style={styles.headline}>我的动态</h2>
-            <p>
-              <h3>题目:</h3>
-            </p>
-          </div>
+        <Tab label="问题" value="a">
+            {this.data('a')}
         </Tab>
         <Tab label="回答" value="b">
-          <div>
-            <h2 style={styles.headline}>我的回答</h2>
-            <p>
-              This is another example of a controllable tab. Remember, if you
-              use controllable Tabs, you need to give all of your tabs values or else
-              you wont be able to select them.
-            </p>
-          </div>
+          {this.data('b')}
         </Tab>
-        <Tab label="提问" value="c">
-          <div>
-            <h2 style={styles.headline}>我的提问</h2>
-            <p>
-              This is another example of a controllable tab. Remember, if you
-              use controllable Tabs, you need to give all of your tabs values or else
-              you wont be able to select them.
-            </p>
-          </div>
-        </Tab>
-        <Tab label="收藏" value="d">
-          <div>
-            <h2 style={styles.headline}>我的收藏</h2>
-            <p>
-              This is another example of a controllable tab. Remember, if you
-              use controllable Tabs, you need to give all of your tabs values or else
-              you wont be able to select them.
-            </p>
-          </div>
+        <Tab label="收藏" value="c">
+          {this.data("c")}
         </Tab>
       </Tabs>
     );
   }
 }
+
+
+class DialogExampleDialogDatePicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  }
+  handleOpen(){
+    this.setState({open: true});
+  };
+
+  handleClose(){
+    this.setState({open: false});
+  };
+  render() {
+    const actions = [
+      <FlatButton
+        label="Ok"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleClose.bind(this)}
+      />,
+    ];
+    return (
+      <div>
+        <RaisedButton label="修改个人资料" onTouchTap={this.handleOpen.bind(this)} style={styles.rb}/>
+        <Dialog
+          title="Dialog With Date Picker"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose.bind(this)}
+        >
+          <DividerExampleForm/>
+        </Dialog>
+      </div>
+    );
+  }
+}
+
+const style = {
+  marginLeft: 20,
+};
+const DividerExampleForm = () => (
+  <Paper zDepth={2}>
+  <form action="/userinfo/infodata" method="post">
+    姓名:<TextField hintText="任振南" style={style} underlineShow={false} />
+    <Divider />
+    年龄:<TextField hintText="22" style={style} underlineShow={false} />
+    <Divider />
+    性别:<TextField hintText="男" style={style} underlineShow={false} />
+    <Divider />
+    支付宝:<TextField hintText="支付宝账号" style={style} underlineShow={false} />
+    <Divider />
+    </form>
+  </Paper>
+);
 
 
 class Counter extends React.Component{
@@ -212,10 +357,8 @@ class Counter extends React.Component{
   }
 }
 
-
-
 ReactDOM.render(
-  <MuiThemeProvider>
+  <MuiThemeProvider muiTheme={muiTheme}>
     <Counter/>
   </MuiThemeProvider>,
   document.getElementById('index')

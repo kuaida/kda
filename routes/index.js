@@ -26,12 +26,6 @@ router.get('/', function(req, res, next) {
 
 })
 
-router.get('/userinfo', function(req, res, next) {
-  res.render('userinfo', {
-    user: 'ren'
-  })
-})
-
 router.get('/login',function(req,res,next){
   res.render('login',{user:'no',password:'no'});
 })
