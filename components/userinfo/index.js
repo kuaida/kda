@@ -102,7 +102,7 @@ const Rstyles = {
     // backgroundImage:url('http://img0.imgtn.bdimg.com/it/u=646551672,3473801352&fm=23&gp=0.jpg'),
     color:'red',
     position:'absolute',
-    top:250,
+    bottom:20,
     left:"2%"
   },
   exampleImageInput: {
@@ -123,6 +123,14 @@ const RaisedButtonExampleSimple = () => (
     <RaisedButton label="编辑个人资料" secondary={true} style={styles.rbutton} buttonStyle={{backgroundColor:'gray'}}/>
   </div>
 );
+
+const RaisedButtonExampleSimpleA = () => (
+  <div style={{position:"absolute",top:'85%',left:"70%"}}>
+    <RaisedButton label="确认修改" secondary={true} style={styles.rbutton} buttonStyle={{backgroundColor:'gray'}} type="submit"/>
+  </div>
+);
+
+
 
 class RaisedButtonExampleComplexA extends React.Component{
   render(){
@@ -194,16 +202,20 @@ class CardExampleWithAvatar extends React.Component{
 
 
 
-const RaisedButtonExampleComplex = () => (
-    <RaisedButton
-    label="编辑封面图片"
-    labelPosition="before"
-    style={styles.button}
-    containerElement="label"
-    >
+class RaisedButtonExampleComplex extends React.Component{
+  render(){
+    return(
+      <RaisedButton
+      label="编辑封面图片"
+      labelPosition="before"
+      style={styles.button}
+      containerElement="label"
+      >
       <input type="file" style={styles.exampleImageInput} />
-    </RaisedButton>
-);
+      </RaisedButton>
+    )
+  }
+};
 
 
 class TabsExampleControlled extends React.Component {
@@ -244,9 +256,9 @@ data(value){
     if (value=='a') {
       var data=[]
       this.state.data.map(function(value){
-        data=value.myQuestion
+        data=value.myQuestions
       })
-      if (data) {
+      if (data.length!==0) {
           data.map(function(a){
             return(
               <div style={styles.st}>
@@ -259,7 +271,7 @@ data(value){
       }else {
           return(
               <div style={styles.st}>
-                <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>快去提问题</a></h4>
+                <h4 style={{paddingLeft:25}}><a href="/publish" style={styles.a}>还没有提问,点我提问题</a></h4>
                 <hr style={styles.hr}/>
               </div>
           )
@@ -270,7 +282,7 @@ data(value){
       this.state.data.map(function(value){
         data=value.myAnswers
       })
-      if (data) {
+      if (data.length!==0) {
           data.map(function(a){
             return(
               <div style={styles.st}>
@@ -283,7 +295,7 @@ data(value){
       }else {
           return(
               <div style={styles.st}>
-                <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>快去回答</a></h4>
+                <h4 style={{paddingLeft:25}}><a href="/" style={styles.a}>还没有回答,点我去回答</a></h4>
                 <hr style={styles.hr}/>
               </div>
           )
@@ -294,7 +306,7 @@ data(value){
       this.state.data.map(function(value){
         data=value.myCollections
       })
-      if (data) {
+      if (data.length!==0) {
           data.map(function(a){
             return(
               <div style={styles.st}>
@@ -307,7 +319,7 @@ data(value){
       }else {
           return(
               <div style={styles.st}>
-                <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>快去收藏</a></h4>
+                <h4 style={{paddingLeft:25}}><a href="/" style={styles.a}>还没有收藏,快去收藏</a></h4>
                 <hr style={styles.hr}/>
               </div>
           )
@@ -350,10 +362,20 @@ class DialogExampleDialogDatePicker extends React.Component {
   handleClose(){
     this.setState({open: false});
   };
+  infodata(info){
+    fetch('/userinfo/userdata',{
+      method:"POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      credentials: 'include',
+      body:''
+    })
+  }
   render() {
     const actions = [
       <FlatButton
-        label="Ok"
+        label="返回"
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleClose.bind(this)}
@@ -363,13 +385,18 @@ class DialogExampleDialogDatePicker extends React.Component {
       <div>
         <RaisedButton label="修改个人资料" onTouchTap={this.handleOpen.bind(this)} style={styles.rb}/>
         <Dialog
-          title="Dialog With Date Picker"
+          title="我的详细信息"
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose.bind(this)}
         >
-          <DividerExampleForm/>
+          <form action="/userinfo/infodata" method="post">
+            <DividerExampleForm/>
+            <RaisedButtonExampleSimpleA>
+              {this.infodata()}
+            </RaisedButtonExampleSimpleA>
+          </form>
         </Dialog>
       </div>
     );
@@ -379,20 +406,48 @@ class DialogExampleDialogDatePicker extends React.Component {
 const style = {
   marginLeft: 20,
 };
-const DividerExampleForm = () => (
-  <Paper zDepth={2}>
-  <form action="/userinfo/infodata" method="post">
-    姓名:<TextField hintText="任振南" style={style} underlineShow={false} />
-    <Divider />
-    年龄:<TextField hintText="22" style={style} underlineShow={false} />
-    <Divider />
-    性别:<TextField hintText="男" style={style} underlineShow={false} />
-    <Divider />
-    支付宝:<TextField hintText="支付宝账号" style={style} underlineShow={false} />
-    <Divider />
-    </form>
-  </Paper>
-);
+class DividerExampleForm extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      data:''
+    }
+  }
+  componentWillMount(){
+    fetch('/userinfo/userdata',{
+      method:"POST",
+      headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+      },
+      credentials: 'include',
+    })
+    .then((response)=>{
+      return response.json();
+    })
+    .then((json)=>{
+        this.setState({data:json});
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+  }
+  render(){
+    return(
+      <Paper zDepth={2}>
+      姓名:<TextField hintText={this.state.nickName} style={style} underlineShow={false} />
+      <Divider />
+      年龄:<TextField hintText='22' style={style} underlineShow={false} />
+      <Divider />
+      性别:<TextField hintText={this.state.gender} style={style} underlineShow={false} />
+      <Divider />
+      生日:<TextField hintText={this.state.birthday} style={style} underlineShow={false} />
+      <Divider />
+      支付宝:<TextField hintText={this.state.totalReward} style={style} underlineShow={false} />
+      <Divider />
+      </Paper>
+    )
+  }
+};
 
 
 class Counter extends React.Component{
