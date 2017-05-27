@@ -14,45 +14,46 @@ let Schema = mongoose.Schema;
 let ObjectId = Schema.Types.ObjectId;
 
 let userSchema = Schema({
-  account:String,
-  nickName:String,
-  password:String,
-  gender:Boolean,
-  age:Number,
-  birthday:String,
+  account:{type:'String',requried:true},
+  nickName:{type:'String',default:'user'},
+  password:{type:'String',required:true},
+  gender:{type:'Boolean',default:true}, //true 代表男性
+  age:{type:'Number',default:0},
+  birthday:{type:'String',default:'1990-01-01'},
   myCollections:[{type:'ObjectId',ref:'question'}],
   myQuestions:[{type:'ObjectId',ref:'question'}],
   myAnswers:[{type:'ObjectId',ref:'question'}],
-  alipayAccount:String,
-  balance:Number,
-  headPortrait:String,
-  backgroundImage:String
+  alipayAccount:{type:'String',default:''},
+  balance:{type:'Number',default:100},
+  headPortrait:{type:'String',default:'./iamges.head.jpg'},
+  backgroundImage:{type:'String',default:''},
+  totalReward:{type:'Number',default:0}
 });
 
 let questionSchema = Schema({
-  title:String,
+  title:{type:'String',default:''},
   type:[],
-  content:String,
+  content:{type:'String',default:''},
   author:{type:'ObjectId',ref:'user'},
   answerList:[{type:'ObjectId',ref:'question'}],
-  charge:Boolean,
-  validTime:Number,
-  money:Number,
-  createTime:String,
-  pageviews:Number
+  charge:{type:'Boolean',default:false},
+  validTime:{type:'Number',default:4},
+  money:{type:'Number',default:10},
+  createTime:{type:'String',default:''},
+  pageviews:{type:'Number',default:0}
 });
 
 let answerSchema = Schema({
   question:{type:'ObjectId',ref:'question'},
-  Content:String,
-  answerTime:String,
+  Content:{type:'String',default:''},
+  answerTime:{type:'String',default:''},
   author:{type:'ObjectId',ref:'user'},
-  adopt:Boolean,
+  adopt:{type:'Boolean',default:false},
   likers:[]
 });
 
 let typeSchema = Schema({
-  type:	String,
+  type:	{type:'String',default:''},
   questionIdList:[{type:'ObjectId',ref:'question'}]
 });
 

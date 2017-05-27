@@ -12,6 +12,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/val', function(req, res, next) {
   if (req.body.email) {
+    db.user.findOne({account:req.body.email},function(err,data){
+      if(data){
         var numberList = Math.floor(Math.random()*(9999-1000))+1000;
         var transporter = nodemailer.createTransport({
           host: 'smtp.sina.com',
@@ -25,30 +27,31 @@ router.post('/val', function(req, res, next) {
         var mailOptions = {
           from: 'ikuaida@sina.com',
           to: req.body.email,
-          subject: '测试',
-          html:`<h2>验证码</h2>`+numberList
+          subject: '爱快打',
+          html:`修改密码验证<h2>验证码:</h2>`+numberList
         };
         transporter.sendMail(mailOptions, function(error, info) {
           if (error) {
             console.log(error);
             res.json(false)
           } else {
-            console.log('Message send: ' + info.response);
-            res.json(result)
+            res.json({numberList:numberList,userName:req.body.email})
           }
         });
-  }
 
-  if(req.body.val){
-    console.log(numberList);
-    if( numberList == req.body.val){
-      res.json(true)
-    }else{
-      res.json(false)
-    }
+      }else{
+        res.json(false)
+      }
+    })
+
   }
 })
-
-
+router.post('/mod', function(req, res, next) {
+  db.user.update({account:req.body.account},{$set:{password:req.body.password}},function(err,data){
+    if(!err){
+      res.json(true)
+    }
+  })
+});
 
 module.exports = router;
