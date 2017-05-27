@@ -43,12 +43,16 @@
             <div class="col-md-12" id="change-s">
               <span id="chang">问题种类:</span>
               <span class="active"><a href="#">全部</a></span>
-              <span><a href="#">php</a></span>
+              <span>
+                <% data4.forEach(function(quest){ %>
+                <a href="#"><%= quest.type %></a>
+                <% }) %>
+              </span>
             </div>
           </div>
         </div>
 
-        <% ques.forEach(function(quest){ %>
+        <% data1.forEach(function(quest){ %>
           <div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12">
               <div class="row" id="title">
@@ -59,7 +63,7 @@
                     </div>
                     <div class="col-md-7 col-xs-7 col-sm-7" id="ans">
                       <span><a href="#"><%= quest.title %></a></span>
-                      <i><a href="#">php</a></i>
+                      <i><a href="#"><%= quest.type %></a></i>
                     </div>
                     <div class="col-md-3 col-xs-3 col-sm-3">
                       <span class="tub">
@@ -74,7 +78,7 @@
             <div class="col-md-12 col-xs-12 col-sm-12">
               <div class="row" id="xian">
                 <div class="col-md-3 col-xs-3 col-sm-3" id="img">
-                  <img src="<%= quest.headPortrait %>" alt="">
+                  <img src="<%= data2.headPortrait %>" alt="">
                 </div>
                 <div class="col-md-3 col-xs-3 col-sm-3" id="read">
                   <p><%= quest.pageviews %></p>
@@ -100,28 +104,26 @@
               <i class="fa fa-money " aria-hidden="true"></i>&nbsp;&nbsp;赏金榜
             </div>
             <ol>
-              <% ques.forEach(function(ranko){ %>
+              <% data2.forEach(function(ranko){ %>
                 <li>
-                  <!-- 头像图片 -->
                   <a href="#"><%= ranko.title %></a>
                   <span><%= ranko.money %></span>
                 </li>
                 <% }) %>
               </ol>
             </div>
-            <div class="l-t">
-              <div class="l-xs">
-                <i class="fa fa-free-code-camp" aria-hidden="true"></i>&nbsp;&nbsp;达人榜
-              </div>
-              <ol>
-
+              <div class="l-t">
+                <div class="l-xs">
+                  <i class="fa fa-free-code-camp" aria-hidden="true"></i>&nbsp;&nbsp;达人榜
+                </div>
+                <ol>
+                <% data3.forEach(function(user){ %>
                   <li>
-                    <!-- 头像图片 -->
-                    <img src="" alt="">
-                    <a href="#"></a>
-                    <span>+46</span>
+                    <img src="<% user.headPortrait %>" alt="">
+                    <a href="#"><%= user.nickName %></a>
+                    <span><%= user.totalReward %></span>
                   </li>
-
+                <% }) %>
                 </ol>
               </div>
               <div class="l-l">
@@ -133,7 +135,7 @@
                   </span>
                 </h4>
                 <ol>
-                  <% ques.forEach(function(ranks){ %>
+                  <% data4.forEach(function(ranks){ %>
                     <li>
                       <a href="#"><%= ranks.title %></a>
                       <span><%= ranks.pageviews %></span>
@@ -141,15 +143,15 @@
                     <% }) %>
 
                   </ol>
-                </div>
-                <div class="l-w">
-                  <p>手机应用APP</p>
-                  <a class="tw" href="#">点击下载</a>
+                  </div>
+                  <div class="l-w">
+                    <p>手机应用APP</p>
+                    <a class="tw" href="#">点击下载</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
   <% include foot %>
 
