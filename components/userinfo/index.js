@@ -141,29 +141,58 @@ class RaisedButtonExampleComplexA extends React.Component{
 }
 
 
-const CardExampleWithAvatar = () => (
-  <Card style={styles.card}>
-  <RaisedButtonExampleComplex />
-    <CardMedia>
+class CardExampleWithAvatar extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      data:[],
+    };
+  }
+  componentWillMount(){
+    fetch('/userinfo/infodata',{
+      method:"POST",
+      headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+      },
+      credentials: 'include',
+    })
+    .then((response)=>{
+      return response.json();
+    })
+    .then((json)=>{
+        this.setState({data:json});
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+  }
+  render(){
+    return(
+      <Card style={styles.card}>
+      <RaisedButtonExampleComplex />
+      <CardMedia>
       <img src="http://t2.27270.com/uploads/tu/201703/40/24.png" style={{width:'100%',height:300}} />
-    </CardMedia>
-    <RaisedButtonExampleComplexA />
-    <div style={styles.info}>
-      <h3>我叫张三</h3>
-      <p>一句话介绍自己</p>
-    </div>
-    <CardHeader
-     title="查看详细资料"
-     actAsExpander={true}
-     showExpandableButton={true}
-     style={styles.info}
-   />
-   <CardText expandable={true} style={styles.info}>
-    我的资料
-   </CardText>
-   <DialogExampleDialogDatePicker/>
-  </Card>
-);
+      </CardMedia>
+      <RaisedButtonExampleComplexA />
+      <div style={styles.info}>
+      <h3>{this.state.data.nickName}</h3>
+      </div>
+      <CardHeader
+      title="查看详细资料"
+      actAsExpander={true}
+      showExpandableButton={true}
+      style={styles.info}
+      />
+      <CardText expandable={true} style={styles.info}>
+      我的资料
+      </CardText>
+      <DialogExampleDialogDatePicker/>
+      </Card>
+    )
+  }
+};
+
+
 
 const RaisedButtonExampleComplex = () => (
     <RaisedButton
@@ -213,56 +242,76 @@ class TabsExampleControlled extends React.Component {
 
 data(value){
     if (value=='a') {
-      let a = []
-      this.state.data.map(function(data){
-        a.push(data.myQuestions)
+      var data=[]
+      this.state.data.map(function(value){
+        data=value.myQuestion
       })
-      return (
-        a.map(function(a){
-          return(
-            <div style={styles.st}>
-              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>问题的题目</a></h4>
-              <p style={styles.hh3}><i>2017-01-01 00:00:00</i><span style={{paddingLeft:10}}>1人回答</span></p>
+      if (data) {
+          data.map(function(a){
+            return(
+              <div style={styles.st}>
+              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>{a.ref.title}</a></h4>
+              <p style={styles.hh3}><i>{a.ref.createTime}</i></p>
               <hr style={styles.hr}/>
-            </div>
+              </div>
+            )
+          })
+      }else {
+          return(
+              <div style={styles.st}>
+                <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>快去提问题</a></h4>
+                <hr style={styles.hr}/>
+              </div>
           )
-        })
-      )
+      }
     }
     if (value=='b') {
-      let a = []
-      this.state.data.map(function(data){
-        a.push(data.myAnswers)
+      var data=[]
+      this.state.data.map(function(value){
+        data=value.myAnswers
       })
-      return (
-        a.map(function(a){
-          return(
-            <div style={styles.st}>
-              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>回答的题目</a></h4>
-              <p style={styles.hh3}><i>2017-01-01 00:00:00</i><span style={{paddingLeft:10}}>1人回答</span></p>
+      if (data) {
+          data.map(function(a){
+            return(
+              <div style={styles.st}>
+              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>{a.ref.title}</a></h4>
+              <p style={styles.hh3}><i>{a.ref.createTime}</i></p>
               <hr style={styles.hr}/>
-            </div>
+              </div>
+            )
+          })
+      }else {
+          return(
+              <div style={styles.st}>
+                <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>快去回答</a></h4>
+                <hr style={styles.hr}/>
+              </div>
           )
-        })
-      )
+      }
     }
-
     if (value=='c') {
-      let a = []
-      this.state.data.map(function(data){
-        a.push(data.myCollections)
+      var data=[]
+      this.state.data.map(function(value){
+        data=value.myCollections
       })
-      return (
-        a.map(function(a){
-          return(
-            <div style={styles.st}>
-              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>回答的题目</a></h4>
-              <p style={styles.hh3}><i>2017-01-01 00:00:00</i><span style={{paddingLeft:10}}>1人回答</span></p>
+      if (data) {
+          data.map(function(a){
+            return(
+              <div style={styles.st}>
+              <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>{a.ref.title}</a></h4>
+              <p style={styles.hh3}><i>{a.ref.createTime}</i></p>
               <hr style={styles.hr}/>
-            </div>
+              </div>
+            )
+          })
+      }else {
+          return(
+              <div style={styles.st}>
+                <h4 style={{paddingLeft:25}}><a href="/question" style={styles.a}>快去收藏</a></h4>
+                <hr style={styles.hr}/>
+              </div>
           )
-        })
-      )
+      }
     }
 }
   render() {

@@ -10,16 +10,16 @@ router.get('/', function(req, res, next) {
 })
 
 router.post('/userdata',function(req,res,next){
-  dbmodel.user.find({},function(err,data){
-    // req.json(data)
+  dbmodel.user.find({nickName:req.session.user},function(err,data){
+    res.json(data)
     console.log(data);
   })
 })
 
 router.post('/infodata',function(req,res,next){
-  console.log(req.body())
-  dbmodel.user.find({},function(err,data){
-    // req.json(data)
+  // console.log(req.body())
+  dbmodel.user.findOne({nickName:req.session.user},function(err,data){
+    res.json(data)
     console.log(data);
   })
 })
