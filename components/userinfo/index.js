@@ -16,6 +16,8 @@ import DatePicker from 'material-ui/DatePicker';
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
+const QueryString = require('querystring');
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -124,18 +126,18 @@ const RaisedButtonExampleSimple = () => (
   </div>
 );
 
-const RaisedButtonExampleSimpleA = () => (
-  <div style={{position:"absolute",top:'85%',left:"70%"}}>
-    <RaisedButton label="确认修改" secondary={true} style={styles.rbutton} buttonStyle={{backgroundColor:'gray'}} type="submit"/>
-  </div>
-);
+// const RaisedButtonExampleSimpleA = () => (
+//   <div style={{position:"absolute",top:'85%',left:"70%"}}>
+//     <RaisedButton label="确认修改" secondary={true} style={styles.rbutton} buttonStyle={{backgroundColor:'gray'}} type="submit"/>
+//   </div>
+// );
 
 
 
 class RaisedButtonExampleComplexA extends React.Component{
   render(){
     return(
-      <img   style={Rstyles.button} src='http://t2.27270.com/uploads/tu/201702/427/26.png'/>
+      <img   style={Rstyles.button} src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906819171&di=b2e3152c9fed35e4dc075fa016c03e82&imgtype=0&src=http%3A%2F%2Fimg0.ph.126.net%2FHdusTv3EtUlluC6EdtBnGg%3D%3D%2F999517642317344430.jpg'/>
       // <RaisedButton
       // label="修改我的个人头像"
       // labelPosition="before"
@@ -179,7 +181,7 @@ class CardExampleWithAvatar extends React.Component{
       <Card style={styles.card}>
       <RaisedButtonExampleComplex />
       <CardMedia>
-      <img src="http://t2.27270.com/uploads/tu/201703/40/24.png" style={{width:'100%',height:300}} />
+      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906588407&di=b2b86cbd547797b7d2df72a290d36ebc&imgtype=0&src=http%3A%2F%2Fimg4.178.com%2Fhots%2F201507%2F232141257200%2F232141467641.png" style={{width:'100%',height:300}} />
       </CardMedia>
       <RaisedButtonExampleComplexA />
       <div style={styles.info}>
@@ -192,7 +194,9 @@ class CardExampleWithAvatar extends React.Component{
       style={styles.info}
       />
       <CardText expandable={true} style={styles.info}>
-      我的资料
+      <p>年龄:{this.state.data.nickName}</p>
+      <p>性别:{this.state.data.gender}</p>
+      <p>生日:{this.state.data.birthday}</p>
       </CardText>
       <DialogExampleDialogDatePicker/>
       </Card>
@@ -363,14 +367,27 @@ class DialogExampleDialogDatePicker extends React.Component {
     this.setState({open: false});
   };
   infodata(info){
-    fetch('/userinfo/userdata',{
-      method:"POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      credentials: 'include',
-      body:''
-    })
+    let data = QueryString.stringify(info);
+    console.log(data);
+    if (data) {
+      fetch('/userinfo/infodata',{
+        method:"POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        credentials: 'include',
+        body:data
+      })
+    }
+  }
+  val(){
+    let text={}
+    text.nickName=$('.v1 input').val()
+    text.age=$('.v2 input').val()
+    text.gender=$('.v3 input').val()
+    text.birthday=$('.v4 input').val()
+    text.totalReward=$('.v5 input').val()
+    this.infodata(text)
   }
   render() {
     const actions = [
@@ -391,12 +408,10 @@ class DialogExampleDialogDatePicker extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose.bind(this)}
         >
-          <form action="/userinfo/infodata" method="post">
             <DividerExampleForm/>
-            <RaisedButtonExampleSimpleA>
-              {this.infodata()}
-            </RaisedButtonExampleSimpleA>
-          </form>
+            <div style={{position:"absolute",top:'85%',left:"70%"}}>
+              <RaisedButton label="确认修改" secondary={true} style={styles.rbutton} buttonStyle={{backgroundColor:'gray'}} onTouchTap={()=>{this.val()}} href="/userinfo"/>
+            </div>
         </Dialog>
       </div>
     );
@@ -414,7 +429,7 @@ class DividerExampleForm extends React.Component{
     }
   }
   componentWillMount(){
-    fetch('/userinfo/userdata',{
+    fetch('/userinfo/infodata',{
       method:"POST",
       headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -434,15 +449,15 @@ class DividerExampleForm extends React.Component{
   render(){
     return(
       <Paper zDepth={2}>
-      姓名:<TextField hintText={this.state.nickName} style={style} underlineShow={false} />
+      姓名:<TextField className="v1" hintText={this.state.data.nickName} style={style} underlineShow={false} />
       <Divider />
-      年龄:<TextField hintText='22' style={style} underlineShow={false} />
+      年龄:<TextField className="v2" hintText={this.state.data.age} style={style} underlineShow={false} />
       <Divider />
-      性别:<TextField hintText={this.state.gender} style={style} underlineShow={false} />
+      性别:<TextField className="v3" hintText={this.state.data.gender} style={style} underlineShow={false} />
       <Divider />
-      生日:<TextField hintText={this.state.birthday} style={style} underlineShow={false} />
+      生日:<TextField className="v4" hintText={this.state.data.birthday} style={style} underlineShow={false} />
       <Divider />
-      支付宝:<TextField hintText={this.state.totalReward} style={style} underlineShow={false} />
+      支付宝:<TextField className="v5" hintText={this.state.data.totalReward} style={style} underlineShow={false} />
       <Divider />
       </Paper>
     )

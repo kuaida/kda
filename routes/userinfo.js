@@ -12,15 +12,23 @@ router.get('/', function(req, res, next) {
 router.post('/userdata',function(req,res,next){
   dbmodel.user.find({nickName:req.session.user},function(err,data){
     res.json(data)
-    console.log(data);
+    // console.log(data);
   })
 })
 
 router.post('/infodata',function(req,res,next){
-  console.log("++++++"+JSON.stringify(req.body))
-  dbmodel.user.findOne({nickName:req.session.user},function(err,data){
+  if (req.body) {
+    console.log("++++++"+JSON.stringify(req.body))
+    dbmodel.user.update({nickName:req.session.user},{$set:req.body},function(err) {
+      if (err) {
+        console.log('错误'+err);
+      }
+    })
+  }
+
+  dbmodel.user.findOne({},function(err,data){
     res.json(data)
-    console.log(data);
+    // console.log(data);
   })
 })
 
