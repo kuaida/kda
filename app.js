@@ -20,6 +20,7 @@ var publish = require('./routes/publish');
 var resetPasswd = require('./routes/resetPasswd');
 var question = require('./routes/question');
 var userinfo = require('./routes/userinfo');
+var search = require('./routes/search');
 
 var app = express();
 app.use(session({
@@ -60,6 +61,7 @@ app.use('/publish', publish);
 app.use('/resetPasswd',resetPasswd);
 app.use('/question',question);
 app.use('/userinfo',userinfo);
+app.use('/search',search);
 
 
 // catch 404 and forward to error handler

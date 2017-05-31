@@ -2,7 +2,8 @@
 <html>
 
 <head>
-  <title>React</title>
+  <title>i快答</title>
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/index.css' />
   <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -13,160 +14,132 @@
   <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-    var socket = io();
+  var socket = io();
   </script>
-  </style>
 </head>
 
 <body>
   <% include head %>
-    <a href="/resetPasswd"></a>
-    <div class="container">
-      <div class="row" id="head">
-        <div class="col-md-9">
-          <div class="row" id="change" id="left">
-              <div class="row">
-                <div class="col-md-12">
-                    <span id="chang">是否悬赏:</span>
-                    <a href="#">全部</a>
-                    <span><a href="#">悬赏</a></span>
-                    <span><a href="#">非悬赏</a></span>
+  <div class="container">
+    <div class="row" id="head">
+      <div class="col-md-9" id="left">
+        <div class="row" id="change">
+          <div class="col-md-12" id="change-s">
+            <span class="active"><a href="/">全部</a></span>
+            <span><a href="#">悬赏</a></span>
+            <span><a href="#">非悬赏</a></span>
+            <span><a href="#">提问中</a></span>
+            <span><a href="#">已解决</a></span>
 
-                </div>
-                <div class="col-md-12">
-                    <span id="chang">问题状态:</span>
-                    <a href="#">全部</a>
-                    <span><a href="#">提问中</a></span>
-                    <span><a href="#">已解决</a></span>
-
-                </div>
-                <div class="col-md-12">
-                    <span id="chang">问题种类:</span>
-                    <span><a href="#">全部</a></span>
-                    <span><a href="#">php</a></span>
-                </div>
+          </div>
+          <div class="col-md-12" id="change-s">
+            <span class="active"><a href="#">全部</a></span>
+            <span>
+              <% data4.forEach(function(quest){ %>
+                <a href="#"><%= quest.type %></a>
+                <% }) %>
+              </span>
             </div>
           </div>
-
-      <% ques.forEach(function(quest){ %>
-          <div class="row" id="left">
-            <div class="col-md-12 col-xs-12 col-sm-12">
-              <div class="row" id="title">
-                <div class="col-md-12 col-xs-12 col-sm-12" id="money">
-                  <div class="row">
-                    <div class="col-md-1 col-xs-1 col-sm-1" id="tit">
-                      标题
-                    </div>
-                    <div class="col-md-10 col-xs-6 col-sm-6" id="ans">
-                    <span><%= quest.title %></span>
-                      <a href="#">php</a>
-                    </div>
-                    <div class="col-md-1 col-xs-1 col-sm-1">
-                      <span class="tub">
-                        <i class="fa fa-money" aria-hidden="true">&nbsp;<span><%= quest.money %></span></i>
-                      </span>
+          <% data1.forEach(function(quest){ %>
+            <div class="row">
+              <div class="col-md-12 col-xs-12 col-sm-12">
+                <div class="row" id="xian">
+                  <div class="col-md-1 col-xs-4 col-sm-4" id="read">
+                    <p><%= quest.pageviews %></p>
+                    浏览量
+                  </div>
+                  <div class="col-md-1 col-xs-4 col-sm-4" id="time">
+                    <p><%= quest.createTime %></p>
+                    创建时间
+                  </div>
+                  <div class="col-md-1 col-xs-4 col-sm-4" id="mon">
+                    <p><%= quest.validTime %></p>
+                    悬赏时间
+                  </div>
+                  <div class="col-md-9 col-xs-9 col-sm-9" id="money">
+                    <div class="row">
+                      <div class="col-md-7 col-xs-7 col-sm-7" id="ans">
+                        <span><a href=/question/<%= quest._id %>><%= quest.title %></a></span>
+                        <br>
+                        <i><a href="#"><%= quest.type %></a></i>
+                      </div>
+                      <div class="col-md-3 col-xs-3 col-sm-3 navbar-right">
+                        <span class="tub">
+                          <i>￥ <span><%= quest.money %></span></i>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <% }) %>
 
-            <div class="col-md-12 col-xs-12 col-sm-12">
-              <div class="row" id="xian">
-                <div class="col-md-3 col-xs-3 col-sm-3" id="img">
-                  <img src="/images/head.jpg" alt="">
+
+
+
+          </div>
+
+          <div class="col-md-3">
+            <div class="l-w">
+              <p><i class="fa fa-question-circle-o fa-lg" aria-hidden="true">&nbsp;</i>你能难住我吗？ 能！！！</p>
+              <a class="btn btn-success btn-lg col-md-12 col-xs-12 col-sm-12" href="#"><span id="spa">提 问</span></a>
+            </div>
+            <div class="l-t">
+              <div class="l-xs">
+                <i class="fa fa-money " aria-hidden="true"></i>&nbsp;&nbsp;赏金榜
+              </div>
+              <ol>
+                <% data2.forEach(function(ranko){ %>
+                  <li>
+                    <a href=/question/<%= ranko._id %>> <%= ranko.title %></a>
+                    <span>￥&nbsp;<%= ranko.money %></span>
+                  </li>
+                  <% }) %>
+                </ol>
+              </div>
+              <div class="l-t">
+                <div class="l-xs">
+                  <i class="fa fa-free-code-camp" aria-hidden="true"></i>&nbsp;&nbsp;达人榜
                 </div>
-                <div class="col-md-3 col-xs-3 col-sm-3" id="read">
-                  <p>0</p>
-                  浏览量
+                <ol>
+                  <% data3.forEach(function(user){ %>
+                    <li>
+                      <img src="<% user.headPortrait %>" alt="">
+                      <a href=/userinfo/<%= user._id %>><%= user.nickName %></a>
+                      <span><%= user.totalReward %></span>
+                    </li>
+                    <% }) %>
+                  </ol>
                 </div>
-                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
-                  <p>10:10</p>
-                  创建时间
-                </div>
-                <div class="col-md-3 col-xs-3 col-sm-3" id="time">
-                  <p>10:10</p>
-                  剩余时间
+                <div class="l-l">
+                  <h4>&nbsp;<i class="fa fa-fire" aria-hidden="true">&nbsp;</i>热搜榜</h4>
+                  <ol>
+                    <% data4.forEach(function(ranks){ %>
+                      <li>
+                        <a href=/question/<%= ranks._id %>><%= ranks.title %></a>
+                        <span><%= ranks.pageviews %></span>
+                      </li>
+                      <% }) %>
+
+                    </ol>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-      <% }) %>
-        </div>
 
-        <div class="col-md-3">
-          <div class="l-t">
-            <div class="l-xs">
-              <i class="fa fa-money " aria-hidden="true"></i>&nbsp;&nbsp;赏金榜
-            </div>
-            <ol>
-              <li>
-                <!-- 头像图片 -->
-                <img src="/images/head.jpg" alt="">
-                <a href="#">HopEvan</a>
-                <span>+46</span>
-              </li>
-              <li>
-                <!-- 头像图片 -->
-                <img src="/images/head.jpg" alt="">
-                <a href="#">HopEvan</a>
-                <span>+46</span>
-              </li>
-            </ol>
-          </div>
-          <div class="l-t">
-            <div class="l-xs">
-              <i class="fa fa-free-code-camp" aria-hidden="true"></i>&nbsp;&nbsp;达人榜
-            </div>
-            <ol>
-              <li>
-                <!-- 头像图片 -->
-                <img src="/images/head.jpg" alt="">
-                <a href="#">HopEvan</a>
-                <span>+46</span>
-              </li>
-              <li>
-                <!-- 头像图片 -->
-                <img src="/images/head.jpg" alt="">
-                <a href="#">HopEvan</a>
-                <span>+46</span>
-              </li>
-            </ol>
-          </div>
-          <div class="l-l">
-            <h4>热搜榜
-              <span class="span">
-                <a href="#">今天</a>&nbsp;·
-                <a href="#">本周</a>&nbsp;·
-                <a href="#">更多</a>
-              </span>
-            </h4>
-            <ol>
-              <li>
-                <!-- 头像图片 -->
-                <img src="/images/head.jpg" alt="">
-                <a href="#">HopEvan</a>
-                <span>+46</span>
-              </li>
-              <li>
-                <!-- 头像图片 -->
-                <img src="/images/head.jpg" alt="">
-                <a href="#">HopEvan</a>
-                <span>+46</span>
-              </li>
-            </ol>
-          </div>
-          <div class="l-w">
-            <p>手机应用APP</p>
-            <a class="tw" href="#">点击下载</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <% include foot %>
-      <div class="container" id="react-root"></div>
-      <script type="text/javascript" src="/js/index.js"></script>
-</body>
+            <% include foot %>
 
-</html>
+            <div class="container" id="react-root"></div>
+            <script type="text/javascript" src="/js/index.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+              $("#change-s span").click(function(){
+                $(this).addClass("active").siblings().removeClass("active")
+              })
+            })
+            </script>
+          </body>
+
+          </html>
