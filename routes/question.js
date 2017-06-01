@@ -3,12 +3,18 @@ var router = express.Router();
 var dbmodel = require('../collections');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  dbmodel.question.findOne({_id: '5928e40767cfd96c99735fd1'},function(err,data) {
-    console.log(data.pageviews);
-    dbmodel.question.update({_id: '5928e40767cfd96c99735fd1'},{$set:{'pageviews': data.pageviews + 1}},function() {})
-  })
-  res.render('question',{'user':'', 'title': '测试问题标题'});
+router.get('/:id', function(req, res, next) {
+  dbmodel.question.findOne({_id: req.params.id},function(err,data) {
+    dbmodel.question.update({_id: req.params.id},{$set:{'pageviews': data.pageviews + 1}},function() {
+      dbmodel.answer.find({question: req.params.id},function(err,data1) {
+        console.log(data1);
+        console.log(req.session.userid);
+        res.render('question',{'user':req.session.nickName, 'userid': req.session.userid,
+        'questionid': req.params.id, 'title': data.title, 'content': data.content, 'type': data.type,
+        'answer': data1});
+      })
+    })
+    })
 });
 
 router.post('/comment',function(req, res, next) {;
