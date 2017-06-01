@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 })
 
 router.post('/userdata',function(req,res,next){
-  dbmodel.user.find({nickName:req.session.user},function(err,data){
+  dbmodel.user.find({_id: req.session.user._id},function(err,data){
     res.json(data)
     // console.log(data);
   })
@@ -18,8 +18,7 @@ router.post('/userdata',function(req,res,next){
 
 router.post('/infodata',function(req,res,next){
   if (req.body) {
-    console.log("++++++"+JSON.stringify(req.body))
-    dbmodel.user.update({nickName:req.session.user},{$set:req.body},function(err) {
+    dbmodel.user.update({_id: req.session.user._id},{$set:req.body},function(err) {
       if (err) {
         console.log('错误'+err);
       }
