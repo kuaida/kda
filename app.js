@@ -55,7 +55,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use((req,res,next)=>{
+  app.locals.user = null;
+  next();
+});
+index(app);
 app.use('/users', users);
 app.use('/publish', publish);
 app.use('/resetPasswd',resetPasswd);

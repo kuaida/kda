@@ -6,8 +6,8 @@ var db = require('../collections');
 var salt = 10;
 
 /* GET home page. */
-
-router.get('/', function(req, res, next) {
+function index(app){
+app.get('/', function(req, res, next) {
   let alldata;
   var hotdata;
   var userdata;
@@ -40,7 +40,6 @@ router.get('/', function(req, res, next) {
   });
   readata.then(() => {
     res.render('index', {
-      user: req.session.nickName,
       data1: alldata,
       data2: golddata,
       data3: userdata,
@@ -49,54 +48,53 @@ router.get('/', function(req, res, next) {
   });
 })
 
-router.get('/login', function(req, res, next) {
+app.get('/login', function(req, res, next) {
   res.render('login', {
-    user: req.session.nickName,
     sucess: true
   });
 })
 
-router.post('/login', function(req, res, next) {
+app.post('/login', function(req, res, next) {
   db.user.findOne({
     account: req.body.account
   }, function(err, data) {
     if (data) {
       bcrypt.compare(req.body.password, data.password, function(err, hash) {
         if (hash) {
-          req.session.nickName = data.nickName;
-          req.session.userid = data._id;
-          req.session.account = data.account;
+          req.session.user = {
+            _id:data._id,
+            nickName:data.nickName,
+            account:data.account,
+            balance:data.balance
+          };
+          app.locals.user = req.session.user;
           res.redirect('/');
         } else {
           res.render('login', {
-            user: req.session.nickName,
             sucess: false
           })
         }
       })
     } else {
       res.render('login', {
-        user: req.session.nickName,
         sucess: false
       })
     }
   })
 })
 
-router.get('/reg', function(req, res, next) {
+app.get('/reg', function(req, res, next) {
   res.render('reg', {
-    user: req.session.nickName,
     islive: false
   });
 })
 
-router.post('/reg', function(req, res, next) {
+app.post('/reg', function(req, res, next) {
   db.user.findOne({
     account: req.body.account
   }, function(err, data) {
     if (data) {
       res.render('reg', {
-        user: req.session.nickName,
         islive: true
       })
     } else {
@@ -113,11 +111,10 @@ router.post('/reg', function(req, res, next) {
   })
 })
 
-router.get('/logout', function(req, res, next) {
-  req.session.nickName = null;
-  req.session.userid = null;
-  req.session.account = null;
+app.get('/logout', function(req, res, next) {
+  req.session.user = null;
+  app.locals.user = null;
   res.redirect('/login');
 })
-
-module.exports = router;
+}
+module.exports = index;

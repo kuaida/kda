@@ -17,7 +17,7 @@ function getAllTypes(cb){
       if(err){
         console.error('getAllTypes: get获取缓存错误:'+ __filename);
       }else{
-        if(replay){
+        if(reply){
           cb(JSON.parse(reply).data);
         }else{
           dbs.type.find({},['_id','type'],(err,types)=>{

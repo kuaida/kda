@@ -83,16 +83,17 @@ class Publish extends Component {
       pay: false,
       time: 1,
       count: 1,
-      state:1
+      state:1,
+      user:null
     }
   }
   componentWillMount(){
-    fetch('/publish/getAllTypes')
+    fetch('/publish/getAllTypesAndIsLogin')
     .then((response)=>{
       return response.json();
     })
-    .then((allTypes)=>{
-      this.setState(Object.assign({},this.state,{typeItems:allTypes.types}));
+    .then((allTypesAndUser)=>{
+      this.setState(Object.assign({},this.state,{typeItems:allTypesAndUser.types,user:allTypesAndUser.user}));
     })
     .catch((err)=>{
       console.log(err);
@@ -194,7 +195,7 @@ class Publish extends Component {
           <Row>
             <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2} style={styles.colBottom}>
               <TextField
-                hintText="来个标题"
+                hintText="来个标题(必填)"
                 fullWidth={true}
                 type="text"
                 inputStyle={styles.title}
@@ -204,7 +205,7 @@ class Publish extends Component {
             <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2} style={styles.colBottom}>
                 <SelectField
                 multiple={true}
-                hintText="问题类别(1~3个)"
+                hintText="问题类别(1~3个,必选)"
                 fullWidth={true}
                 value={this.state.type}
                 onChange={( e, index, values )=>{ this.changeType(values) }}
@@ -218,13 +219,18 @@ class Publish extends Component {
                           placeholder={this.props.placeholder}
               />
             </Col>
-            <Col lg={3} lgOffset={2} md={4} mdOffset={2} sm={6} smOffset={2} xs={12} style={styles.colBottom}>
+            <Col lg={3} lgOffset={2} md={4} mdOffset={2} sm={6} smOffset={2} xs={8} style={styles.colBottom}>
               <Toggle
                 label={this.state.pay?"悬赏":"不悬赏"}
                 labelStyle={this.state.pay?{color:"#fff"}:{}}
                 style={this.state.pay?styles.payToggle:styles.nopayToggle}
                 onToggle={( e, isChecked )=>{this.changePay(isChecked)}}
+                disabled={this.state.user&&!this.state.user.balance?false:true}
               />
+            </Col>
+            <Col lg={3} md={4} sm={4} xs={4}>
+              <span style={{color:"red",display:this.state.user&&!this.state.user.balance?"block":"none"}}>余额不足，暂不能提问</span>
+              <span style={{color:"red",display:this.state.user?"none":"block"}}>请先登录</span>
             </Col>
             <Col lg={8} lgOffset={2} md={8} mdOffset={2} sm={8} smOffset={2} style={styles.colBottom,{display:this.state.pay?"block":"none"}}>
               <Row>
@@ -244,7 +250,7 @@ class Publish extends Component {
                     <Slider
                       value={this.state.count}
                       min={1}
-                      max={500}
+                      max={this.state.user?this.state.user.money:500}
                       step={1}
                       sliderStyle={styles.slider}
                       onChange={ ( e, count ) => { this.changeCount(count) } }
