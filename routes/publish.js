@@ -4,17 +4,9 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const dbs   = require('../collections');
 const moment= require('moment');
 const xssFilters = require('xss-filters');
-const types = {
-  type:[],
-  last:Math.floor(Number(moment('2015-05-25').format('x'))/1000),
-  limit:600
-};
 const redis = require('../redis');
 
 const initTypes = ['HTML5','CSS3','Node.js','Express','React','Javascript','jQuery','React Native','MongoDB','MySQL','Python','PHP','UI框架','JS框架'];
-router.get('/', function(req, res, next) {
-  res.render('publish',{user:req.session.user});
-});
 /*
 * 初始化标签
 */
@@ -30,21 +22,14 @@ dbs.type.find({},(err,res)=>{
   }
 });
 
-router.get('/getAllTypes',function(req,res,next){
-  var nowTime = Math.floor(new Date().getTime()/1000);
-  if(nowTime>types.last+types.limit){
-    dbs.type.find({},['_id','type'],(err,typeData)=>{
-      if(err){
-        console.log(err);
-      }else{
-        types.type = typeData;
-        types.last = Math.floor(Number(moment().format('x'))/1000);
-        res.json({types:typeData});
-      }
-    });
-  }else{
-    res.json({types:types.type});
-  }
+router.get('/', function(req, res, next) {
+  res.render('publish',{user:req.session.user});
+});
+
+router.get('/getAllTypesAndIsLogin',function(req,res,next){
+  redis.getAllTypes((types)=>{
+    res.json({types:types,user:req.session.user});
+  });
 });
 
 router.post('/postQuestion',function(req,res,next){
@@ -94,6 +79,11 @@ router.post('/postQuestion',function(req,res,next){
         }
       });
     }
+  });
+});
+router.get('/test',function(req,res,next){
+  redis.getTopQuestion((v)=>{
+    console.log(v);
   });
 });
 module.exports = router;
