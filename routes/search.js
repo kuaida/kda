@@ -43,7 +43,7 @@ router.get('/', function(req, res, next) {
   });
   readata.then(() => {
     res.render('search', {
-      user: req.session.nickName,
+      user:req.session.user,
       data1: searchdata,
       data2: golddata,
       data3: userdata,

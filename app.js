@@ -63,11 +63,8 @@ app.use(
     })
  );
 
-app.use((req,res,next)=>{
-  app.locals.user = null;
-  next();
-});
-index(app);
+
+app.use('/',index);
 app.use('/users', users);
 app.use('/publish', publish);
 app.use('/resetPasswd',resetPasswd);
