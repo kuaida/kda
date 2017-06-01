@@ -26,10 +26,10 @@
         <div class="row" id="change">
           <div class="col-md-12" id="change-s">
             <span class="active"><a href="/">全部</a></span>
-            <span><a href="#">悬赏</a></span>
-            <span><a href="#">非悬赏</a></span>
-            <span><a href="#">提问中</a></span>
-            <span><a href="#">已解决</a></span>
+            <span><a href="/indexBounty">悬赏</a></span>
+            <span><a href="/indexFbounty">非悬赏</a></span>
+            <span><a href="/indexQuestion">提问中</a></span>
+            <span><a href="/indexAnswer">已解决</a></span>
 
           </div>
           <div class="col-md-12" id="change-s">
@@ -65,9 +65,13 @@
                         <i><a href="#"><%= quest.type %></a></i>
                       </div>
                       <div class="col-md-3 col-xs-3 col-sm-3 navbar-right">
+                          <% if(quest.money){ %>
                         <span class="tub">
                           <i>￥ <span><%= quest.money %></span></i>
                         </span>
+                          <% }else{ %>
+
+                          <% } %>
                       </div>
                     </div>
                   </div>
@@ -75,15 +79,11 @@
               </div>
             </div>
             <% }) %>
-
-
-
-
           </div>
 
           <div class="col-md-3">
             <div class="l-w">
-              <p><i class="fa fa-question-circle-o fa-lg" aria-hidden="true">&nbsp;</i>你能难住我吗？ 能！！！</p>
+              <p><i class="fa fa-question-circle-o fa-lg" aria-hidden="true">&nbsp;</i>你能难住我吗！！！</p>
               <a class="btn btn-success btn-lg col-md-12 col-xs-12 col-sm-12" href="#"><span id="spa">提 问</span></a>
             </div>
             <div class="l-t">
@@ -140,6 +140,21 @@
               })
             })
             </script>
-          </body>
+            <script type="text/javascript">
+            $.ajax({
+              type:"POST",
+              dataType:"json",
+              url: "/", //你的请求程序页面随便啦
+              // async:false,//同步：意思是当有返回值以后才会进行后面的js程序。
+              data: {
+                data2: "money"
+              } //请求需要发送的处理数据
+              success:function(data){
+            if (data2.money == 0 ) {//根据返回值进行跳转
+            window.location.href = '/';
+              }
+            }
+            </script>
+</body>
 
-          </html>
+</html>
