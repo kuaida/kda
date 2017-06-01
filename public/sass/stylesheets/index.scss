@@ -1,14 +1,16 @@
 @charset "UTF-8";
 
-$color: #673ab7 #fff #000 #FF6F00 #EF6C00 #e65100 #FFCC80 #ddd #999 #2962FF #DD2C00;
-$size: 50% 60% 75% 100%;
-$px: 0px 1px 2px 3px 4px 5px 6px 10px 12px 14px 15px 16px 20px 25px 30px 40px 42px 50px 80px 120px;
-$border: top;
-$borderTopSet: 1px solid #673ab7;
-$borderBottomSet:1px solid #999;
-$border: 1px solid #ff6f00;
-$borderOne: 1px solid #999;
-$weight: 900;
+//深蓝　灰　橙　蓝 黑
+$color: #304FFE #E0E0E0 #FF6F00 #40C4FF #000;
+$fontSize: 12px 18px;
+$borderOne: 1px solid #40C4FF;
+$borderTwo: 1px solid #e0e0e0;
+$borderThree: 1px solid #ff6f00;
+$paddingaTop: 10px;
+$paddingaBottom:15px;
+$paddingLeft: 3px;
+$marginLeft: 10px;
+$marginRight: 3px;
 
 ul {
   list-style: none;
@@ -18,248 +20,169 @@ a {
   text-decoration: none;
 }
 
-.col-md-12 {
-  margin: nth($px,5) nth($px,1);
+#head {
+  border: $borderOne;
+  padding: $paddingaTop;
+  margin: 10px;
+  #allOne {
+    padding: $paddingaTop;
+    span {
+      margin-left: $marginLeft;
+    }
+    .active {
+      a {
+        font-weight: 900;
+        color: #fff;
+        padding: 4px 6px;
+        background: #673ab7;
+        font-weight: 900;
+      }
+    }
+  }
+  #allTwo {
+    padding: $paddingaTop;
+    span {
+      margin-left: $marginLeft;
+    }
+  }
 }
 
-#change {
-  border: $borderTopSet;
-  color: nth($color,2);
-  padding: nth($px,12) nth($px,1);
+#looktg {
+  height: 70px;
+  margin: $marginLeft;
+  border-bottom: $borderTwo;
+}
 
-  a {
-    text-decoration: none;
+#look {
+  font-size: nth($fontSize,1);
+  padding: $paddingaTop;
+  p {
+    text-align: center;
+  }
+}
+
+#time {
+  font-size: nth($fontSize,1);
+  padding: $paddingaTop;
+  p {
+    text-align: center;
+  }
+}
+
+#gold {
+  font-size: nth($fontSize,1);
+  padding: $paddingaTop;
+  span {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: nth($fontSize,2);
+    color: nth($color,3);
     display: inline-block;
-    color: nth($color,1);
-    padding: nth($px,3) nth($px,7);
-    font-weight: $weight;
-    margin: nth($px,1) nth($px,5);
+    border: $borderThree;
   }
-
-  a:hover {
+  #help {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: nth($fontSize,2);
     color: nth($color,2);
-    background: nth($color,1);
-    font-weight: $weight;
+    display: inline-block;
+    border: $borderTwo;
   }
-
-  .active a {
-    color: nth($color,2);
-    background: nth($color,1);
-    font-weight: $weight;
-  }
-}
-
-#chang {
-  color: nth($color,3);
-  font-size: nth($px,11);
-  font-weight: $weight;
-  margin-right: nth($px,8);
-  margin: nth($px,5);
-}
-
-#change-s {
-  padding: nth($px,1) nth($px,14);
-}
-
-#left {
-  padding: nth($px, 1) nth($px, 14)
-}
-
-#xian {
-  border-bottom: $borderBottomSet;
-  padding-bottom: nth($px,8);
 }
 
 #title {
-  margin-top: nth($px,8);
-}
-
-#read {
-  font-size: nth($px,9);
-  padding: nth($px,6) nth($px,1);
-  text-align: center;
-
-  p {
-    margin-bottom: nth($px,1);
-    text-align: center;
-    margin-top: nth($px,5);
+  h4 {
+    width: 80%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color: nth($color,4);
   }
 }
 
-#mone {
-  span {
-    display: inline-block;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  padding: nth($px,1) nth($px,1);
-  padding-top: 4px;
-  margin-top: 3px;
-  text-align: center;
-  border: 2px solid #FFA000;
-  color: #FFA000;
-  font-weight: $weight;
-}
-  p {
-    margin-bottom: nth($px,1);
-    text-align: center;
-    margin-top: nth($px,5);
-  }
-  .two {
-    border: 2px solid #000;
-    color: #000;
-  }
-}
-
-#mon {
-  font-size: nth($px,9);
-  padding: nth($px,4) nth($px,1);
-  padding-top: nth($px,6);
-  text-align: center;
-  p {
-    margin-bottom: nth($px,1);
-    text-align: center;
-    margin-top: nth($px,5);
-  }
-}
-
-#money {
-  padding: nth($px,1);
-
-  #tit {
-    padding: nth($px,1) nth($px,8);
-    color: nth($color,3);
-    font-weight: $weight;
-    padding-left: nth($px,12);
-  }
-
-  a {
-    color: nth($color,1);
-    font-size: nth($px,9);
-  }
-
-  .tub {
-    i {
-      display: inline-block;
-      // width: nth($px,18);
-      text-align: center;
-      border: $border;
-      color: nth($color,4);
-      padding: nth($px,1) nth($px,3);
-      font-size: nth($px,9);
-      line-height: nth($px,1);
-    }
-    span {
-      border: $borderTopSet;
-    }
-  }
-}
-
-#ans {
-  width: nth($size,3);
-  height: nth($size,4);
-  margin-top: 4px;
-  padding-left: nth($px,16);
-  overflow: hidden;
-  a {
-    font-size: nth($px,10);
-    height: nth($size,4);
-  }
-  span {
-    a {
-      color: #304FFE;
-      font-size: nth($px,12);
-      width: nth($size,3);
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-  }
+#label {
   i {
+    background: nth($color,2);
     a {
-      color: #000;
-      background: #ddd;
-      font-size: nth($px,9);
-      padding: nth($px,3) nth($px,5);
+      font-size: nth($fontSize,1);
+      color: nth($color,5);
+      padding: $paddingLeft;
     }
   }
 }
-.btn {
-  #spa {
-      padding: nth($px,1) nth($px,19);
-      font-weight: $weight;
-      font-size: nth($px,13);
+
+.question {
+  height: 120px;
+  padding: $paddingaBottom;
+  background: #ddd;
+  border: 1px solid #999;
+  margin-bottom: 25px;
+  margin-top: 10px;
+  p {
+    font-weight: 900;
+    i {
+      color: #2962FF;
+    }
   }
 }
 
-.l-t {
-  width: nth($size,4);
-  border: $borderTopSet;
-  margin-bottom: nth($px,15);
+.list {
+  width: 100%;
+  border: 1px solid #673ab7;
+  margin-bottom: 25px;
   ol {
-    margin-top: nth($px,7);
+    margin-top: 6px;
   }
-}
-
-.l-xs {
-  height: nth($px,17);
-  background: nth($color,1);
-  padding: nth($px,8) nth($px, 11);
-  color: nth($color, 2);
-  font-weight: $weight;
+  .list-money {
+    height: 42px;
+    background: #673ab7;
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: 900;
+  }
+  .list-person {
+    height: 42px;
+    background: #673ab7;
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: 900;
+  }
+  .list-hot {
+    border-radius: $borderOne;
+  }
 }
 
 ol {
   li {
-    margin-bottom: nth($px,8);
-    font-weight: $weight;
+    margin-bottom: 10px;
+    font-weight: 900;
     a {
       display: inline-block;
-      width: nth($size,2);
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      color: nth($color,1);
-      font-weight: $weight;
-      margin-left: nth($px,8);
+      width: 60%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: nth($color,4);
+      font-weight: 900;
+      margin-left: 10px;
     }
     a:hover {
       color: purple;
-      font-weight: $weight;
+      font-weight: 900;
     }
     span {
-      margin-right: nth($px,13);
+      margin-right: 20px;
       float: right;
     }
     img {
-      width: nth($px,14);
-      height: nth($px,14);
-      border-radius: nth($size,1);
-      margin-left: nth($px,8);
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-left: 10px;
     }
-  }
-}
-
-.l-w {
-  height: nth($px,20);
-  padding: nth($px,11);
-  background: nth($color,8);
-  border: $borderOne;
-  margin-bottom: nth($px,15);
-  p {
-    font-weight: $weight;
-    i {
-      color: nth($color,10);
-    }
-  }
-}
-
-.l-l {
-  height: nth($size,4);
-  h4 {
-    color: nth($color,11);
-  }
-  ol {
-    margin-bottom: nth($px,14);
   }
 }
