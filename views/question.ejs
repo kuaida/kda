@@ -8,6 +8,7 @@
     <script src="http://cdn.bootcss.com/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/jindingwen/quill.core.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="/stylesheets/jindingwen/quill.snow.css" media="screen" title="no title" charset="utf-8">
     <style media="screen">
@@ -29,10 +30,8 @@
   <body>
     <% include head %>
     <div id="react-root" class="container"></div>
-    <div class="hide question-user">123</div>
-    <div class="hide question-id">123</div>
-    <div class="hide question-like">false</div>
-    <div class="hide question-content"><%= title %></div>
+    <div class="hide question-user"><%= userid %></div>
+    <div class="hide question-id"><%= questionid %></div>
     <% include foot %>
     <script type="text/javascript" src="/js/vender.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>

@@ -22,6 +22,7 @@ var question = require('./routes/question');
 var userinfo = require('./routes/userinfo');
 var search = require('./routes/search');
 var sassMiddleware = require('node-sass-middleware');
+var api = require('/routes/api');
 
 var app = express();
 app.use(session({
@@ -71,6 +72,7 @@ app.use('/resetPasswd',resetPasswd);
 app.use('/question',question);
 app.use('/userinfo',userinfo);
 app.use('/search',search);
+app.use('/api',api);
 
 
 // catch 404 and forward to error handler
