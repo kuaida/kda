@@ -21,6 +21,7 @@ var resetPasswd = require('./routes/resetPasswd');
 var question = require('./routes/question');
 var userinfo = require('./routes/userinfo');
 var search = require('./routes/search');
+var sassMiddleware = require('node-sass-middleware');
 
 var app = express();
 app.use(session({
@@ -54,6 +55,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+    sassMiddleware({
+        src: __dirname + '/public/sass', //where the sass files are
+        dest: __dirname + '/public', //where css should go
+        debug: true // obvious
+    })
+ );
 
 app.use((req,res,next)=>{
   app.locals.user = null;
