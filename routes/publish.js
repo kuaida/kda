@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const dbs   = require('../collections');
 const moment= require('moment');
 const xssFilters = require('xss-filters');
-// const redis = require('../redis');
+const redis = require('../redis');
 
 const initTypes = ['HTML5','CSS3','Node.js','Express','React','Javascript','jQuery','React Native','MongoDB','MySQL','Python','PHP','UI框架','JS框架'];
 /*
