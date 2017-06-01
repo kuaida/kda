@@ -86,15 +86,28 @@ a {
   }
 }
 
-#time {
-  font-size: nth($px,9);
-  padding: nth($px,4) nth($px,1);
-  padding-top: nth($px,6);
+#mone {
+  span {
+    display: inline-block;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  padding: nth($px,1) nth($px,1);
+  padding-top: 4px;
+  margin-top: 3px;
   text-align: center;
+  border: 2px solid #FFA000;
+  color: #FFA000;
+  font-weight: $weight;
+}
   p {
     margin-bottom: nth($px,1);
     text-align: center;
     margin-top: nth($px,5);
+  }
+  .two {
+    border: 2px solid #000;
+    color: #000;
   }
 }
 
@@ -128,12 +141,16 @@ a {
   .tub {
     i {
       display: inline-block;
-      width: nth($px,18);
+      // width: nth($px,18);
       text-align: center;
       border: $border;
       color: nth($color,4);
       padding: nth($px,1) nth($px,3);
       font-size: nth($px,9);
+      line-height: nth($px,1);
+    }
+    span {
+      border: $borderTopSet;
     }
   }
 }
@@ -141,6 +158,7 @@ a {
 #ans {
   width: nth($size,3);
   height: nth($size,4);
+  margin-top: 4px;
   padding-left: nth($px,16);
   overflow: hidden;
   a {
@@ -149,14 +167,18 @@ a {
   }
   span {
     a {
-      color: nth($color,5);
+      color: #304FFE;
       font-size: nth($px,12);
+      width: nth($size,3);
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
   }
   i {
     a {
-      color: nth($color,6);
-      background: nth($color,7);
+      color: #000;
+      background: #ddd;
       font-size: nth($px,9);
       padding: nth($px,3) nth($px,5);
     }
@@ -194,7 +216,9 @@ ol {
     a {
       display: inline-block;
       width: nth($size,2);
-      overflow: hidden;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
       color: nth($color,1);
       font-weight: $weight;
       margin-left: nth($px,8);

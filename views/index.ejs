@@ -26,10 +26,10 @@
         <div class="row" id="change">
           <div class="col-md-12" id="change-s">
             <span class="active"><a href="/">全部</a></span>
-            <span><a href="/indexBounty">悬赏</a></span>
-            <span><a href="/indexFbounty">非悬赏</a></span>
-            <span><a href="/indexQuestion">提问中</a></span>
-            <span><a href="/indexAnswer">已解决</a></span>
+            <span><a href="#">悬赏</a></span>
+            <span><a href="#">非悬赏</a></span>
+            <span><a href="#">提问中</a></span>
+            <span><a href="#">已解决</a></span>
 
           </div>
           <div class="col-md-12" id="change-s">
@@ -45,34 +45,38 @@
             <div class="row">
               <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="row" id="xian">
+
                   <div class="col-md-1 col-xs-4 col-sm-4" id="read">
                     <p><%= quest.pageviews %></p>
                     浏览量
                   </div>
-                  <div class="col-md-1 col-xs-4 col-sm-4" id="time">
+
+                  <!-- <div class="col-md-1 col-xs-4 col-sm-4" id="time">
                     <p><%= quest.createTime %></p>
                     创建时间
-                  </div>
+                  </div> -->
                   <div class="col-md-1 col-xs-4 col-sm-4" id="mon">
                     <p><%= quest.validTime %></p>
                     悬赏时间
                   </div>
+
+                  <div class="col-md-1 col-xs-4 col-sm-4" id="mone">
+                      <% if(quest.money){ %>
+                      <span>赏</span>
+                      <% }else{ %>
+                      <span class="two"><i class="fa fa-hand-peace-o" aria-hidden="true"></i></span>
+                      <% } %>
+                  </div>
                   <div class="col-md-9 col-xs-9 col-sm-9" id="money">
                     <div class="row">
-                      <div class="col-md-7 col-xs-7 col-sm-7" id="ans">
+
+
+                      <div class="col-md-9 col-xs-9 col-sm-9" id="ans">
                         <span><a href=/question/<%= quest._id %>><%= quest.title %></a></span>
                         <br>
                         <i><a href="#"><%= quest.type %></a></i>
                       </div>
-                      <div class="col-md-3 col-xs-3 col-sm-3 navbar-right">
-                          <% if(quest.money){ %>
-                        <span class="tub">
-                          <i>￥ <span><%= quest.money %></span></i>
-                        </span>
-                          <% }else{ %>
 
-                          <% } %>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -132,7 +136,7 @@
             <% include foot %>
 
             <div class="container" id="react-root"></div>
-            <!-- <script type="text/javascript" src="/js/index.js"></script> -->
+            <script type="text/javascript" src="/js/index.js"></script>
             <script type="text/javascript">
             $(document).ready(function(){
               $("#change-s span").click(function(){
@@ -140,21 +144,7 @@
               })
             })
             </script>
-            <script type="text/javascript">
-            $.ajax({
-              type:"POST",
-              dataType:"json",
-              url: "/", //你的请求程序页面随便啦
-              // async:false,//同步：意思是当有返回值以后才会进行后面的js程序。
-              data: {
-                data2: "money"
-              } //请求需要发送的处理数据
-              success:function(data){
-            if (data2.money == 0 ) {//根据返回值进行跳转
-            window.location.href = '/';
-              }
-            }
-            </script>
+
 </body>
 
 </html>

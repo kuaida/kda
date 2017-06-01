@@ -56,15 +56,27 @@ a {
     text-align: center;
     margin-top: 4px; }
 
-#time {
-  font-size: 12px;
-  padding: 3px 0px;
-  padding-top: 5px;
-  text-align: center; }
-  #time p {
-    margin-bottom: 0px;
-    text-align: center;
-    margin-top: 4px; }
+#mone span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  padding: 0px 0px;
+  padding-top: 4px;
+  margin-top: 3px;
+  text-align: center;
+  border: 2px solid #FFA000;
+  color: #FFA000;
+  font-weight: 900; }
+
+#mone p {
+  margin-bottom: 0px;
+  text-align: center;
+  margin-top: 4px; }
+
+#mone .two {
+  border: 2px solid #000;
+  color: #000; }
 
 #mon {
   font-size: 12px;
@@ -88,27 +100,34 @@ a {
     font-size: 12px; }
   #money .tub i {
     display: inline-block;
-    width: 50px;
     text-align: center;
     border: 1px solid #ff6f00;
     color: #FF6F00;
     padding: 0px 2px;
-    font-size: 12px; }
+    font-size: 12px;
+    line-height: 0px; }
+  #money .tub span {
+    border: 1px solid #673ab7; }
 
 #ans {
   width: 75%;
   height: 100%;
+  margin-top: 4px;
   padding-left: 40px;
   overflow: hidden; }
   #ans a {
     font-size: 14px;
     height: 100%; }
   #ans span a {
-    color: #EF6C00;
-    font-size: 16px; }
+    color: #304FFE;
+    font-size: 16px;
+    width: 75%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
   #ans i a {
-    color: #e65100;
-    background: #FFCC80;
+    color: #000;
+    background: #ddd;
     font-size: 12px;
     padding: 2px 4px; }
 
@@ -138,6 +157,8 @@ ol li {
     display: inline-block;
     width: 60%;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     color: #673ab7;
     font-weight: 900;
     margin-left: 10px; }
