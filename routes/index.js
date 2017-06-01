@@ -6,8 +6,8 @@ var db = require('../collections');
 var salt = 10;
 
 /* GET home page. */
-function index(app){
-app.get('/', function(req, res, next) {
+
+router.get('/', function(req, res, next) {
   let alldata;
   var hotdata;
   var userdata;
@@ -40,6 +40,7 @@ app.get('/', function(req, res, next) {
   });
   readata.then(() => {
     res.render('index', {
+      user:req.session.user,
       data1: alldata,
       data2: golddata,
       data3: userdata,
@@ -48,13 +49,14 @@ app.get('/', function(req, res, next) {
   });
 })
 
-app.get('/login', function(req, res, next) {
+router.get('/login', function(req, res, next) {
   res.render('login', {
+    user:req.session.user,
     sucess: true
   });
 })
 
-app.post('/login', function(req, res, next) {
+router.post('/login', function(req, res, next) {
   db.user.findOne({
     account: req.body.account
   }, function(err, data) {
@@ -67,34 +69,37 @@ app.post('/login', function(req, res, next) {
             account:data.account,
             balance:data.balance
           };
-          app.locals.user = req.session.user;
           res.redirect('/');
         } else {
           res.render('login', {
+            user:req.session.user,
             sucess: false
           })
         }
       })
     } else {
       res.render('login', {
+        user:req.session.user,
         sucess: false
       })
     }
   })
 })
 
-app.get('/reg', function(req, res, next) {
+router.get('/reg', function(req, res, next) {
   res.render('reg', {
+    user:req.session.user,
     islive: false
   });
 })
 
-app.post('/reg', function(req, res, next) {
+router.post('/reg', function(req, res, next) {
   db.user.findOne({
     account: req.body.account
   }, function(err, data) {
     if (data) {
       res.render('reg', {
+        user:req.session.user,
         islive: true
       })
     } else {
@@ -111,10 +116,9 @@ app.post('/reg', function(req, res, next) {
   })
 })
 
-app.get('/logout', function(req, res, next) {
+router.get('/logout', function(req, res, next) {
   req.session.user = null;
-  app.locals.user = null;
   res.redirect('/login');
 })
-}
-module.exports = index;
+
+module.exports = router;

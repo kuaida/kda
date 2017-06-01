@@ -88,7 +88,9 @@ class Publish extends Component {
     }
   }
   componentWillMount(){
-    fetch('/publish/getAllTypesAndIsLogin')
+    fetch('/publish/getAllTypesAndIsLogin',{
+      'credentials':'include'
+    })
     .then((response)=>{
       return response.json();
     })
@@ -225,7 +227,7 @@ class Publish extends Component {
                 labelStyle={this.state.pay?{color:"#fff"}:{}}
                 style={this.state.pay?styles.payToggle:styles.nopayToggle}
                 onToggle={( e, isChecked )=>{this.changePay(isChecked)}}
-                disabled={this.state.user&&!this.state.user.balance?false:true}
+                disabled={(this.state.user&&this.state.user.balance>0)?false:true}
               />
             </Col>
             <Col lg={3} md={4} sm={4} xs={4}>
@@ -250,7 +252,7 @@ class Publish extends Component {
                     <Slider
                       value={this.state.count}
                       min={1}
-                      max={this.state.user?this.state.user.money:500}
+                      max={this.state.user?this.state.user.balance:500}
                       step={1}
                       sliderStyle={styles.slider}
                       onChange={ ( e, count ) => { this.changeCount(count) } }
