@@ -64,11 +64,13 @@ router.post('/postQuestion',function(req,res,next){
       console.log(err);
       res.json({state:400});
     }else{
-      dbs.user.findByIdAndUpdate(id,{$push:{'myQuestions':ques._id}},(err,user)=>{
+      redis.flushdb();
+      dbs.user.findByIdAndUpdate(id,{$push:{'myQuestions':ques._id},$inc:{'balance':-question.money}},(err,user)=>{
         if(err){
           console.log(err);
           res.json({state:400});
         }else{
+          req.session.user.balance = user.balance - question.money;
           dbs.type.update({'type':{$in:ques.type}},{$addToSet:{'questionIdList':ques._id}},{multi:true},(err)=>{
             if(err){
               console.log(err);

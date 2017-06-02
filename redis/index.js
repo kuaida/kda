@@ -1,11 +1,11 @@
 const dbs   = require('../collections');
 const redis = require('./connect');
 const times = {
-  getAllTypes:60*60*12,
-  getLastQuestion:60*10,
-  getTopRewardQuestion:60*10,
-  getTopUser:60*30,
-  getTopQuestion:60*3
+  getAllTypes:60*60*24,
+  getLastQuestion:60*60*24,
+  getTopRewardQuestion:60*60*24,
+  getTopUser:60*60*24,
+  getTopQuestion:60*60*24
 }
 /*
 * @function 获得所有的标签信息,包括_id,type
@@ -76,7 +76,7 @@ function getTopRewardQuestion(cb){
         console.error('getTopRewardQuestion: get获取缓存错误:'+ __filename);
       }else{
         if(reply){
-          cb(JSON.parse(v));
+          cb(JSON.parse(reply));
         }else{
           dbs.question.where({'charge':true}).select('_id title money').sort({money:-1}).limit(10).exec((err, docs)=>{
             if(err){
@@ -179,9 +179,15 @@ function getOneTypeQuestion(options,cb){
     return;
   }
 }
-
+/*
+* 刷新redis
+*/
+function flushdb(){
+  redis.flushdb();
+}
 
 methods = {
+  flushdb,
   getAllTypes,
   getLastQuestion,
   getTopRewardQuestion,
