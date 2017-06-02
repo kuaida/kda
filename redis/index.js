@@ -76,7 +76,7 @@ function getTopRewardQuestion(cb){
         console.error('getTopRewardQuestion: get获取缓存错误:'+ __filename);
       }else{
         if(reply){
-          cb(JSON.parse(v));
+          cb(JSON.parse(reply));
         }else{
           dbs.question.where({'charge':true}).select('_id title money').sort({money:-1}).limit(10).exec((err, docs)=>{
             if(err){

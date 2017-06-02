@@ -3,50 +3,36 @@ var router = express.Router();
 var dbmodel = require('../collections');
 var bcrypt = require('bcrypt');
 var db = require('../collections');
+const redis = require('../redis');
 var salt = 10;
 
 /* GET home page. */
 
-router.get('/', function(req, res, next) {
-  let alldata;
-  var hotdata;
-  var userdata;
-  var golddata;
-  var all = dbmodel.question.find({}).exec();
-  var gold = dbmodel.question.find({}).sort({
-    'money': -1
-  }).exec();
-  var user = dbmodel.user.find({}).sort({
-    'totalReward': -1
-  }).exec();
-  var hot = dbmodel.question.find({}).sort({
-    'pageview': -1
-  }).exec();
 
-  var readata = new Promise(function(resolve, reject) {
-    all.then((data) => {
-      alldata = data;
-      return gold;
-    }).then((data) => {
-      golddata = data;
-      return user;
-    }).then((data) => {
-      userdata = data;
-      return hot;
-    }).then((data) => {
-      hotdata = data;
-      resolve()
-    });
-  });
-  readata.then(() => {
-    res.render('index', {
-      user:req.session.user,
-      data1: alldata,
-      data2: golddata,
-      data3: userdata,
-      data4: hotdata
-    });
-  });
+router.get('/', function(req, res, next) {
+  redis.getLastQuestion(function(alldata){
+    console.log(alldata+"11111");
+    redis.getTopRewardQuestion(function(golddata){
+      console.log(golddata+"22222");
+      redis.getTopUser(function(userdata) {
+        console.log(userdata+"33333");
+        redis.getTopQuestion(function(hotdata){
+          console.log(hotdata+"44444");
+            redis.getAllTypes(function(typedata){
+              console.log(typedata+"5555");
+              res.render('index', {
+                user:req.session.user,
+                data1: alldata,
+                data2: golddata,
+                data3: userdata,
+                data4: hotdata,
+                data5: typedata
+              });
+            })
+        })
+      })
+    })
+  })
 })
 
 router.get('/login', function(req, res, next) {
