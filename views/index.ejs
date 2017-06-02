@@ -52,7 +52,7 @@
                   浏览量
                 </div>
                 <div class="col-md-1" id="time">
-                  <p><%= quest.validTime %></p>
+                  <p class="time"><%= quest.validTime %></p>
                   悬赏时间
                 </div>
                 <div class="col-md-1" id="gold">
@@ -136,12 +136,35 @@
 
             <div class="container" id="react-root"></div>
             <script type="text/javascript" src="/js/index.js"></script>
+            <!-- <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script> -->
             <script type="text/javascript">
             $(document).ready(function(){
               $("#allOne span").click(function(){
                 $(this).addClass("active").siblings().removeClass("active")
               })
+              var now = new Date()
+              var sss = now.getTime()
+              $(".time").each(function(){
+                $(this).text()
+                var youdate= parseInt($(this).text())
+                var time = sss - youdate
+                var hour = parseInt(time/1000/60/60)
+                var min = parseInt(time/1000/60 - hour)
+                var second = parseInt(time/1000/60 - min)
+                if(hour < 10){
+                  hour = "0" + hour
+                }
+                if (min < 10) {
+                  min = "0" + min
+                }
+                if(second < 10){
+                  second = "0" +second
+                }
+                var times = hour + ":" + min + ":" + second
+                $(this).text(times)
+              })
             })
+
             </script>
 
 </body>
