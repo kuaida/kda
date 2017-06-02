@@ -1,0 +1,134 @@
+ul {
+  list-style: none; }
+
+a {
+  text-decoration: none; }
+
+#head {
+  border: 1px solid #40C4FF;
+  padding: 10px;
+  margin: 10px; }
+  #head #allOne {
+    padding: 10px; }
+    #head #allOne span {
+      margin-left: 10px; }
+    #head #allOne .active a {
+      font-weight: 900;
+      color: #fff;
+      padding: 4px 6px;
+      background: #673ab7;
+      font-weight: 900; }
+  #head #allTwo {
+    padding: 10px; }
+    #head #allTwo span {
+      margin-left: 10px; }
+
+#looktg {
+  height: 70px;
+  margin: 10px;
+  border-bottom: 1px solid #e0e0e0; }
+
+#look {
+  font-size: 12px;
+  padding: 10px; }
+  #look p {
+    text-align: center; }
+
+#time {
+  font-size: 12px;
+  padding: 10px; }
+  #time p {
+    text-align: center; }
+
+#gold {
+  font-size: 12px;
+  padding: 10px; }
+  #gold span {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #FF6F00;
+    display: inline-block;
+    border: 1px solid #ff6f00; }
+  #gold #help {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #E0E0E0;
+    display: inline-block;
+    border: 1px solid #e0e0e0; }
+
+#title h4 {
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #40C4FF; }
+
+#label i {
+  background: #E0E0E0; }
+  #label i a {
+    font-size: 12px;
+    color: #000;
+    padding: 3px; }
+
+.question {
+  height: 120px;
+  padding: 15px;
+  background: #ddd;
+  border: 1px solid #999;
+  margin-bottom: 25px;
+  margin-top: 10px; }
+  .question p {
+    font-weight: 900; }
+    .question p i {
+      color: #2962FF; }
+
+.list {
+  width: 100%;
+  border: 1px solid #673ab7;
+  margin-bottom: 25px; }
+  .list ol {
+    margin-top: 6px; }
+  .list .list-money {
+    height: 42px;
+    background: #673ab7;
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: 900; }
+  .list .list-person {
+    height: 42px;
+    background: #673ab7;
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: 900; }
+  .list .list-hot {
+    border-radius: 1px solid #40C4FF; }
+
+ol li {
+  margin-bottom: 10px;
+  font-weight: 900; }
+  ol li a {
+    display: inline-block;
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #40C4FF;
+    font-weight: 900;
+    margin-left: 10px; }
+  ol li a:hover {
+    color: purple;
+    font-weight: 900; }
+  ol li span {
+    margin-right: 20px;
+    float: right; }
+  ol li img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-left: 10px; }
