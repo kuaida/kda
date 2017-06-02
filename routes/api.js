@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dbmodel = require('../collections');
+var redis = require('../redis');
 
 router.route('/')
       .get(function(req, res) {
@@ -14,19 +15,34 @@ router.route('/')
         })
       });
 
-router.route('/money/top20')
+router.route('/redis/question')
       .get(function(req, res) {
-        dbmodel.question.find({}).limit(20).exec(function(err,data) {
+        redis.getLastQuestion(function(data) {
           res.end(JSON.stringify(data));
         })
-      })
+      });
 
-router.route('/user/top20')
+router.route('/redis/talent')
       .get(function(req, res) {
-        dbmodel.user.find({}).limit(20).exec(function(err,data) {
+        redis.getTopUser(function(data) {
           res.end(JSON.stringify(data));
         })
-      })
+      });
+
+router.route('/redis/money')
+      .get(function(req, res) {
+        redis.getTopRewardQuestion(function(data) {
+          res.end(JSON.stringify(data));
+        })
+      });
+
+router.route('/redis/hot')
+      .get(function(req, res) {
+        redis.getTopQuestion(function(data) {
+          res.end(JSON.stringify(data));
+        })
+      });
+
 
 router.route('/question/:id')
       .get(function(req, res) {
