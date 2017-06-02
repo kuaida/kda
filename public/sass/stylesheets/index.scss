@@ -23,7 +23,7 @@ a {
 #head {
   border: $borderOne;
   padding: $paddingaTop;
-  margin: 10px;
+  margin: 10px 0px;
   #allOne {
     padding: $paddingaTop;
     span {
@@ -49,13 +49,14 @@ a {
 
 #looktg {
   height: 70px;
-  margin: $marginLeft;
+  margin: $marginLeft 0px;
   border-bottom: $borderTwo;
 }
 
 #look {
   font-size: nth($fontSize,1);
   padding: $paddingaTop;
+  text-align: center;
   p {
     text-align: center;
   }
