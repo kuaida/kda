@@ -52,7 +52,7 @@ router.post('/postQuestion',function(req,res,next){
   };
   if(req.body.pay=='true'){
     question.charge = true;
-    question.validTime = req.body.time+Math.floor(Number(moment().format('x'))/1000);
+    question.validTime = Number(req.body.time)*3600+Math.floor(Number(moment().format('x'))/1000);
     question.money = req.body.count;
   }
   if(typeof req.body.type=='string'){

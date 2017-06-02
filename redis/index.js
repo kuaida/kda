@@ -1,8 +1,8 @@
 const dbs   = require('../collections');
 const redis = require('./connect');
 const times = {
-  getAllTypes:60*60,
-  getLastQuestion:60*5,
+  getAllTypes:60*60*12,
+  getLastQuestion:60*10,
   getTopRewardQuestion:60*10,
   getTopUser:60*30,
   getTopQuestion:60*3
@@ -13,19 +13,19 @@ const times = {
 */
 function getAllTypes(cb){
   if(typeof cb == 'function'){
-    redis.get('allTypes',(err,reply)=>{
+    redis.get('allTypes', (err, reply)=>{
       if(err){
         console.error('getAllTypes: get获取缓存错误:'+ __filename);
       }else{
         if(reply){
           cb(JSON.parse(reply).data);
         }else{
-          dbs.type.find({},['_id','type'],(err,types)=>{
+          dbs.type.find({},['_id','type'],(err, types)=>{
             if(err){
               console.error('getAllTypes: 查询type集合出现错误:' + __filename);
             }else{
-              redis.set('allTypes',JSON.stringify({data:types}));
-              redis.expire('allTypes',times.getAllTypes);
+              redis.set('allTypes', JSON.stringify({data:types}));
+              redis.expire('allTypes', times.getAllTypes);
               cb(types);
             }
           });
@@ -37,24 +37,24 @@ function getAllTypes(cb){
   }
 }
 /*
-* @function 获得最近的200条提问
+* @function 获得最近的500条提问
 * @param cb 回调函数,接受一个查询结果作为参数
 */
 function getLastQuestion(cb){
   if(typeof cb == 'function'){
-    redis.get('lastQuestion',(err,reply)=>{
+    redis.get('lastQuestion', (err, reply)=>{
       if(err){
         console.error('getLastQuestion: get获取缓存错误:'+ __filename);
       }else{
-        if(replay){
+        if(reply){
           cb(JSON.parse(reply));
         }else{
-          dbs.question.find({}).limit(200).populate('author',{_id:1,nickName:1,headPortrait:1}).exec((err,docs)=>{
+          dbs.question.find({}).limit(500).populate('author',{_id:1,nickName:1,headPortrait:1}).exec((err, docs)=>{
             if(err){
               console.error('getLastQuestion: get获取数据库数据失败:'+ __filename);
             }else{
-              redis.set('lastQuestion',JSON.stringify(docs));
-              redis.expire('lastQuestion',times.getLastQuestion);
+              redis.set('lastQuestion', JSON.stringify(docs));
+              redis.expire('lastQuestion', times.getLastQuestion);
               cb(docs);
             }
           });
@@ -69,36 +69,25 @@ function getLastQuestion(cb){
 * @function 赏金榜前10
 * @param cb 回调函数,接受一个查询结果作为参数
 */
-redis.zrange('question',0,9,(err,v)=>{
-  if(err){
-    console.error(err);
-  }else{
-    if(v.length){
-      return;
-    }else{
-      dbs.question.where({'charge':true}).select('_id title money pageviews').limit(1000).exec((err,docs)=>{
-        if(err){
-          console.error(err);
-        }else{
-          docs.forEach((doc)=>{
-            redis.zadd('question',doc.money,JSON.stringify(doc));
-          });
-        }
-      });
-    }
-  }
-});
 function getTopRewardQuestion(cb){
   if(typeof cb == 'function'){
-    redis.zrevrange('question',0,9,(err,reply)=>{
+    redis.get('10_question', (err, reply)=>{
       if(err){
-        console.error('getTopRewardQuestion: zrevrange获取缓存错误:'+ __filename);
+        console.error('getTopRewardQuestion: get获取缓存错误:'+ __filename);
       }else{
-        let question = [];
-        reply.forEach((cur)=>{
-          question.push(JSON.parse(cur));
-        });
-        cb(question);
+        if(reply){
+          cb(JSON.parse(v));
+        }else{
+          dbs.question.where({'charge':true}).select('_id title money').sort({money:-1}).limit(10).exec((err, docs)=>{
+            if(err){
+              console.error(err);
+            }else{
+              redis.set('10_question', JSON.stringify(docs));
+              redis.expire('10_question', times.getTopRewardQuestion);
+              cb(docs);
+            }
+          });
+        }
       }
     });
   }else{
@@ -109,36 +98,25 @@ function getTopRewardQuestion(cb){
 * @function 达人榜前10
 * @param cb 回调函数,接受一个查询结果作为参数
 */
-redis.zrange('user',0,9,(err,v)=>{
-  if(err){
-    console.error(err);
-  }else{
-    if(v.length){
-      return;
-    }else{
-      dbs.user.where({}).select('_id nickName headPortrait totalReward').limit(1000).exec((err,docs)=>{
-        if(err){
-          console.error(err);
-        }else{
-          docs.forEach((doc)=>{
-            redis.zadd('user',doc.totalReward,JSON.stringify(doc));
-          });
-        }
-      });
-    }
-  }
-});
 function getTopUser(cb){
   if(typeof cb == 'function'){
-    redis.zrevrange('user',0,9,(err,reply)=>{
+    redis.get('10_user', (err, reply)=>{
       if(err){
-        console.error('getTopUser: zrevrange获取缓存错误:'+ __filename);
+        console.error('getTopUser: get获取缓存错误:'+ __filename);
       }else{
-        let user = [];
-        reply.forEach((cur)=>{
-          user.push(JSON.parse(cur));
-        });
-        cb(user);
+        if(reply){
+          cb(JSON.parse(reply));
+        }else{
+          dbs.user.where("totalReward").gt(0).select('_id nickName totalReward').sort({totalReward:-1}).limit(10).exec((err, docs)=>{
+            if(err){
+              console.error(err);
+            }else{
+              redis.set('10_user', JSON.stringify(docs));
+              redis.expire('10_user', times.getTopUser);
+              cb(docs);
+            }
+          });
+        }
       }
     });
   }else{
@@ -149,36 +127,25 @@ function getTopUser(cb){
 * @function 热搜榜前10
 * @param cb 回调函数,接受一个查询结果作为参数
 */
-redis.zrange('topQuestion',0,9,(err,v)=>{
-  if(err){
-    console.error(err);
-  }else{
-    if(v.length){
-      return;
-    }else{
-      dbs.question.where({}).select('_id title pageviews').limit(1000).exec((err,docs)=>{
-        if(err){
-          console.error(err);
-        }else{
-          docs.forEach((doc)=>{
-            redis.zadd('topQuestion',doc.pageviews,JSON.stringify(doc));
-          });
-        }
-      });
-    }
-  }
-});
 function getTopQuestion(cb){
   if(typeof cb == 'function'){
-    redis.zrevrange('topQuestion',0,9,(err,reply)=>{
+    redis.get('10_s_question',(err, reply)=>{
       if(err){
-        console.error('getTopQuestion: zrevrange获取缓存错误:'+ __filename);
+        console.error('getTopQuestion: get获取缓存错误:'+ __filename);
       }else{
-        let topQuestion = [];
-        reply.forEach((cur)=>{
-          topQuestion.push(JSON.parse(cur));
-        });
-        cb(topQuestion);
+        if(reply){
+          cb(JSON.parse(reply));
+        }else{
+          dbs.question.find({}).select('_id title pageviews').sort({pageviews:-1}).limit(10).exec((err, docs)=>{
+            if(err){
+              console.error(err);
+            }else{
+              redis.set('10_s_question', JSON.stringify(docs));
+              redis.expire('10_s_question', times.getTopQuestion);
+              cb(docs);
+            }
+          });
+        }
       }
     });
   }else{
@@ -186,12 +153,33 @@ function getTopQuestion(cb){
   }
 }
 /*
-* @function 热搜榜前10
+* @function 获得某一类的问题
+* @param options 查询的条件,包括type,state
+*     type 问题的类型 如"node.js",默认"all"
+*     money 问题的状态 如悬赏"money",非悬赏"nomoney",默认"all"
+*     state 问题的状态 提问中"asking",已解决"solve",默认"all"
 * @param cb 回调函数,接受一个查询结果作为参数
 */
-function getOneTypeQuestion(){
-
+function getOneTypeQuestion(options,cb){
+  if(typeof options == "function"){
+    cb      = options;
+    options = {
+      type: "all",
+      money: "all",
+      state: "all"
+    };
+  }
+  if(typeof options == "object"){
+    options.type  = options.type  || "all";
+    options.money = options.money || "all";
+    options.state = options.state || "all";
+  }
+  if(typeof cb != "function"){
+    console.error("getOneTypeQuestion:参数不是一个函数" + __filename);
+    return;
+  }
 }
+
 
 methods = {
   getAllTypes,
