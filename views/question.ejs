@@ -30,7 +30,8 @@
   <body>
     <% include head %>
     <div id="react-root" class="container"></div>
-    <div class="hide question-user"><%= userid %></div>
+
+    <div class="hide question-user"><%= user? user._id : '' %></div>
     <div class="hide question-id"><%= questionid %></div>
     <% include foot %>
     <script type="text/javascript" src="/js/vender.js"></script>

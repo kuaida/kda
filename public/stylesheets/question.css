@@ -1,5 +1,4 @@
 .question-main {
-  width: 80%;
   margin: auto;
 }
 
@@ -11,14 +10,38 @@
 .question-img {
   display: inline-block;
   float: left;
+  padding-top: 30px;
+  width: 80%;
 }
 
 .question-answer {
   width: 1000px;
-  height: 300px;
 
 }
 
 .question-btn {
   float: right;
+}
+
+.question-btn1 {
+  float: right;
+  /*margin-top: 200px;*/
+}
+
+.question-allbtn {
+  float: right;
+}
+
+.question-left {
+  background-color: #f6f6f6;
+  float: left;
+  width: 100%;
+}
+
+.question-left-width {
+  width: 90%;
+}
+
+.question-content {
+  margin-left: 40px;
 }
