@@ -6,12 +6,16 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/index.css' />
-  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.bootcss.com/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
-  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="http://cdn.bootcss.com/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
   <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  var socket = io();
+  </script>
 </head>
 
 <body>
@@ -31,7 +35,7 @@
             </div>
             <div class="col-md-12" id="allTwo">
                 <span class="active"><a href="#">全部</a></span>
-                <span>
+                <span id="list">
                   <% data5.forEach(function(quest){ %>
                     <a href="#"><%= quest.type %></a>
                   <% }) %>
@@ -48,8 +52,14 @@
                   浏览量
                 </div>
                 <div class="col-md-1" id="time">
-                  <p class="time"><%= quest.validTime %></p>
+                  <% if(quest.validTime){ %>
+                  <p class="time"><%= quest.createTime %></p>
                   悬赏时间
+                  <% }else{ %>
+                  <p class="line"><%= quest.createTime %></p>
+                  提问时间
+                  <% } %>
+
                 </div>
                 <div class="col-md-1" id="gold">
                   <% if(quest.money){ %>
@@ -125,40 +135,35 @@
     </div>
   </div>
 
+  <% include foot %>
 
+  <div class="container" id="react-root"></div>
+  <script type="text/javascript" src="/js/index.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#allOne span").click(function(){
+      $(this).addClass("active").siblings().removeClass("active")
+    })
 
+      var now = new Date()
+      var nowTime = (now).getTime();
+      $(".line").each(function(){
+        $(this).text()
+        var date = $(this).text()
+        data = date.substring(10,19);
+        $(this).text(data)
 
-            <% include foot %>
+        })
+        $(".time").each(function(){
+          $(this).text()
+          var date = $(this).text()
+          data = date.substring(10,19);
+          $(this).text(data)
 
-            <div class="container" id="react-root"></div>
-            <script type="text/javascript">
-            $(document).ready(function(){
-              $("#allOne span").click(function(){
-                $(this).addClass("active").siblings().removeClass("active")
-              })
-              var now = new Date()
-              var sss = now.getTime()
-              $(".time").each(function(){
-                $(this).text()
-                var youdate= parseInt($(this).text())
-                var time = sss - youdate
-                var hour = parseInt(time/1000/60/60)
-                var min = parseInt(time/1000/60 - hour)
-                var second = parseInt(time/1000/60 - min)
-                if(hour < 10){
-                  hour = "0" + hour
-                }
-                if (min < 10) {
-                  min = "0" + min
-                }
-                if(second < 10){
-                  second = "0" +second
-                }
-                var times = hour + ":" + min + ":" + second
-                $(this).text(times)
-              })
-            })
-        </script>
+          })
+
+      })
+  </script>
 
 </body>
 
