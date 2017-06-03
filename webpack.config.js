@@ -5,7 +5,8 @@ var ROOT_PATH = path.resolve(__dirname);
 
 let configs = {
   entry: {
-    vender: ['webpack/hot/dev-server', 'webpack-hot-middleware/client'], // 额外插件打包成vender
+    // vender: ['webpack/hot/dev-server', 'webpack-hot-middleware/client'], // 额外插件打包成vender
+    vender:['react','react-dom'],
     publish: './components/publish.js',
     index: './components/index.js',
     userinfo: './components/userinfo/index.js',
@@ -31,6 +32,21 @@ let configs = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // 热更新插件
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false,
+      },
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({ names:['vendor'] })
   ]
 };
 
