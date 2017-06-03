@@ -29,6 +29,11 @@ a {
     span {
       margin-left: $marginLeft;
     }
+    #list {
+      a {
+        margin-right: 4px;
+      }
+    }
     .active {
       a {
         font-weight: 900;
@@ -65,6 +70,7 @@ a {
 #time {
   font-size: nth($fontSize,1);
   padding: $paddingaTop;
+  text-align: center;
   p {
     text-align: center;
   }
@@ -159,8 +165,9 @@ a {
 
 ol {
   li {
-    margin-bottom: 10px;
+    padding: 6px 0px;
     font-weight: 900;
+    line-height: 100%;
     a {
       display: inline-block;
       width: 60%;
