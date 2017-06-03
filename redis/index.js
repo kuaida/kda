@@ -49,7 +49,7 @@ function getLastQuestion(cb){
         if(reply){
           cb(JSON.parse(reply));
         }else{
-          dbs.question.find({}).limit(500).populate('author',{_id:1,nickName:1,headPortrait:1}).exec((err, docs)=>{
+          dbs.question.find({}).limit(500).sort({createTime:-1}).populate('author',{_id:1,nickName:1,headPortrait:1}).exec((err, docs)=>{
             if(err){
               console.error('getLastQuestion: get获取数据库数据失败:'+ __filename);
             }else{
