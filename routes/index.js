@@ -11,15 +11,10 @@ var salt = 10;
 
 router.get('/', function(req, res, next) {
   redis.getLastQuestion(function(alldata){
-    console.log(alldata+"11111");
     redis.getTopRewardQuestion(function(golddata){
-      console.log(golddata+"22222");
       redis.getTopUser(function(userdata) {
-        console.log(userdata+"33333");
         redis.getTopQuestion(function(hotdata){
-          console.log(hotdata+"44444");
             redis.getAllTypes(function(typedata){
-              console.log(typedata+"5555");
               res.render('index', {
                 user:req.session.user,
                 data1: alldata,
