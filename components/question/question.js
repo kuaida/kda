@@ -4,19 +4,13 @@ import ReactQuill from 'react-quill';
 import { Router, Route } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Button, Col, Row, Media, Jumbotron } from 'react-bootstrap';
+import { Button, Col, Row, Media, Jumbotron, Image } from 'react-bootstrap';
 import { deepPurple900, deepPurple300, yellowA700, grey500, green800, redA700 } from 'material-ui/styles/colors';
 
 
 
 var Index = React.createClass({
   getInitialState() {
-    var apt = $('.question-like').text();
-    if (apt === 'true') {
-      apt = true
-    } else {
-      apt = false
-    };
     var userid = $('.question-user').text();
     var questionid = $('.question-id').text();
     return {
@@ -74,13 +68,16 @@ var Index = React.createClass({
   submit() {
     var user = $('.question-user').text();
     var id = $('.question-id').text();
+    var thissub = this;
     $.ajax({
       type: 'post',
       url: '/api/question/comment',
       data: {Content: this.state.editorHtml, author: this.state.userid, answerTime: new Date(), question: this.state.questionid},
       dataType: 'json',
-      success: function(data,status) {
-        // console.log(data);
+      success: function(data) {
+        thissub.setState({
+          
+        })
       }
     })
   },
@@ -147,21 +144,21 @@ var Index = React.createClass({
     var text1 = this.state.collection ? '已收藏' : '收藏';
 
     return (
+      <div className="question-body">
       <div className='question-main'>
-        <div className="question-question">
-          <div className="question-left">
+        <div className="question-left">
           <p className='question-btn' backgroundColor={deepPurple300}><Button bsStyle="primary" onClick={this.collection}>{text1}</Button></p>
           <div className="question-left-width">
           <h2><i className="fa fa-handshake-o" aria-hidden="true"></i>{this.state.title}</h2>
-          <h4 className="question-content">{this.state.content}</h4>
+          <h4 className="question-content" dangerouslySetInnerHTML={{__html:this.state.content}}></h4>
           <p className="question-content">关键字：{this.state.type.map(function(data) {
             return(
               <span>{data}</span>
             )
           })}</p>
+
           </div>
-          </div>
-          </div>
+        </div>
 
           <Row className="show-grid">
             {this.state.answer.map(function(data,i) {
@@ -169,21 +166,22 @@ var Index = React.createClass({
                 <div>
                   <Col lg={12} md={12} sm={12} xs={12} className='question-answer'>
                     <div className='question-img'>
-                      <span>用户名：</span>
+                      <Image className="question-image" src={data.author.headPortrait} circle />
+                      <span className="question-font">{data.author.nickName}</span>
 
-                      <div dangerouslySetInnerHTML={{__html:data.Content}}></div>
+                      <div className="question-font1" dangerouslySetInnerHTML={{__html:data.Content}}></div>
+                      <Col lg={12} md={12} sm={12} xs={12} className="question-btn1">
+                      <Button className="question-btn1" bsStyle="primary" onClick={this.adopt.bind(this,i)}>{this.adoptstate.bind(this,i)()}</Button>
+                      <Button className="question-btn1" bsStyle="success" onClick={this.likebtn.bind(this,i)}>{this.likestate.bind(this,i)()}</Button>
+                      </Col>
                     </div>
-                  </Col>
-                  <Col lg={12} md={12} sm={12} xs={12} className="question-btn1">
-                  <Button className="question-btn1" bsStyle="primary" onClick={this.adopt.bind(this,i)}>{this.adoptstate.bind(this,i)()}</Button>
-                  <Button className="question-btn1" bsStyle="success" onClick={this.likebtn.bind(this,i)}>{this.likestate.bind(this,i)()}</Button>
                   </Col>
                 </div>
               )
             }.bind(this)
           )}
           </Row>
-          <Row className="show-grid">
+          <Row className="show-grid question-input">
             <Col lg={12} md={12} sm={12} xs={12} >
             <ReactQuill theme="snow"
             onChange={(html) => { this.changeQuill(html) }}
@@ -193,6 +191,10 @@ var Index = React.createClass({
             <p className="question-btn"><Button bsStyle="primary" disabled={this.state.btn} onClick={this.submit}>提交</Button></p>
             </Col>
           </Row>
+      </div>
+      <div className="question-question">
+
+      </div>
       </div>
     );
   }

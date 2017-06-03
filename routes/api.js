@@ -43,19 +43,29 @@ router.route('/redis/hot')
         })
       });
 
+router.route('/redis/alltype')
+      .get(function(req, res) {
+        redis.getAllTypes(function(data) {
+          res.end(JSON.stringify(data));
+        })
+      });
+
 
 router.route('/question/:id')
       .get(function(req, res) {
         dbmodel.question.findOne({_id: req.params.id},function(err,data) {
           dbmodel.question.update({_id: req.params.id},{$set:{'pageviews': data.pageviews + 1}},function() {
-          dbmodel.answer.find({question: req.params.id},function(err,data1) {
-            var obj = {};
-            obj.question = data;
-            obj.answer = data1;
-            res.end(JSON.stringify(obj))
-          })
-        })
-        })
+          dbmodel.answer.find({question: req.params.id})
+                             .populate('author',{_id:1,nickName:1,headPortrait:1})
+                             .exec(function(err,data1) {
+                             var obj = {};
+                             obj.question = data;
+                             obj.answer = data1;
+                             res.end(JSON.stringify(obj))
+                           })
+                         })
+                         })
+
       })
 
 router.route('/question/comment')

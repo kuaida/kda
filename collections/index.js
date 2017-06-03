@@ -66,7 +66,7 @@ let userSchema = Schema({
   },
   headPortrait: {
     type: 'String',
-    default: './iamges.head.jpg'
+    default: '/images/head.jpg'
   },
   backgroundImage: {
     type: 'String',

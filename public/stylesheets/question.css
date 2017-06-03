@@ -1,5 +1,6 @@
 .question-main {
-  margin: auto;
+  width: 70%;
+  float: left;
 }
 
 .question-title {
@@ -7,11 +8,28 @@
   padding-right: 200px;
 }
 
+.question-body {
+  width: 100%;
+}
+
+.question-question {
+  width: 28%;
+  border: 1px solid lightgrey;
+  float: right;
+  height: 900px;
+}
+
+.question-btn {
+  float: right;
+}
+
 .question-img {
+  border-bottom: 1px solid lightgrey;
   display: inline-block;
   float: left;
-  padding-top: 30px;
-  width: 80%;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .question-answer {
@@ -19,16 +37,7 @@
 
 }
 
-.question-btn {
-  float: right;
-}
-
 .question-btn1 {
-  float: right;
-  /*margin-top: 200px;*/
-}
-
-.question-allbtn {
   float: right;
 }
 
@@ -36,12 +45,31 @@
   background-color: #f6f6f6;
   float: left;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .question-left-width {
-  width: 90%;
+  width: 100%;
 }
 
 .question-content {
   margin-left: 40px;
+}
+
+.question-font {
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.question-font1 {
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+.question-input {
+  width: 103.6%;
+}
+
+.question-image {
+  width: 22px;
 }
