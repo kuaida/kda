@@ -53,9 +53,13 @@ a {
 }
 
 #looktg {
-  height: 70px;
+  height: 60px;
   margin: $marginLeft 0px;
   border-bottom: $borderTwo;
+}
+
+p {
+  margin: 0 0 6px !important;
 }
 
 #look {
@@ -64,6 +68,8 @@ a {
   text-align: center;
   p {
     text-align: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
   }
 }
 
@@ -73,12 +79,15 @@ a {
   text-align: center;
   p {
     text-align: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
   }
 }
 
 #gold {
   font-size: nth($fontSize,1);
   padding: $paddingaTop;
+  text-align: center;
   span {
     width: 40px;
     height: 40px;
@@ -108,12 +117,14 @@ a {
     text-overflow:ellipsis;
     white-space:nowrap;
     color: nth($color,4);
+    margin-bottom: 2px;
   }
 }
 
 #label {
   i {
     background: nth($color,2);
+     font-style:normal;
     a {
       font-size: nth($fontSize,1);
       color: nth($color,5);
