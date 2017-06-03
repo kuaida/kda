@@ -23,7 +23,7 @@ var userinfo = require('./routes/userinfo');
 var search = require('./routes/search');
 var sassMiddleware = require('node-sass-middleware');
 var api = require('./routes/api');
-
+var compression = require('compression');
 var app = express();
 app.use(session({
   resave: true,
@@ -40,7 +40,7 @@ app.use(WebpackDevMiddleware(compiler, {
   stats: { colors: true }
 }));
 app.use(WebpackHotMiddleware(compiler));
-
+app.use(compression());
 
 // view engine setup
 // app.set('views', path.join(__dirname, '/components'));
