@@ -6,7 +6,7 @@ var ROOT_PATH = path.resolve(__dirname);
 let configs = {
   entry: {
     // vender: ['webpack/hot/dev-server', 'webpack-hot-middleware/client'], // 额外插件打包成vender
-    vender:['react','react-dom'],
+    vender:['react','react-dom','react-bootstrap'],
     publish: './components/publish.js',
     index: './components/index.js',
     userinfo: './components/userinfo/index.js',
