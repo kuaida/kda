@@ -194,9 +194,11 @@ class CardExampleWithAvatar extends React.Component{
       style={styles.info}
       />
       <CardText expandable={true} style={styles.info}>
-      <p>年龄:{this.state.data.nickName}</p>
-      <p>性别:{this.state.data.gender}</p>
-      <p>生日:{this.state.data.birthday}</p>
+      <p>帐 号: <strong>{this.state.data.account}</strong></p>
+      <p>昵 称: <strong>{this.state.data.nickName}</strong></p>
+      <p>年 龄: <strong>{this.state.data.age}</strong></p>
+      <p>性 别: <strong>{this.state.data.gender}</strong></p>
+      <p>生 日: <strong>{this.state.data.birthday}</strong></p>
       </CardText>
       <DialogExampleDialogDatePicker/>
       </Card>

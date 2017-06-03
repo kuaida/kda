@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var dbmodel = require('../collections');
+var tools = require('./tools');
 
 
 router.get('/', function(req, res, next) {
-    res.render('userinfo', {
-      user: req.session.user,
-    });
+    if(typeof(req.session.user) !== 'undefined' && !tools.isEmptyObject(req.session.user)){
+        res.render('userinfo', {
+          user: req.session.user,
+        });
+    } else {
+        res.redirect('/login');
+    }
+
 })
 
 router.post('/userdata',function(req,res,next){
