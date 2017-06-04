@@ -25,11 +25,17 @@ var Index = React.createClass({
       questionid: questionid,
       answer: [],
       btn: false,
+      author: '',
+      headPortrait: '',
+      pageviews: '',
+      adt: false,
+      answerlist: [],
     }
   },
   componentDidMount: function() {
     var a = this;
     var btn = $('.question-user').text();
+    var atr = $('.question-user').text();
     if (btn === '') {
       btn = true
     } else {
@@ -42,6 +48,7 @@ var Index = React.createClass({
       success: function(json) {
         var adoptArray = [];
         var likeArray = [];
+        var answerid = [];
         var length = json.answer.length
         for (var i = 0; i < length; i++) {
           adoptArray.push(false)
@@ -49,6 +56,15 @@ var Index = React.createClass({
         for (var j = 0; j < length; j++) {
           likeArray.push(false)
         }
+        for (var k = 0; k < length; k++) {
+          answerid.push(json.answer[k].author)
+        }
+        console.log(answerid);
+        if (json.question.author._id === atr) {
+          atr = false
+        } else {
+          atr = true
+        };
         a.setState({
           title: json.question.title,
           content: json.question.content,
@@ -57,6 +73,11 @@ var Index = React.createClass({
           btn: btn,
           adopt: adoptArray,
           like: likeArray,
+          author: json.question.author.nickName,
+          headPortrait: json.question.author.headPortrait,
+          pageviews: json.question.pageviews,
+          adt: atr,
+          answerlist: answerid,
         })
       }
     })
@@ -66,6 +87,7 @@ var Index = React.createClass({
       // this.setState({editorHtml: html});
   },
   submit() {
+
     var user = $('.question-user').text();
     var id = $('.question-id').text();
     var thissub = this;
@@ -76,7 +98,8 @@ var Index = React.createClass({
       dataType: 'json',
       success: function(data) {
         thissub.setState({
-          
+          answer: data.answer,
+          editorHtml: ''
         })
       }
     })
@@ -118,7 +141,7 @@ var Index = React.createClass({
     $.ajax({
       type: 'post',
       url: '/api/question/adopt/'+questionid+'/'+userid,
-      data: {userid: this.state.userid, questionid: this.state.questionid, state:this.state.adopt},
+      data: {userid: this.state.userid, questionid: this.state.questionid, state:this.state.adopt[i], user: this.state.answerlist[i]._id},
       dataType: 'json',
       success: function(data,status) {
       }
@@ -126,12 +149,14 @@ var Index = React.createClass({
     var d = this.state.adopt;
     d[i] = !d[i]
     console.log(this.state.adopt);
-    this.setState({adopt: d})
+    this.setState({adopt: d,
+                   adt: true,
+                  })
   },
 
   adoptstate(i) {
     var e = this.state.adopt;
-    return e[i] ? '已采纳' : '采纳'
+    return e[i] ? '已采' : '采纳'
   },
 
   likestate(i) {
@@ -147,23 +172,25 @@ var Index = React.createClass({
       <div className="question-body">
       <div className='question-main'>
         <div className="question-left">
-          <p className='question-btn' backgroundColor={deepPurple300}><Button bsStyle="primary" onClick={this.collection}>{text1}</Button></p>
+          <p className='question-btn' backgroundColor={deepPurple300}><Button bsStyle="primary" disabled={this.state.btn} onClick={this.collection}>{text1}</Button></p>
           <div className="question-left-width">
           <h2><i className="fa fa-handshake-o" aria-hidden="true"></i>{this.state.title}</h2>
           <h4 className="question-content" dangerouslySetInnerHTML={{__html:this.state.content}}></h4>
           <p className="question-content">关键字：{this.state.type.map(function(data) {
             return(
-              <span>{data}</span>
+              <span className="question-type">{data}</span>
             )
           })}</p>
-
+          <Image className="question-image question-content" src={this.state.headPortrait} circle />
+          <span className="question-author">{this.state.author}</span>
+          <span className="question-author">被浏览{this.state.pageviews}次</span>
           </div>
         </div>
 
           <Row className="show-grid">
             {this.state.answer.map(function(data,i) {
               return (
-                <div>
+                <div key={i}>
                   <Col lg={12} md={12} sm={12} xs={12} className='question-answer'>
                     <div className='question-img'>
                       <Image className="question-image" src={data.author.headPortrait} circle />
@@ -171,8 +198,8 @@ var Index = React.createClass({
 
                       <div className="question-font1" dangerouslySetInnerHTML={{__html:data.Content}}></div>
                       <Col lg={12} md={12} sm={12} xs={12} className="question-btn1">
-                      <Button className="question-btn1" bsStyle="primary" onClick={this.adopt.bind(this,i)}>{this.adoptstate.bind(this,i)()}</Button>
-                      <Button className="question-btn1" bsStyle="success" onClick={this.likebtn.bind(this,i)}>{this.likestate.bind(this,i)()}</Button>
+                      <Button className="question-btn1" bsStyle="primary" disabled={this.state.adt} onClick={this.adopt.bind(this,i)}>{this.adoptstate.bind(this,i)()}</Button>
+                      <Button className="question-btn1" bsStyle="success" disabled={this.state.btn} onClick={this.likebtn.bind(this,i)}>{this.likestate.bind(this,i)()}</Button>
                       </Col>
                     </div>
                   </Col>
@@ -186,6 +213,7 @@ var Index = React.createClass({
             <ReactQuill theme="snow"
             onChange={(html) => { this.changeQuill(html) }}
             placeholder={'please input'}
+            value={this.state.editorHtml}
             />
 
             <p className="question-btn"><Button bsStyle="primary" disabled={this.state.btn} onClick={this.submit}>提交</Button></p>

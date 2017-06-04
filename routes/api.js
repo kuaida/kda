@@ -53,7 +53,9 @@ router.route('/redis/alltype')
 
 router.route('/question/:id')
       .get(function(req, res) {
-        dbmodel.question.findOne({_id: req.params.id},function(err,data) {
+        dbmodel.question.findOne({_id: req.params.id})
+                                .populate('author',{nickName:1,headPortrait:1})
+                                .exec(function(err,data) {
           dbmodel.question.update({_id: req.params.id},{$set:{'pageviews': data.pageviews + 1}},function() {
           dbmodel.answer.find({question: req.params.id})
                              .populate('author',{_id:1,nickName:1,headPortrait:1})
@@ -70,7 +72,6 @@ router.route('/question/:id')
 
 router.route('/question/comment')
       .post(function(req, res) {
-        console.log(req.body);
         let quest = new dbmodel.answer(req.body);
         quest.save(function(err) {
           if (err) {
@@ -80,9 +81,18 @@ router.route('/question/comment')
         dbmodel.question.findOne({_id: req.body.question}, function(err,data) {
           var title = data._id;
           dbmodel.user.findOne({_id: req.body.author}, function(err,data1) {
-            dbmodel.user.update({_id: req.body.author},{$push:{'myAnswers': title}},function() {})
-          })
-        })
+            dbmodel.user.update({_id: req.body.author},{$push:{'myAnswers': title}},function() {
+              dbmodel.answer.find({question:req.body.question})
+                                 .populate('author',{_id:1,nickName:1,headPortrait:1})
+                                 .exec(function(err, data2) {
+                                  var obj1 = {};
+                                  obj1.question = data;
+                                  obj1.answer = data2;
+                                  res.end(JSON.stringify(obj1))
+                                })
+                              })
+                            })
+                          })
       })
 
 router.route('/question/like/:id/:ip')
@@ -90,7 +100,6 @@ router.route('/question/like/:id/:ip')
 
         dbmodel.answer.findOne({question: req.params.id}, function(err,data) {
           dbmodel.answer.where('likers').in([req.params.ip]).exec(function(err,data1){
-            console.log(data1);
             if(data1.length) {
               dbmodel.answer.update({question: req.params.id}, {$pop: {'likers': req.params.ip}}, function() {})
             } else {
@@ -102,9 +111,6 @@ router.route('/question/like/:id/:ip')
 
 router.route('/question/collection/:id/:ip')
       .post(function(req, res) {
-        console.log(req.params.id);
-        console.log(req.params.ip);
-        console.log(req.body);
         dbmodel.user.where('myCollections').in([req.params.id]).exec(function(err, data1) {
           if(data1.length) {
             dbmodel.question.findOne({_id: req.params.id}, function(err,data) {
@@ -120,10 +126,15 @@ router.route('/question/collection/:id/:ip')
         })
       })
 
-router.route('question/adopt/:id/:ip')
+router.route('/question/adopt/:id/:ip')
       .post(function(req, res) {
-        console.log(req.body);
-        console.log(req.params.id);
-        dbmodel.answer.update({question: req.body.questionid}, {$set: {'adopt': req.body.state}}, function() {})
+        dbmodel.answer.update({question: req.body.questionid}, {$set: {'adopt': !req.body.state}}, function() {
+          dbmodel.question.findOne({_id: req.body.questionid}, function(err,data) {
+            dbmodel.user.findOne({_id: req.body.user}, function(err,data1) {
+              var data2 = data1.balance + data.money
+              dbmodel.user.update({_id: req.body.user}, {$set: {'balance': data2}}, function() {})
+            })
+          })
+        })
       })
 module.exports = router;

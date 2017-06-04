@@ -73,3 +73,14 @@
 .question-image {
   width: 22px;
 }
+
+.question-author {
+  padding-left: 5px;
+  font-size: 18px;
+}
+
+.question-type {
+  display: inline-block;
+  margin-left: 10px;
+  border: 1px solid lightgrey;
+}
