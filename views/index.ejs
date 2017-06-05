@@ -6,6 +6,9 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/index.css' />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
   <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -42,11 +45,11 @@
           <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="row">
               <div id="looktg">
-                <div class="col-md-1 col-xs-4 col-sm-1" id="look">
+                <div class="col-md-1 col-xs-4 col-sm-4" id="look">
                   <p><%= quest.pageviews %></p>
                   浏览量
                 </div>
-                <div class="col-md-1 col-xs-4 col-sm-1" id="time">
+                <div class="col-md-1 col-xs-4 col-sm-4" id="time">
                   <% if(quest.validTime){ %>
                   <p class="time"><%= quest.createTime %></p>
                   悬赏时间
@@ -56,14 +59,14 @@
                   <% } %>
 
                 </div>
-                <div class="col-md-1 col-xs-4 col-sm-1" id="gold">
+                <div class="col-md-1 col-xs-4 col-sm-4" id="gold">
                   <% if(quest.money){ %>
                   <span>G</span>
                   <% }else{ %>
                   <span id="help">H</span>
                   <% } %>
                 </div>
-                <div class="col-md-9 col-xs-12 col-sm-9">
+                <div class="col-md-9 col-xs-12 col-sm-12">
                   <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12" id="title">
                       <h4><a href=/question/<%= quest._id %>><%= quest.title %></a></h4>
@@ -153,9 +156,7 @@
           var date = $(this).text()
           data = date.substring(10,19);
           $(this).text(data)
-
           })
-
       })
   </script>
 
