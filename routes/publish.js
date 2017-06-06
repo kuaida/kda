@@ -3,7 +3,6 @@ var router     = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
 const dbs   = require('../collections');
 const moment= require('moment');
-const xssFilters = require('xss-filters');
 const redis = require('../redis');
 
 const initTypes = ['HTML5','CSS3','Node.js','Express','React','Javascript','jQuery','React Native','MongoDB','MySQL','Python','PHP','UI框架','JS框架'];
@@ -58,34 +57,20 @@ router.post('/postQuestion',function(req,res,next){
   if(typeof req.body.type=='string'){
     question.type = [req.body.type];
   }
-  var dbQuestion = new dbs.question(question);
-  dbQuestion.save((err,ques)=>{
+  redis.saveNewQuestion(question, (err, user)=>{
     if(err){
-      console.log(err);
+      console.error(err);
       res.json({state:400});
     }else{
-      redis.flushdb();
-      dbs.user.findByIdAndUpdate(id,{$push:{'myQuestions':ques._id},$inc:{'balance':-question.money}},(err,user)=>{
-        if(err){
-          console.log(err);
-          res.json({state:400});
-        }else{
-          req.session.user.balance = user.balance - question.money;
-          dbs.type.update({'type':{$in:ques.type}},{$addToSet:{'questionIdList':ques._id}},{multi:true},(err)=>{
-            if(err){
-              console.log(err);
-            }else{
-              res.json({state:200});
-            }
-          });
-        }
-      });
+      req.session.user.balance = user.balance - question.money;
+      res.json({state:200});
     }
   });
+
 });
 router.get('/test',function(req,res,next){
-  redis.getTopQuestion((v)=>{
-    console.log(v);
+  redis.getQuestionById("593178ee04cfbc3983e62c30",(reply)=>{
+    console.log(reply);
   });
 });
 module.exports = router;

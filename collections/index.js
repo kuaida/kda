@@ -53,7 +53,7 @@ let userSchema = Schema({
   myAnswers: [
     {
       type: 'ObjectId',
-      ref: 'question'
+      ref: 'answer'
     }
   ],
   alipayAccount: {
@@ -95,7 +95,7 @@ let questionSchema = Schema({
   answerList: [
     {
       type: 'ObjectId',
-      ref: 'question'
+      ref: 'answer'
     }
   ],
   charge: {
