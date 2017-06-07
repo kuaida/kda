@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+.reg-btn,.login-btn{
+  float:right;margin-top:5px;
+  margin-left: 10px;
+  background:#3F51B5;color:white;
+}

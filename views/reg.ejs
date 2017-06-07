@@ -7,8 +7,12 @@
   <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <title>注册-快答</title>
   <style media="screen">
+  body{
+    /*background:url("/images/timg.jpeg") no-repeat;*/
+  }
     .ma,.ma1{
       display: none;
       color: red;
@@ -31,7 +35,9 @@
       padding-top: 20px;
       height: 100%;
       width: 500px;
-      box-shadow: 0 0 10px black;
+      /*box-shadow: 0 0 10px black;*/
+      background:rgba(255, 255, 255, 0.45);
+      border-radius: 5px;
     }
 
   </style>
@@ -57,12 +63,14 @@
           <label for="exampleInputPassword1">注册密码</label>&nbsp;&nbsp;<span class="ma">密码不能少于8位</span>
           <input type="password" name='password' id='exampleInputPassword1' class="form-control password" placeholder="Password">
           <br>
-          <br>
+
           <label for="exampleInputPassword2">确认密码</label>&nbsp;&nbsp;<span class="ma1">两次密码不一致</span>
           <input type="password" id='exampleInputPassword2' class="form-control password1" placeholder="Password">
           <br>
-          <a type="submit" href='/login' class="btn btn-default" style="float:right;margin-top:5px;background: #0D47A1;color:white;">登录</a>
-        <button type="submit" class="btn btn-default submit" style="float:right;margin-top:5px;background: #0D47A1;color:white;">注册</button>
+          <a type="submit" href='/login' class="btn btn-default reg-btn">登录</a>
+        <button type="submit" class="btn btn-default submit reg-btn">注册</button>
+        <br><br>
+        <hr>
         </div>
       </form>
     </div>
@@ -94,6 +102,6 @@
       }
     })
   </script>
-  <% include foot %>
+
 </body>
 </html>
