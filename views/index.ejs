@@ -14,36 +14,44 @@
   <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style media="screen">
+    body{
+
+    }
+    #allOne>span>a{
+      border-radius: 5px;
+    }
+  </style>
 </head>
 
 <body>
   <% include head %>
 
   <div class="container">
+    <div class="row" id="head">
+      <div class="col-md-12 col-xs-12 col-sm-12" id="allTwo">
+        <span class="active"><a href="#">全部</a></span>
+        <span id="list">
+          <% data5.forEach(function(quest){ %>
+            <a class="index-a" href="#"><%= quest.type %></a>
+            <% }) %>
+          </span>
+        </div>
+      </div>
     <div class="row">
-      <div class="col-md-9">
-        <div class="row" id="head">
-          <div>
-            <div class="col-md-12 col-xs-12 col-sm-12" id="allOne">
-              <span class="active"><a href="/">全部</a></span>
-              <span><a href="#">悬赏</a></span>
-              <span><a href="#">非悬赏</a></span>
-              <span><a href="#">提问中</a></span>
-              <span><a href="#">已解决</a></span>
-            </div>
-            <div class="col-md-12 col-xs-12 col-sm-12" id="allTwo">
-                <span class="active"><a href="#">全部</a></span>
-                <span id="list">
-                  <% data5.forEach(function(quest){ %>
-                    <a href="#"><%= quest.type %></a>
-                  <% }) %>
-                </span>
-              </div>
-            </div>
-          </div>
+      <div class="col-md-9" id="left">
+        <br>
+        <div class="col-md-12 col-xs-12 col-sm-12" id="allOne">
+          <span class="active"><a href="/">全部</a></span>
+          <span><a href="#">悬赏</a></span>
+          <span><a href="#">非悬赏</a></span>
+          <span><a href="#">提问中</a></span>
+          <span><a href="#">已解决</a></span>
+        </div>
+        <br><br>
           <% data1.forEach(function(quest){ %>
-          <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="row">
+          <div class="col-md-12 col-xs-12 col-sm-12">
               <div id="looktg">
                 <div class="col-md-1 col-xs-4 col-sm-4" id="look">
                   <p><%= quest.pageviews %></p>
@@ -57,9 +65,9 @@
                   <p class="line"><%= quest.createTime %></p>
                   提问时间
                   <% } %>
-
                 </div>
-                <div class="col-md-1 col-xs-4 col-sm-4" id="gold">
+
+                <div class="col-md-1 col-xs-4 col-sm-4" style="border-radius:5px;" id="gold">
                   <% if(quest.money){ %>
                   <span>G</span>
                   <% }else{ %>
@@ -72,7 +80,7 @@
                       <h4><a href=/question/<%= quest._id %>><%= quest.title %></a></h4>
                     </div>
                     <div class="col-md-12 col-xs-12 col-sm-12" id="label">
-                      <i><a href="#"><%= quest.type %></a></i>
+                      <i><a class="label-a" href="#"><%= quest.type %></a></i>
                     </div>
                   </div>
                 </div>
@@ -81,10 +89,12 @@
           </div>
           <% }) %>
         </div>
+
         <div class="col-md-3 col-xs-12 col-sm-12">
           <div class="question">
             <p><i class="fa fa-question-circle-o fa-lg" aria-hidden="true">&nbsp;</i>你能难住我吗！！！</p>
-            <a class="btn btn-success btn-lg col-md-12 col-xs-12 col-sm-12" href="/publish"><span id="spa">提 问</span></a>
+            <br>
+            <a class="btn btn-danger btn-lg col-md-12 col-xs-12 col-sm-12" href="/publish"><span id="spa">提 问</span></a>
           </div>
           <div class="list">
             <div class="list-money">
@@ -115,7 +125,8 @@
               </div>
               <div class="list">
                 <div class="list-hot">
-                <h4>&nbsp;<i class="fa fa-fire" aria-hidden="true">&nbsp;</i>热搜榜</h4>
+              <i class="fa fa-fire" aria-hidden="true">&nbsp;&nbsp;</i>热搜榜
+              </div>
                 <ol>
                   <% data4.forEach(function(ranks){ %>
                   <li>
@@ -124,9 +135,9 @@
                   </li>
                   <% }) %>
                 </ol>
-                </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
