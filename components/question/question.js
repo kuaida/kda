@@ -171,31 +171,35 @@ var Index = React.createClass({
     return (
       <div className="question-body">
       <div className='question-main'>
-        <div className="question-left">
-          <p className='question-btn' backgroundColor={deepPurple300}><Button bsStyle="primary" disabled={this.state.btn} onClick={this.collection}>{text1}</Button></p>
+        <div className="question-right">
+          <p className='question-btn' ><Button bsStyle="primary" disabled={this.state.btn} onClick={this.collection}>{text1}</Button></p>
           <div className="question-left-width">
-          <h2><i className="fa fa-handshake-o" aria-hidden="true"></i>{this.state.title}</h2>
+          <h2><i className="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;{this.state.title}</h2>
           <h4 className="question-content" dangerouslySetInnerHTML={{__html:this.state.content}}></h4>
           <p className="question-content">关键字：{this.state.type.map(function(data) {
             return(
               <span className="question-type">{data}</span>
             )
           })}</p>
+          <div className="question-btn2">
           <Image className="question-image question-content" src={this.state.headPortrait} circle />
           <span className="question-author">{this.state.author}</span>
-          <span className="question-author">被浏览{this.state.pageviews}次</span>
           </div>
-        </div>
-
+          <span className="question-author question-btn1">被浏览{this.state.pageviews}次</span>
+          </div>
+          </div>
           <Row className="show-grid">
             {this.state.answer.map(function(data,i) {
               return (
                 <div key={i}>
                   <Col lg={12} md={12} sm={12} xs={12} className='question-answer'>
                     <div className='question-img'>
+                    <div>
+                      <div className="question-preson">
                       <Image className="question-image" src={data.author.headPortrait} circle />
                       <span className="question-font">{data.author.nickName}</span>
-
+                      </div>
+                    </div>
                       <div className="question-font1" dangerouslySetInnerHTML={{__html:data.Content}}></div>
                       <Col lg={12} md={12} sm={12} xs={12} className="question-btn1">
                       <Button className="question-btn1" bsStyle="primary" disabled={this.state.adt} onClick={this.adopt.bind(this,i)}>{this.adoptstate.bind(this,i)()}</Button>
