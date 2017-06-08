@@ -11,6 +11,7 @@ $paddingaBottom:15px;
 $paddingLeft: 3px;
 $marginLeft: 10px;
 $marginRight: 3px;
+$borderRadius:5px;
 
 ul {
   list-style: none;
@@ -24,6 +25,7 @@ a {
   border: $borderOne;
   padding: $paddingaTop;
   margin: 10px 0px;
+  border-radius: $borderRadius;
   #allOne {
     padding: $paddingaTop;
     span {
@@ -136,8 +138,6 @@ p {
 .question {
   height: 120px;
   padding: $paddingaBottom;
-  background: #ddd;
-  border: 1px solid #999;
   margin-bottom: 25px;
   margin-top: 10px;
   p {
@@ -150,23 +150,30 @@ p {
 
 .list {
   width: 100%;
-  border: 1px solid #673ab7;
+  border: 1px solid #03A9F4;
   margin-bottom: 25px;
   ol {
     margin-top: 6px;
   }
   .list-money {
     height: 42px;
-    background: #673ab7;
+    background: #03A9F4;
     padding: 10px 15px;
-    color: #fff;
+    color: #e0f7fa;
     font-weight: 900;
   }
   .list-person {
     height: 42px;
-    background: #673ab7;
+    background: #03A9F4;
     padding: 10px 15px;
-    color: #fff;
+    color: #e0f7fa;
+    font-weight: 900;
+  }
+  .list-hot {
+    height: 42px;
+    background: #03A9F4;
+    padding: 10px 15px;
+    color: #e0f7fa;
     font-weight: 900;
   }
   .list-hot {
@@ -205,3 +212,16 @@ ol {
     }
   }
 }
+.index-a{
+    background:#4FC3F7;padding:3px 10px;
+    border-radius: 5px;
+    color: white;
+  }
+  .label-a{
+    font-size: 12px;
+    color:#2196F3;
+    background:white;
+    border: 1px #2196F3 solid;
+    border-radius: 2px;
+    padding: 2px 5px;
+  }
