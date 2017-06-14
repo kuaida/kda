@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-//深蓝　灰　橙　蓝 黑
-$color: #304FFE #E0E0E0 #FF6F00 #40C4FF #000;
+//深蓝　灰　橙　蓝 黑 6浅蓝 7绿黄 8白色 9白蓝色
+$color: rgb(63,81,181) #E0E0E0 #FF6F00 #40C4FF #000 #40C4FF #e1e10d #fff #e0f7fa;
 $fontSize: 12px 18px;
 $borderOne: 1px solid #40C4FF;
 $borderTwo: 1px solid #e0e0e0;
@@ -11,7 +11,7 @@ $paddingaBottom:15px;
 $paddingLeft: 3px;
 $marginLeft: 10px;
 $marginRight: 3px;
-$borderRadius:5px;
+$borderRadius:3px;
 
 ul {
   list-style: none;
@@ -39,9 +39,9 @@ a {
     .active {
       a {
         font-weight: 900;
-        color: #fff;
+        color: nth($color,8);
         padding: 4px 6px;
-        background: #673ab7;
+        background: nth($color,1);
         font-weight: 900;
       }
     }
@@ -140,6 +140,8 @@ p {
   padding: $paddingaBottom;
   margin-bottom: 25px;
   margin-top: 10px;
+  border: $borderTwo;
+  border-radius: $borderRadius;
   p {
     font-weight: 900;
     i {
@@ -155,25 +157,11 @@ p {
   ol {
     margin-top: 6px;
   }
-  .list-money {
+  .list-money,.list-person,.list-hot {
     height: 42px;
-    background: #03A9F4;
+    background:nth($color,6);
     padding: 10px 15px;
-    color: #e0f7fa;
-    font-weight: 900;
-  }
-  .list-person {
-    height: 42px;
-    background: #03A9F4;
-    padding: 10px 15px;
-    color: #e0f7fa;
-    font-weight: 900;
-  }
-  .list-hot {
-    height: 42px;
-    background: #03A9F4;
-    padding: 10px 15px;
-    color: #e0f7fa;
+    color: nth($color,9);
     font-weight: 900;
   }
   .list-hot {
@@ -197,7 +185,7 @@ ol {
       margin-left: 10px;
     }
     a:hover {
-      color: purple;
+      color: nth($color,9);
       font-weight: 900;
     }
     span {
@@ -213,15 +201,16 @@ ol {
   }
 }
 .index-a{
-    background:#4FC3F7;padding:3px 10px;
-    border-radius: 5px;
-    color: white;
+    background:nth($color,6);
+    padding:3px 10px;
+    border-radius:$borderRadius;
+    color:nth($color,8);
   }
   .label-a{
-    font-size: 12px;
-    color:#2196F3;
-    background:white;
+    font-size:nth($fontSize,1);
+    color:nth($color,1);
+    background:nth($color,2);
     border: 1px #2196F3 solid;
-    border-radius: 2px;
+    border-radius: $borderRadius;
     padding: 2px 5px;
   }
