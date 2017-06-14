@@ -118,7 +118,7 @@
                 <li>
                   <img src="<% user.headPortrait %>" alt="">
                   <a href=/userinfo/<%= user._id %>><%= user.nickName %></a>
-                  <span><%= user.totalReward %></span>
+                  <!-- <span><%= user.totalReward %></span> -->
                 </li>
                 <% }) %>
                 </ol>
@@ -169,6 +169,7 @@
           $(this).text(data)
           })
       })
+      console.log($('.label-a').text());
   </script>
 
 </body>

@@ -31,7 +31,7 @@
         </div>
 
         <br><br>
-        
+
       </div>
       <div class="col-md-9" id="left">
         <br>
@@ -97,6 +97,7 @@
                 <% data2.forEach(function(ranko){ %>
                   <li>
                     <a href=/question/<%= ranko._id %>> <%= ranko.title %></a>
+                    <div style="border:1px solid blue;padding:10px 10px;background-color:#fff;border-radius:3px;text-align:center;position: absolute;opacity: 1; color:lightblue"><%= ranko.title %></div>
                     <span>￥&nbsp;<%= ranko.money %></span>
                   </li>
                   <% }) %>
@@ -114,7 +115,7 @@
                     <li>
                       <img src="<% user.headPortrait %>" alt="">
                       <a href=/userinfo/<%= user._id %>><%= user.nickName %></a>
-                      <span><%= user.totalReward %></span>
+                      <span style="display:none;"><%= user.totalReward %></span>
                     </li>
                     <% }) %>
                   </ol>
